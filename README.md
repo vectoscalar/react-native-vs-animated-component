@@ -1,0 +1,1 @@
+# react-native-vs-animated-component
