@@ -1,12 +1,18 @@
 import React from 'react'
-import { SafeAreaView, Text } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import { SafeAreaView } from 'react-native'
+
+import SpringButton from './src/components/buttons/spring-button/SpringButton'
+import Select from './src/components/select/Select'
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text>App</Text>
-      <Icon name="arrow-back" size={40} />
+    <SafeAreaView style={{ flex: 1 }}>
+      <SpringButton />
+      <Select
+        onChange={() => {}}
+        options={[{ title: 'Pranjul', value: 'pranjul' }]}
+        value="Pranjul"
+      />
     </SafeAreaView>
   )
 }
