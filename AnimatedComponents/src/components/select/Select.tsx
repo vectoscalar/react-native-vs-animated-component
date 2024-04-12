@@ -14,12 +14,12 @@ import styles from './select-styles'
 
 interface ISelectProps {
   onChange: (newValue: string) => void
-  optionContainerStyle: ViewStyle
+  optionContainerStyle?: ViewStyle
   options: Array<{ title: string; value: string }>
-  optionStyle: ViewStyle
-  placeholderText: string
-  selectedOptionStyle: ViewStyle
-  style: ViewStyle | TextStyle
+  optionStyle?: ViewStyle
+  placeholderText?: string
+  selectedOptionStyle?: ViewStyle
+  style?: ViewStyle | TextStyle
   value: string
 }
 const MIN_HEIGHT = 10
@@ -27,12 +27,12 @@ const MIN_HEIGHT = 10
 const Select = (props: ISelectProps) => {
   const {
     onChange,
-    optionContainerStyle = {},
+    optionContainerStyle,
     options,
-    optionStyle = {},
-    placeholderText = 'Select',
-    selectedOptionStyle = {},
-    style = {},
+    optionStyle,
+    placeholderText,
+    selectedOptionStyle,
+    style,
     value,
   } = props
   const [isOpen, setIsOpen] = useState(false)
@@ -128,7 +128,7 @@ const Select = (props: ISelectProps) => {
           {value || placeholderText}
         </Animated.Text>
         <Animated.View style={{ transform: [{ rotate: rotateArrow }] }}>
-          <Icon name={'chevron-down'} size={20} />
+          <Icon name="chevron-down" size={20} />
         </Animated.View>
       </TouchableOpacity>
       <Animated.View

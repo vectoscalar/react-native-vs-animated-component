@@ -3,7 +3,13 @@ import { Animated, Pressable, Text, View } from 'react-native'
 
 import style from './springButton-styles'
 
-const SpringButton = () => {
+interface ISpringButton {
+  label: string
+  onPress: () => void
+}
+
+const SpringButton = (props: ISpringButton) => {
+  const { label, onPress } = props
   const animatedScale = useRef(new Animated.Value(0)).current
 
   useEffect(() => {
@@ -11,6 +17,7 @@ const SpringButton = () => {
   }, [])
 
   const handleOnPress = () => {
+    onPress()
     animatedScale.setValue(0.8)
     Animated.spring(animatedScale, {
       bounciness: 20,
@@ -24,7 +31,7 @@ const SpringButton = () => {
     <View style={style.container}>
       <Pressable onPress={handleOnPress}>
         <Animated.View style={[style.button, { transform: [{ scale: animatedScale }] }]}>
-          <Text style={style.buttonText}>Press Me</Text>
+          <Text style={style.buttonText}>{label}</Text>
         </Animated.View>
       </Pressable>
     </View>
