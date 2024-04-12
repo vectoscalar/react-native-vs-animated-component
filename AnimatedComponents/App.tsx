@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Easing, SafeAreaView, View } from 'react-native'
+import { Easing, SafeAreaView } from 'react-native'
 
 import { RemixIcons } from '@constants'
 
