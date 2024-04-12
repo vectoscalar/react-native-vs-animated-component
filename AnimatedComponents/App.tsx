@@ -17,10 +17,9 @@ const App = () => {
 
   const onSpringPress = () => {}
 
-  const handleSubmitBtnPress = async () => {
+  const handleSubmitBtnPress = () => {
     try {
-      const value = await Promise.resolve(true)
-      return value
+      return true
     } catch {
       return false
     }
