@@ -21,7 +21,7 @@ export const TextTickAnimationType = Object.freeze({
   bounce: 'bounce',
 })
 
-export default class SBTextAnimator extends PureComponent {
+export default class TextAnimator extends PureComponent {
   static defaultProps = {
     style: {},
     loop: true,

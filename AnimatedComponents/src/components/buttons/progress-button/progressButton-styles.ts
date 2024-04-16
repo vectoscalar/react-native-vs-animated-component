@@ -3,11 +3,14 @@ import { StyleSheet } from 'react-native'
 const style = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: '#5cb85c',
+    backgroundColor: '#016FC3',
     borderRadius: 5,
     justifyContent: 'center',
     overflow: 'hidden',
     position: 'relative',
+    width: '90%',
+    alignSelf: 'center',
+    marginBottom: 20,
   },
   label: {
     color: 'white',
@@ -20,7 +23,7 @@ const style = StyleSheet.create({
     paddingVertical: 10,
   },
   progressBar: {
-    backgroundColor: '#8DCD8D',
+    backgroundColor: '#034472',
     height: '100%',
     left: 0,
     position: 'absolute',

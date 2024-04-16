@@ -8,7 +8,7 @@ const style = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: 'green',
+    backgroundColor: '#016FC3',
     borderRadius: 40,
     height: 40,
     justifyContent: 'center',

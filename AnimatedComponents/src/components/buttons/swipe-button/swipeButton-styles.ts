@@ -2,7 +2,7 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import { Sizes, palette } from '@theme'
 
-import { BUTTON_HEIGHT, BUTTON_PADDING, BUTTON_WIDTH, SWIPEABLE_DIMENSIONS } from './constants'
+import { BUTTON_HEIGHT, BUTTON_PADDING, BUTTON_WIDTH } from './constants'
 
 interface Styles {
   swipeContainer: ViewStyle
@@ -16,8 +16,8 @@ const styles = StyleSheet.create<Styles>({
   swipeContainer: {
     alignItems: 'center',
     alignSelf: 'center',
-    backgroundColor: palette.blueBayoux,
-    borderRadius: Sizes.Size_20,
+    backgroundColor: '#1779FD',
+    borderRadius: Sizes.Size_12,
     height: BUTTON_HEIGHT,
     justifyContent: 'center',
     overflow: 'hidden',
@@ -29,13 +29,13 @@ const styles = StyleSheet.create<Styles>({
   },
   swipeThumb: {
     alignItems: 'center',
-    borderRadius: BUTTON_HEIGHT,
-    backgroundColor: palette.neutral[0],
-    height: SWIPEABLE_DIMENSIONS,
     justifyContent: 'center',
-    left: BUTTON_PADDING,
     position: 'absolute',
-    width: SWIPEABLE_DIMENSIONS,
+    height: BUTTON_HEIGHT,
+    width: 40,
+    left: 0,
+    borderRadius: Sizes.Size_12,
+    padding: 30,
     zIndex: 3,
   },
   text: {
@@ -46,13 +46,13 @@ const styles = StyleSheet.create<Styles>({
     zIndex: 2,
   },
   wave: {
-    borderRadius: BUTTON_HEIGHT,
+    borderRadius: Sizes.Size_12,
     height: BUTTON_HEIGHT,
     left: 0,
     position: 'absolute',
   },
   resultWave: {
-    borderRadius: BUTTON_HEIGHT,
+    borderRadius: Sizes.Size_12,
     height: BUTTON_HEIGHT,
     left: 0,
     position: 'absolute',

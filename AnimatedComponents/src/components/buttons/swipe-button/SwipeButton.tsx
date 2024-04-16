@@ -190,7 +190,7 @@ const SwipeButton: React.FC<ISBSwipeButton> = (props: ISBSwipeButton) => {
         <PanGestureHandler onGestureEvent={animatedGestureHandler}>
           <Animated.View
             style={[styles.swipeThumb, animatedStyle.swipeThumb, animatedStyle.swipeThumbHide]}>
-            <RemixIcon name={RemixIcons.FILLED_ARROW_RIGHT} size={24} color={palette.silver} />
+            <RemixIcon name={RemixIcons.ARROW_RIGHT} size={24} color={palette.mintCream} />
           </Animated.View>
         </PanGestureHandler>
         {asyncTaskStatus === -2 ? (

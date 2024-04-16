@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from 'react'
-import { Easing, SafeAreaView } from 'react-native'
+import { SafeAreaView } from 'react-native'
 
-import { Loader } from '@components'
+import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
+import {
+  IconTransitionButton,
+  Loader,
+  ProgressButton,
+  Select,
+  SpringButton,
+  SwipeButton,
+} from '@components'
 import { RemixIcons } from '@constants'
-
-import ProgressButton from './src/components/buttons/progress-button/ProgressButton'
-import SpringButton from './src/components/buttons/spring-button/SpringButton'
-import SwipeButton from './src/components/buttons/swipe-button/SwipeButton'
-import Select from './src/components/select/Select'
-import SBTextAnimator from './src/components/text-animator/TextAnimator'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -27,26 +29,34 @@ const App = () => {
     }
   }
 
+  const onIconTransition = () => {
+    try {
+      return false
+    } catch {
+      return false
+    }
+  }
+
   const taskStatusData = useMemo(
     () => ({
       fail: {
         text: 'Failed',
         icon: RemixIcons.FILLED_CLOSE_CIRCLE,
         iconColor: 'white',
-        waveColor: ['red', 'red'],
+        waveColor: ['#D54D49', '#D54D49'],
       },
       success: {
         text: 'Successfully',
         icon: RemixIcons.CHECKBOX_CIRCLE_FILLED,
         iconColor: 'white',
-        waveColor: ['blue', 'blue'],
+        waveColor: ['#59B359', '#59B359'],
       },
     }),
     [],
   )
 
-  const gradientWaveColor = useMemo(() => ['red', 'red'], [])
-  const thumbColors = useMemo(() => ['yellow', 'yellow'], [])
+  const gradientWaveColor = useMemo(() => ['#1A63C5', '#1A63C5'], [])
+  const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -57,7 +67,6 @@ const App = () => {
         options={[{ title: 'Pranjul', value: 'pranjul' }]}
         value="Pranjul"
       />
-
       <ProgressButton isLoading={isLoading} onPress={onPress} label="Submit" />
       <SwipeButton
         buttonInitialText="Swipe Tp left"
@@ -67,19 +76,12 @@ const App = () => {
         taskStatusData={taskStatusData}
         thumbColors={thumbColors}
       />
-      <SBTextAnimator
-        bounce={false}
-        duration={3000}
-        easing={Easing.linear}
-        isRTL={false}
-        loop
-        marqueeDelay={0}
-        repeatSpacer={30}
-        scroll={false}
-        shouldAnimateThreshold={40}>
-        Textas dasjkdjkas jckdj kasdjkajkd kjsakldkasld Textas dasjkdjkas jckdj kasdjkajkd
-        kjsakldkasld Textas dasjkdjkas jckdj kasdjkajkd kjsakldkasld Textas dasjkdjkas jckdj
-      </SBTextAnimator>
+      <IconTransitionButton
+        onPress={onIconTransition}
+        startIcon={RightArrowIcon}
+        failedIcon={CrossIcon}
+        successIcon={TickIcon}
+      />
     </SafeAreaView>
   )
 }
