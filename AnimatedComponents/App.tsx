@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { Easing, SafeAreaView } from 'react-native'
 
+import { Loader } from '@components'
 import { RemixIcons } from '@constants'
 
 import ProgressButton from './src/components/buttons/progress-button/ProgressButton'
@@ -50,11 +51,13 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SpringButton label="Press me" onPress={onSpringPress} />
+      <Loader />
       <Select
         onChange={() => {}}
         options={[{ title: 'Pranjul', value: 'pranjul' }]}
         value="Pranjul"
       />
+
       <ProgressButton isLoading={isLoading} onPress={onPress} label="Submit" />
       <SwipeButton
         buttonInitialText="Swipe Tp left"
