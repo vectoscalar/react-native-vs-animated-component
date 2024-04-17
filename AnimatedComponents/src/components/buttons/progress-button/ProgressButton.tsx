@@ -1,16 +1,26 @@
 import React, { useRef } from 'react'
-import { Animated, Pressable, Text } from 'react-native'
+import { Animated, Pressable, StyleProp, Text, ViewStyle } from 'react-native'
 
 import style from './progressButton-styles'
 
 interface IProgressButton {
+  customButtonStyle?: StyleProp<ViewStyle>
+  isDisabled?: boolean
   isLoading: boolean
-  onPress: () => void
   label: string
+  loadingText?: string
+  onPress: () => void
 }
 
 const ProgressButton = (props: IProgressButton) => {
-  const { isLoading, onPress, label } = props
+  const {
+    customButtonStyle = {},
+    isDisabled,
+    isLoading,
+    label,
+    loadingText = 'isLoading...',
+    onPress,
+  } = props
 
   const progressAnim = useRef(new Animated.Value(0)).current
 
@@ -25,7 +35,7 @@ const ProgressButton = (props: IProgressButton) => {
   }
 
   return (
-    <Pressable style={style.button} onPress={handlePress} disabled={isLoading}>
+    <Pressable style={style.button} onPress={handlePress} disabled={isLoading || isDisabled}>
       {isLoading && (
         <Animated.View
           style={[
@@ -36,11 +46,12 @@ const ProgressButton = (props: IProgressButton) => {
                 outputRange: ['0%', '100%'],
               }),
             },
+            customButtonStyle,
           ]}
         />
       )}
 
-      <Text style={style.label}>{isLoading ? 'isLoading...' : label}</Text>
+      <Text style={style.label}>{isLoading ? loadingText : label}</Text>
     </Pressable>
   )
 }

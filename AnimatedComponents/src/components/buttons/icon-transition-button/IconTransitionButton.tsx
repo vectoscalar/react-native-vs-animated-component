@@ -1,12 +1,11 @@
-import React, { Ref, RefObject, useRef, useState } from 'react'
-import { LayoutChangeEvent, Pressable, View, ViewStyle } from 'react-native'
+import React, { useRef, useState } from 'react'
+import { LayoutChangeEvent, Pressable, ViewStyle } from 'react-native'
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
-import { SvgProps } from 'react-native-svg'
 
 import styles from './iconTransition-button-styles'
 
 interface IIconsTransitionButton {
-  onPress: () => boolean | Promise<boolean>
+  onPress: () => void | boolean | Promise<void>
   buttonStyle?: ViewStyle
   startIcon: React.ReactNode
   failedIcon: React.ReactNode
@@ -19,7 +18,7 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
   const rotationValue = useSharedValue(0)
   const [Icon, setIconName] = useState<React.ReactNode>(startIcon)
 
-  const buttonWidth = useRef<any>(0)
+  const buttonWidth = useRef<number>(0)
 
   const onLayout = (event: LayoutChangeEvent) => {
     buttonWidth.current = event.nativeEvent.layout.width

@@ -18,6 +18,14 @@ const style = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   },
+  buttonDisabled: {
+    alignItems: 'center',
+    backgroundColor: 'grey',
+    borderRadius: 40,
+    height: 40,
+    justifyContent: 'center',
+    width: 100,
+  },
 })
 
 export default style

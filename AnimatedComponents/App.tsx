@@ -4,13 +4,13 @@ import { SafeAreaView } from 'react-native'
 import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
   IconTransitionButton,
-  Loader,
   ProgressButton,
   Select,
   SpringButton,
   SwipeButton,
+  TriDotLoader,
 } from '@components'
-import { RemixIcons } from '@constants'
+import { RemixIcons, TriDotLoaderPreset } from '@constants'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -61,7 +61,7 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SpringButton label="Press me" onPress={onSpringPress} />
-      <Loader />
+      <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
       <Select
         onChange={() => {}}
         options={[{ title: 'Pranjul', value: 'pranjul' }]}
@@ -69,7 +69,7 @@ const App = () => {
       />
       <ProgressButton isLoading={isLoading} onPress={onPress} label="Submit" />
       <SwipeButton
-        buttonInitialText="Swipe Tp left"
+        buttonInitialText="Swipe To left"
         gradientWaveColor={gradientWaveColor}
         onSwipeComplete={handleSubmitBtnPress}
         onTaskComplete={handleSubmitBtnPress}

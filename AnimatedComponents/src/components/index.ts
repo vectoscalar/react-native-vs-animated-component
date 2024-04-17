@@ -1,7 +1,7 @@
 export { default as ProgressButton } from './buttons/progress-button/ProgressButton'
 export { default as SpringButton } from './buttons/spring-button/SpringButton'
 export { default as Select } from './select/Select'
-export { default as Loader } from './loader/tri-dot-loader/Loader'
+export { default as TriDotLoader } from './loader/tri-dot-loader/TriDotLoader'
 export { default as IconTransitionButton } from './buttons/icon-transition-button/IconTransitionButton'
 export { default as SwipeButton } from './buttons/swipe-button/SwipeButton'
 export { default as TextAnimator } from './text-animator/TextAnimator'

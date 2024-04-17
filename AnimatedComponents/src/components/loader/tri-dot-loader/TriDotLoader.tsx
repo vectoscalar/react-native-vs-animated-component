@@ -4,15 +4,20 @@ import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-na
 
 import { TriDotLoaderPreset } from '@constants'
 
-import { styles } from './loader-styles'
+import { styles } from './tri-loader-styles'
 
 type TriDotLoaderPropsType = {
-  loaderPreset?: TriDotLoaderPreset
+  customLoaderStyle?: StyleProp<ViewStyle>
   loaderDotColor?: string
+  loaderPreset?: TriDotLoaderPreset
 }
 
 const TriDotLoader = (props: TriDotLoaderPropsType) => {
-  const { loaderPreset = TriDotLoaderPreset.Medium, loaderDotColor = 'black' } = props
+  const {
+    loaderPreset = TriDotLoaderPreset.Medium,
+    loaderDotColor = 'black',
+    customLoaderStyle = {},
+  } = props
   const dot1Opacity = useSharedValue(1)
   const dot2Opacity = useSharedValue(1)
   const dot3Opacity = useSharedValue(1)
@@ -62,9 +67,15 @@ const TriDotLoader = (props: TriDotLoaderPropsType) => {
 
   return (
     <View style={styles.container}>
-      <Animated.View style={[dotStyle, dot1Style, { backgroundColor: loaderDotColor }]} />
-      <Animated.View style={[dotStyle, dot2Style, { backgroundColor: loaderDotColor }]} />
-      <Animated.View style={[dotStyle, dot3Style, { backgroundColor: loaderDotColor }]} />
+      <Animated.View
+        style={[dotStyle, dot1Style, { backgroundColor: loaderDotColor }, customLoaderStyle]}
+      />
+      <Animated.View
+        style={[dotStyle, dot2Style, { backgroundColor: loaderDotColor }, customLoaderStyle]}
+      />
+      <Animated.View
+        style={[dotStyle, dot3Style, { backgroundColor: loaderDotColor }, customLoaderStyle]}
+      />
     </View>
   )
 }

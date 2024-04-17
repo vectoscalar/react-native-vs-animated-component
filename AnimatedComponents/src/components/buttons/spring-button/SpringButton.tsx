@@ -1,15 +1,34 @@
 import React, { useEffect, useRef } from 'react'
-import { Animated, Pressable, Text, View } from 'react-native'
+import {
+  ActivityIndicator,
+  Animated,
+  Pressable,
+  StyleProp,
+  Text,
+  View,
+  ViewStyle,
+} from 'react-native'
 
 import style from './springButton-styles'
 
 interface ISpringButton {
   label: string
   onPress: () => void
+  isLoading?: boolean
+  isDisabled?: boolean
+  loaderColor?: string
+  customButtonStyle?: StyleProp<ViewStyle>
 }
 
 const SpringButton = (props: ISpringButton) => {
-  const { label, onPress } = props
+  const {
+    label,
+    onPress,
+    isLoading,
+    isDisabled,
+    loaderColor = '#fff',
+    customButtonStyle = {},
+  } = props
   const animatedScale = useRef(new Animated.Value(0)).current
 
   useEffect(() => {
@@ -29,9 +48,18 @@ const SpringButton = (props: ISpringButton) => {
 
   return (
     <View style={style.container}>
-      <Pressable onPress={handleOnPress}>
-        <Animated.View style={[style.button, { transform: [{ scale: animatedScale }] }]}>
-          <Text style={style.buttonText}>{label}</Text>
+      <Pressable disabled={isLoading || isDisabled} onPress={handleOnPress}>
+        <Animated.View
+          style={[
+            isDisabled ? style.buttonDisabled : style.button,
+            { transform: [{ scale: animatedScale }] },
+            customButtonStyle,
+          ]}>
+          {isLoading ? (
+            <ActivityIndicator color={loaderColor} />
+          ) : (
+            <Text style={style.buttonText}>{label}</Text>
+          )}
         </Animated.View>
       </Pressable>
     </View>
