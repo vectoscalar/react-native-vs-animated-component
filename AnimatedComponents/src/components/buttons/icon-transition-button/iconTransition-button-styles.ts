@@ -3,6 +3,7 @@ import { StyleSheet, ViewStyle } from 'react-native'
 interface Styles {
   container: ViewStyle
   ball: ViewStyle
+  buttonDisabled: ViewStyle
 }
 
 const styles = StyleSheet.create<Styles>({
@@ -11,6 +12,16 @@ const styles = StyleSheet.create<Styles>({
     flexDirection: 'row',
     width: 300,
     backgroundColor: '#016FC3',
+    padding: 10,
+    borderRadius: 15,
+    position: 'relative',
+    alignSelf: 'center',
+  },
+  buttonDisabled: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: 300,
+    backgroundColor: 'grey',
     padding: 10,
     borderRadius: 15,
     position: 'relative',

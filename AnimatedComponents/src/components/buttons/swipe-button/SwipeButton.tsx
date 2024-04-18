@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { View } from 'react-native'
+import { View, ViewStyle } from 'react-native'
 import {
   GestureHandlerRootView,
   PanGestureHandler,
@@ -53,6 +53,7 @@ interface ISBSwipeButton {
   onTaskComplete: (isSuccess: boolean) => void
   taskStatusData: ITaskStatusData
   thumbColors: Array<string>
+  style?: ViewStyle
 }
 
 const SwipeButton: React.FC<ISBSwipeButton> = (props: ISBSwipeButton) => {
@@ -64,6 +65,7 @@ const SwipeButton: React.FC<ISBSwipeButton> = (props: ISBSwipeButton) => {
     onTaskComplete,
     taskStatusData,
     thumbColors,
+    style,
   } = props
   const { fail, success } = taskStatusData
   const { waveColor: gradientWaveSuccessColor } = success
@@ -170,7 +172,7 @@ const SwipeButton: React.FC<ISBSwipeButton> = (props: ISBSwipeButton) => {
 
   return (
     <GestureHandlerRootView>
-      <View style={[styles.swipeContainer, isDisabled && styles.disabledContainer]}>
+      <View style={[styles.swipeContainer, isDisabled && styles.disabledContainer, style]}>
         <AnimatedLinearGradient
           style={[styles.wave, animatedStyle.wave]}
           colors={gradientWaveColor}

@@ -10,15 +10,17 @@ interface IIconsTransitionButton {
   startIcon: React.ReactNode
   failedIcon: React.ReactNode
   successIcon: React.ReactNode
+  isDisabled?: boolean
+  isLoading?: boolean
 }
 
 const IconTransitionButton = (props: IIconsTransitionButton) => {
-  const { onPress, buttonStyle, startIcon, failedIcon, successIcon } = props
+  const { onPress, buttonStyle, startIcon, failedIcon, successIcon, isDisabled, isLoading } = props
   const translateX = useSharedValue(0)
   const rotationValue = useSharedValue(0)
   const [Icon, setIconName] = useState<React.ReactNode>(startIcon)
 
-  const buttonWidth = useRef<number>(0)
+  const buttonWidth = useRef<any>(0)
 
   const onLayout = (event: LayoutChangeEvent) => {
     buttonWidth.current = event.nativeEvent.layout.width
@@ -56,7 +58,8 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
   return (
     <Pressable
       onPress={handlePress}
-      style={[styles.container, buttonStyle]}
+      disabled={isLoading || isDisabled}
+      style={[isDisabled ? styles.buttonDisabled : styles.container, buttonStyle]}
       ref={buttonWidth}
       onLayout={onLayout}>
       <Animated.View style={[styles.ball, animatedStyles]}>{Icon}</Animated.View>

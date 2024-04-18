@@ -78,9 +78,9 @@ const App = () => {
       />
       <IconTransitionButton
         onPress={onIconTransition}
-        startIcon={RightArrowIcon}
-        failedIcon={CrossIcon}
-        successIcon={TickIcon}
+        startIcon={<RightArrowIcon />}
+        failedIcon={<CrossIcon />}
+        successIcon={<TickIcon />}
       />
     </SafeAreaView>
   )
