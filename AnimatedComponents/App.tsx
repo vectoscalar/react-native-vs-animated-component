@@ -1,54 +1,93 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import React, { useMemo, useState } from 'react'
+import { SafeAreaView } from 'react-native'
 
-import { RangeSlider, Slider } from '@components'
+import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
+import {
+  IconTransitionButton,
+  ProgressButton,
+  Select,
+  Slider,
+  SpringButton,
+  SwipeButton,
+  TriDotLoader,
+} from '@components'
+import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 
 const App = () => {
-  const MIN_DEFAULT = 0
-  const MAX_DEFAULT = 100
-  const [minValue, setMinValue] = useState(MIN_DEFAULT)
-  const [maxValue, setMaxValue] = useState(MAX_DEFAULT)
+  const [isLoading, setIsLoading] = useState(false)
+  const onPress = () => {
+    setIsLoading(true)
+    setTimeout(() => setIsLoading(false), 3000)
+  }
 
-  const returnSliderComponent = (mode: string) => {
-    switch (mode) {
-      case 'Range': {
-        return (
-          <RangeSlider
-            sliderWidth={300}
-            min={0}
-            max={100}
-            step={5}
-            onValueChange={range => {
-              setMinValue(range.min)
-              setMaxValue(range.max)
-            }}
-          />
-        )
-      }
-      default: {
-        return (
-          <Slider
-            sliderWidth={300}
-            min={0}
-            max={100}
-            step={5}
-            onValueChange={range => {
-              setMinValue(range.min)
-              setMaxValue(range.max)
-            }}
-          />
-        )
-      }
+  const onSpringPress = () => {}
+
+  const handleSubmitBtnPress = () => {
+    try {
+      return true
+    } catch {
+      return false
     }
   }
 
+  const onIconTransition = () => {
+    try {
+      return false
+    } catch {
+      return false
+    }
+  }
+
+  const taskStatusData = useMemo(
+    () => ({
+      fail: {
+        text: 'Failed',
+        icon: RemixIcons.FILLED_CLOSE_CIRCLE,
+        iconColor: 'white',
+        waveColor: ['#D54D49', '#D54D49'],
+      },
+      success: {
+        text: 'Successfully',
+        icon: RemixIcons.CHECKBOX_CIRCLE_FILLED,
+        iconColor: 'white',
+        waveColor: ['#59B359', '#59B359'],
+      },
+    }),
+    [],
+  )
+
+  const gradientWaveColor = useMemo(() => ['#1A63C5', '#1A63C5'], [])
+  const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
+
   return (
-    <GestureHandlerRootView style={{ flex: 1, justifyContent: 'center' }}>
-      {returnSliderComponent('Range')}
-    </GestureHandlerRootView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <SpringButton label="Press me" onPress={onSpringPress} />
+      <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
+      <Select
+        onChange={() => {}}
+        options={[{ title: 'Pranjul', value: 'pranjul' }]}
+        value="Pranjul"
+      />
+      <ProgressButton isLoading={isLoading} onPress={onPress} label="Submit" />
+      <SwipeButton
+        buttonInitialText="Swipe To left"
+        gradientWaveColor={gradientWaveColor}
+        onSwipeComplete={handleSubmitBtnPress}
+        onTaskComplete={handleSubmitBtnPress}
+        taskStatusData={taskStatusData}
+        thumbColors={thumbColors}
+      />
+      <IconTransitionButton
+        onPress={onIconTransition}
+        startIcon={<RightArrowIcon />}
+        failedIcon={<CrossIcon />}
+        successIcon={<TickIcon />}
+      />
+      <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
+    </SafeAreaView>
   )
 }
 

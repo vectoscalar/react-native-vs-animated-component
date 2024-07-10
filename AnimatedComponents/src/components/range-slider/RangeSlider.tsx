@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TextInput, TextInputProps, View } from 'react-native'
 import {
   PanGestureHandler,
@@ -11,20 +11,23 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated'
 
-import { AnimatedPropsProp, SliderProps } from '@constants'
+import { AnimatedPropsProp, MAX_DEFAULT, MIN_DEFAULT, ValueSliderProps } from '@constants'
 
 import { styles } from './rangeSlider-styles'
 
 Animated.addWhitelistedNativeProps({ text: true })
 
-const Slider = (props: SliderProps) => {
-  const { sliderWidth, min, max, step, onValueChange } = props
+const RangeSlider = (props: ValueSliderProps) => {
+  const { sliderWidth, min, max, step, activeTrackColor, inactiveTrackColor, thumbColor } = props
   const positionLowerLimit = useSharedValue(0)
   const positionUpperLimit = useSharedValue(sliderWidth)
   const opacityLowerLimit = useSharedValue(0)
   const opacityUpperLimit = useSharedValue(0)
   const zIndexLowerLimit = useSharedValue(0)
   const zIndexUpperLimit = useSharedValue(0)
+
+  const [minValue, setMinValue] = useState(MIN_DEFAULT)
+  const [maxValue, setMaxValue] = useState(MAX_DEFAULT)
 
   const handleLowerLimitGesture = (gestureState: PanGestureHandlerGestureEvent) => {
     const velocityX = gestureState.nativeEvent.velocityX / 50
@@ -38,12 +41,12 @@ const Slider = (props: SliderProps) => {
     zIndexLowerLimit.value = positionLowerLimit.value > positionUpperLimit.value ? 1 : 0
 
     if (gestureState.nativeEvent.state === State.END) {
-      onValueChange({
-        min:
-          min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step,
-        max:
-          min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step,
-      })
+      setMinValue(
+        min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step,
+      )
+      setMaxValue(
+        min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step,
+      )
     }
   }
 
@@ -59,12 +62,12 @@ const Slider = (props: SliderProps) => {
     zIndexUpperLimit.value = positionLowerLimit.value > positionUpperLimit.value ? 0 : 1
 
     if (gestureState.nativeEvent.state === State.END) {
-      onValueChange({
-        min:
-          min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step,
-        max:
-          min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step,
-      })
+      setMinValue(
+        min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step,
+      )
+      setMaxValue(
+        min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step,
+      )
     }
   }
 
@@ -104,10 +107,14 @@ const Slider = (props: SliderProps) => {
 
   return (
     <View style={[styles.sliderContainer, { width: sliderWidth }]}>
-      <View style={[styles.sliderBack, { width: sliderWidth }]} />
-      <Animated.View style={[sliderStyle, styles.sliderFront]} />
+      <View
+        style={[styles.sliderBack, { width: sliderWidth, backgroundColor: inactiveTrackColor }]}
+      />
+      <Animated.View
+        style={[sliderStyle, styles.sliderFront, { backgroundColor: activeTrackColor }]}
+      />
       <PanGestureHandler onGestureEvent={handleLowerLimitGesture}>
-        <Animated.View style={[animatedStyleLowerLimit, styles.thumb]}>
+        <Animated.View style={[animatedStyleLowerLimit, styles.thumb, { borderColor: thumbColor }]}>
           <Animated.View style={[opacityStyleLowerLimit, styles.label]}>
             <AnimatedTextInput
               style={styles.labelText}
@@ -119,7 +126,7 @@ const Slider = (props: SliderProps) => {
         </Animated.View>
       </PanGestureHandler>
       <PanGestureHandler onGestureEvent={handleUpperLimitGesture}>
-        <Animated.View style={[animatedStyleUpperLimit, styles.thumb]}>
+        <Animated.View style={[animatedStyleUpperLimit, styles.thumb, { borderColor: thumbColor }]}>
           <Animated.View style={[opacityStyleUpperLimit, styles.label]}>
             <AnimatedTextInput
               style={styles.labelText}
@@ -134,4 +141,4 @@ const Slider = (props: SliderProps) => {
   )
 }
 
-export default Slider
+export default RangeSlider

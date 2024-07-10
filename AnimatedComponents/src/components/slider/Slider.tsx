@@ -1,83 +1,77 @@
 import React from 'react'
-import { TextInput, TextInputProps, View } from 'react-native'
-import {
-  PanGestureHandler,
-  PanGestureHandlerGestureEvent,
-  State,
-} from 'react-native-gesture-handler'
-import Animated, {
-  useAnimatedProps,
-  useAnimatedStyle,
-  useSharedValue,
-} from 'react-native-reanimated'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
-import { AnimatedPropsProp, SliderProps } from '@constants'
+import { RangeSlider, SingleValueSlider } from '@components'
+import { SliderType, ValueSliderProps } from '@constants'
 
-import { styles } from './slider-styles'
+interface ISliderProps extends ValueSliderProps {
+  type?: string
+}
 
-Animated.addWhitelistedNativeProps({ text: true })
+const Slider = (props: ISliderProps) => {
+  const {
+    max,
+    min,
+    sliderWidth,
+    step,
+    type = SliderType.SingleValueSlider,
+    activeTrackColor = '#3F4CF6',
+    inactiveTrackColor = '#DFEAFB',
+    thumbColor = '#3F4CF6',
+  } = props
 
-const Slider = (props: SliderProps) => {
-  const { sliderWidth, min, max, step, onValueChange } = props
-  const positionLowerLimit = useSharedValue(0)
-  const positionUpperLimit = useSharedValue(sliderWidth)
-  const opacityLimit = useSharedValue(0)
-
-  const handleSlideGesture = (gestureState: PanGestureHandlerGestureEvent) => {
-    const velocityX = gestureState.nativeEvent.velocityX / 50
-    opacityLimit.value = 1
-
-    positionLowerLimit.value = Math.max(
-      0,
-      Math.min(positionLowerLimit.value + velocityX, positionUpperLimit.value - step),
-    )
-
-    if (gestureState.nativeEvent.state === State.END) {
-      onValueChange({
-        min:
-          min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step,
-        max:
-          min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step,
-      })
+  const returnSliderComponent = () => {
+    let component: React.JSX.Element
+    switch (type) {
+      case SliderType.RangeSlider: {
+        component = (
+          <RangeSlider
+            sliderWidth={sliderWidth}
+            min={min}
+            max={max}
+            step={step}
+            activeTrackColor={activeTrackColor}
+            inactiveTrackColor={inactiveTrackColor}
+            thumbColor={thumbColor}
+          />
+        )
+        break
+      }
+      case SliderType.SingleValueSlider: {
+        component = (
+          <SingleValueSlider
+            sliderWidth={sliderWidth}
+            min={min}
+            max={max}
+            step={step}
+            activeTrackColor={activeTrackColor}
+            inactiveTrackColor={inactiveTrackColor}
+            thumbColor={thumbColor}
+          />
+        )
+        break
+      }
+      default: {
+        component = (
+          <SingleValueSlider
+            sliderWidth={sliderWidth}
+            min={min}
+            max={max}
+            step={step}
+            activeTrackColor={activeTrackColor}
+            inactiveTrackColor={inactiveTrackColor}
+            thumbColor={thumbColor}
+          />
+        )
+      }
     }
+    return component
   }
 
-  const animatedStyleLowerLimit = useAnimatedStyle(() => ({
-    transform: [{ translateX: positionLowerLimit.value }],
-  }))
-
-  const opacityStyleLowerLimit = useAnimatedStyle(() => ({
-    opacity: opacityLimit.value,
-  }))
-
-  const sliderStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: positionLowerLimit.value }],
-    width: positionUpperLimit.value - positionLowerLimit.value,
-  }))
-
-  const AnimatedTextInput = Animated.createAnimatedComponent(TextInput)
-  const minLabelText = useAnimatedProps(() => {
-    const value = Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step
-    return { text: `${min + value}` } as AnimatedPropsProp<TextInputProps>
-  })
-
   return (
-    <View style={[styles.sliderContainer, { width: sliderWidth }]}>
-      <View style={[styles.sliderBack, { width: sliderWidth }]} />
-      <Animated.View style={[sliderStyle, styles.sliderFront]} />
-      <PanGestureHandler onGestureEvent={handleSlideGesture}>
-        <Animated.View style={[animatedStyleLowerLimit, styles.thumb]}>
-          <Animated.View style={[opacityStyleLowerLimit, styles.label]}>
-            <AnimatedTextInput
-              style={styles.labelText}
-              animatedProps={minLabelText}
-              editable={false}
-              defaultValue="0"
-            />
-          </Animated.View>
-        </Animated.View>
-      </PanGestureHandler>
-    </View>
+    <GestureHandlerRootView style={{ flex: 1, justifyContent: 'center' }}>
+      {returnSliderComponent()}
+    </GestureHandlerRootView>
   )
 }
 
