@@ -1,3 +1,6 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo, useState } from 'react'
 import { SafeAreaView } from 'react-native'
 
@@ -6,11 +9,12 @@ import {
   IconTransitionButton,
   ProgressButton,
   Select,
+  Slider,
   SpringButton,
   SwipeButton,
   TriDotLoader,
 } from '@components'
-import { RemixIcons, TriDotLoaderPreset } from '@constants'
+import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -82,6 +86,7 @@ const App = () => {
         failedIcon={<CrossIcon />}
         successIcon={<TickIcon />}
       />
+      <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
     </SafeAreaView>
   )
 }
