@@ -12,17 +12,24 @@ import Icon from 'react-native-vector-icons/Entypo'
 
 import styles from './select-styles'
 
+export interface ISelectOption {
+  title: string
+  value: string
+}
+
 interface ISelectProps {
-  onChange: (newValue: string) => void
+  onChange: (newValue: ISelectOption) => void
   optionContainerStyle?: ViewStyle
-  options: Array<{ title: string; value: string }>
+  options: Array<ISelectOption>
   optionStyle?: ViewStyle
   placeholderText?: string
   selectedOptionStyle?: ViewStyle
   style?: ViewStyle | TextStyle
-  value: string
+  selectedOption: ISelectOption
 }
 const MIN_HEIGHT = 10
+
+const DEFAULT_SELECTED_OPTION: ISelectOption = { title: '', value: '' }
 
 const Select = (props: ISelectProps) => {
   const {
@@ -33,8 +40,9 @@ const Select = (props: ISelectProps) => {
     placeholderText,
     selectedOptionStyle,
     style,
-    value,
+    selectedOption,
   } = props
+
   const [isOpen, setIsOpen] = useState(false)
   const [selectedHeight, setSelectedHeight] = useState(0)
   const [optionsContainerHeight, setOptionsContainerHeight] = useState(10)
@@ -42,6 +50,8 @@ const Select = (props: ISelectProps) => {
   const heightAnim = useRef(new Animated.Value(0)).current
   const rotateAnim = useRef(new Animated.Value(0)).current
   const fadeAnim = useRef(new Animated.Value(0)).current
+
+  const { value } = selectedOption
 
   const rotateArrow = rotateAnim.interpolate({
     inputRange: [0, 1],
@@ -52,14 +62,15 @@ const Select = (props: ISelectProps) => {
     setIsOpen(!isOpen)
   }
 
-  const handleOptionPress = (item: string) => {
-    Animated.sequence([
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 50,
-        useNativeDriver: true,
-      }),
-    ]).start(() => onChange(item))
+  const handleOptionPress = (item: ISelectOption) => () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 50,
+      useNativeDriver: true,
+    }).start(() => {
+      const isSelected = item.value === value
+      onChange(isSelected ? DEFAULT_SELECTED_OPTION : item)
+    })
     setIsOpen(false)
   }
 
@@ -80,13 +91,11 @@ const Select = (props: ISelectProps) => {
   }, [isOpen, rotateAnim])
 
   useEffect(() => {
-    Animated.sequence([
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 50,
-        useNativeDriver: true,
-      }),
-    ]).start()
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start()
   }, [value, fadeAnim])
 
   const renderOptions = useCallback(() => {
@@ -104,7 +113,7 @@ const Select = (props: ISelectProps) => {
                 setOptionsContainerHeight(event.nativeEvent.layout.height * options.length)
               }
               activeOpacity={10}
-              onPress={() => handleOptionPress(item.value)}>
+              onPress={handleOptionPress(item)}>
               <Text
                 style={[styles.option, styles.optionText, optionStyle, ...selectedStyle]}
                 key={`${item.value}-${index}`}>

@@ -16,8 +16,11 @@ import {
 } from '@components'
 import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 
+import type { ISelectOption } from './src/components/select/Select'
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const [select, setSelect] = useState<ISelectOption>({ title: '', value: '' })
   const onPress = () => {
     setIsLoading(true)
     setTimeout(() => setIsLoading(false), 3000)
@@ -67,9 +70,13 @@ const App = () => {
       <SpringButton label="Press me" onPress={onSpringPress} />
       <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
       <Select
-        onChange={() => {}}
-        options={[{ title: 'Pranjul', value: 'pranjul' }]}
-        value="Pranjul"
+        onChange={setSelect}
+        options={[
+          { title: 'Pranjul', value: 'pranjul' },
+          { title: 'Divyanshu', value: 'divyanshu' },
+        ]}
+        selectedOption={select}
+        placeholderText="Enter Value"
       />
       <ProgressButton isLoading={isLoading} onPress={onPress} label="Submit" />
       <SwipeButton
