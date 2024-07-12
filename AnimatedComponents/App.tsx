@@ -68,17 +68,28 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SpringButton label="Press me" onPress={onSpringPress} />
-      <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
+      {/* <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} /> */}
       <Select
         onChange={setSelect}
         options={[
-          { title: 'Pranjul', value: 'pranjul' },
-          { title: 'Divyanshu', value: 'divyanshu' },
+          { title: 'Test 1', value: 'test1' },
+          { title: 'Test 2', value: 'test2' },
+          { title: 'Test 3', value: 'test3' },
+
+          { title: 'Test 4', value: 'test4' },
         ]}
         selectedOption={select}
         placeholderText="Enter Value"
+        optionContainerStyle={{ zIndex: 1000 }}
       />
-      <ProgressButton isLoading={isLoading} onPress={onPress} label="Submit" />
+      <ProgressButton
+        isLoading={isLoading}
+        onPress={onPress}
+        label="Submit"
+        buttonContainerStyle={{
+          marginVertical: 20,
+        }}
+      />
       <SwipeButton
         buttonInitialText="Swipe To left"
         gradientWaveColor={gradientWaveColor}

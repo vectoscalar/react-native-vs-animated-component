@@ -2,39 +2,38 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   mainContainer: {
-    position: 'relative',
-    flex: 1,
+    zIndex: 1,
   },
   container: {
     backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 10,
+    borderRadius: 5,
     flexDirection: 'row',
-    width: '100%',
     justifyContent: 'space-between',
+    padding: 10,
+    width: '100%',
   },
   selectText: {
     fontSize: 16,
     fontWeight: '600',
-    color: 'black',
   },
   optionsContainer: {
-    position: 'absolute',
     backgroundColor: 'white',
-    width: '100%',
-    borderRadius: 10,
+    marginTop: 4,
     overflow: 'hidden',
-    marginTop: 10,
+    position: 'absolute',
+    width: '100%',
   },
   option: {
-    padding: 5,
+    margin: 10,
+    padding: 8,
   },
   optionText: {
     fontSize: 16,
     fontWeight: '500',
   },
   selectedOption: {
-    backgroundColor: 'blue',
+    backgroundColor: '#016FC3',
+    borderRadius: 5,
     color: 'white',
   },
 })

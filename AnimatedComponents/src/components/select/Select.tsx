@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import {
   Animated,
   FlatList,
+  Modal,
   Text,
   TextStyle,
   TouchableOpacity,
@@ -51,7 +52,7 @@ const Select = (props: ISelectProps) => {
   const rotateAnim = useRef(new Animated.Value(0)).current
   const fadeAnim = useRef(new Animated.Value(0)).current
 
-  const { value } = selectedOption
+  const { value, title } = selectedOption
 
   const rotateArrow = rotateAnim.interpolate({
     inputRange: [0, 1],
@@ -134,7 +135,7 @@ const Select = (props: ISelectProps) => {
         onPress={handleOpenClosePress}
         style={[styles.container, style]}>
         <Animated.Text style={[styles.selectText, { opacity: fadeAnim }]}>
-          {value || placeholderText}
+          {title || placeholderText}
         </Animated.Text>
         <Animated.View style={{ transform: [{ rotate: rotateArrow }] }}>
           <Icon name="chevron-down" size={20} />
