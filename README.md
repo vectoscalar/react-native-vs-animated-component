@@ -27,4 +27,4 @@ jsx
 | accordionTitleStyle | DefaultStyle    | style object      | It is an optional prop which is used to allow users to change the style of title text.         |
 | isDefaultOpen       | boolean         | true/false        | It is an optional prop which is used to dictate whether the accordion will be open by default. |
 | duration            | number          | any number value  | It is used to control the speed of the animation.                                              |
-| icon                | string          | name of react vector icon | It is used to dictate the icon name for the accordion dropdown.                                     |
+| icon                | string          | name of react vector icon | It is used to dictate the icon name from the ant design library for the accordion dropdown.|
