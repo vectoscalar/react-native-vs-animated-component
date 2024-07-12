@@ -19,9 +19,11 @@ import {
 } from '@components'
 import { ModalPreset, RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 
+import type { ISelectOption } from './src/components/select/Select'
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
+  const [select, setSelect] = useState<ISelectOption>({ title: '', value: '' })
   const onPress = () => {
     setIsLoading(true)
     setTimeout(() => setIsLoading(false), 3000)
@@ -61,33 +63,35 @@ const App = () => {
   const gradientWaveColor = useMemo(() => ['#1A63C5', '#1A63C5'], [])
   const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
   return (
-    <GestureHandlerRootView>
-      <SafeAreaView style={{ flex: 1 }}>
-        <SpringButton label="Press me" onPress={onSpringPress} />
-        <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
-        <Select
-          onChange={() => {}}
-          options={[{ title: 'Pranjul', value: 'pranjul' }]}
-          value="Pranjul"
-        />
-        <ProgressButton isLoading={isLoading} onPress={onPress} label="Submit" />
-        <SwipeButton
-          buttonInitialText="Swipe To left"
-          gradientWaveColor={gradientWaveColor}
-          onSwipeComplete={handleSubmitBtnPress}
-          onTaskComplete={handleSubmitBtnPress}
-          taskStatusData={taskStatusData}
-          thumbColors={thumbColors}
-        />
-        <IconTransitionButton
-          onPress={onIconTransition}
-          startIcon={<RightArrowIcon />}
-          failedIcon={<CrossIcon />}
-          successIcon={<TickIcon />}
-        />
-        <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
-      </SafeAreaView>
-    </GestureHandlerRootView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <SpringButton label="Press me" onPress={onSpringPress} />
+      <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
+      <Select
+        onChange={setSelect}
+        options={[
+          { title: 'Pranjul', value: 'pranjul' },
+          { title: 'Divyanshu', value: 'divyanshu' },
+        ]}
+        selectedOption={select}
+        placeholderText="Enter Value"
+      />
+      <ProgressButton isLoading={isLoading} onPress={onPress} label="Submit" />
+      <SwipeButton
+        buttonInitialText="Swipe To left"
+        gradientWaveColor={gradientWaveColor}
+        onSwipeComplete={handleSubmitBtnPress}
+        onTaskComplete={handleSubmitBtnPress}
+        taskStatusData={taskStatusData}
+        thumbColors={thumbColors}
+      />
+      <IconTransitionButton
+        onPress={onIconTransition}
+        startIcon={<RightArrowIcon />}
+        failedIcon={<CrossIcon />}
+        successIcon={<TickIcon />}
+      />
+      <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
+    </SafeAreaView>
   )
 }
 export default App

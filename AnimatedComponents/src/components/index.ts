@@ -8,5 +8,4 @@ export { default as SingleValueSlider } from './single-value-slider/SingleValueS
 export { default as Slider } from './slider/Slider'
 export { default as SpringButton } from './buttons/spring-button/SpringButton'
 export { default as SwipeButton } from './buttons/swipe-button/SwipeButton'
-export { default as TextAnimator } from './text-animator/TextAnimator'
 export { default as TriDotLoader } from './loader/tri-dot-loader/TriDotLoader'
