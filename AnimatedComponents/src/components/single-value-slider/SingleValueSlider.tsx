@@ -17,7 +17,6 @@ import { AnimatedPropsProp, MAX_DEFAULT, MIN_DEFAULT, ValueSliderProps } from '@
 import { styles } from './singleValueSlider-styles'
 
 Animated.addWhitelistedNativeProps({ text: true })
-
 const SingleValueSlider = (props: ValueSliderProps) => {
   const { sliderWidth, min, max, step, activeTrackColor, inactiveTrackColor, thumbColor } = props
   const positionLowerLimit = useSharedValue(0)
@@ -25,34 +24,26 @@ const SingleValueSlider = (props: ValueSliderProps) => {
   const opacityLimit = useSharedValue(0)
   const [minValue, setMinValue] = useState(MIN_DEFAULT)
   const [maxValue, setMaxValue] = useState(MAX_DEFAULT)
-
   const handleSlideGesture = (gestureState: PanGestureHandlerGestureEvent) => {
     const velocityX = gestureState.nativeEvent.velocityX / 50
     opacityLimit.value = 1
-
     positionLowerLimit.value = Math.max(
       0,
-      Math.min(positionLowerLimit.value + velocityX, positionUpperLimit.value - step),
+      Math.min(positionLowerLimit.value + velocityX, sliderWidth),
     )
-
     if (gestureState.nativeEvent.state === State.END) {
-      setMinValue(
-        min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step,
-      )
-      setMaxValue(
-        min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step,
-      )
+      const newValue =
+        min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step
+      setMinValue(newValue)
+      setMaxValue(Math.min(newValue + step, max))
     }
   }
-
   const animatedStyleLowerLimit = useAnimatedStyle(() => ({
     transform: [{ translateX: positionLowerLimit.value }],
   }))
-
   const opacityStyleLowerLimit = useAnimatedStyle(() => ({
     opacity: opacityLimit.value,
   }))
-
   const sliderStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: positionLowerLimit.value }],
     width: positionUpperLimit.value - positionLowerLimit.value,
@@ -63,7 +54,6 @@ const SingleValueSlider = (props: ValueSliderProps) => {
     const value = Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step
     return { text: `${min + value}` } as AnimatedPropsProp<TextInputProps>
   })
-
   return (
     <View
       style={[styles.sliderContainer, { width: sliderWidth, backgroundColor: inactiveTrackColor }]}>
@@ -86,5 +76,4 @@ const SingleValueSlider = (props: ValueSliderProps) => {
     </View>
   )
 }
-
 export default SingleValueSlider

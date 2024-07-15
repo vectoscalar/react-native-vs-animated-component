@@ -15,8 +15,6 @@ import { AnimatedPropsProp, MAX_DEFAULT, MIN_DEFAULT, ValueSliderProps } from '@
 
 import { styles } from './rangeSlider-styles'
 
-Animated.addWhitelistedNativeProps({ text: true })
-
 const RangeSlider = (props: ValueSliderProps) => {
   const { sliderWidth, min, max, step, activeTrackColor, inactiveTrackColor, thumbColor } = props
   const positionLowerLimit = useSharedValue(0)
@@ -35,18 +33,26 @@ const RangeSlider = (props: ValueSliderProps) => {
 
     positionLowerLimit.value = Math.max(
       0,
-      Math.min(positionLowerLimit.value + velocityX, positionUpperLimit.value - step),
+      Math.min(positionLowerLimit.value + velocityX, positionUpperLimit.value),
     )
 
-    zIndexLowerLimit.value = positionLowerLimit.value > positionUpperLimit.value ? 1 : 0
+    zIndexLowerLimit.value = 1
+    zIndexUpperLimit.value = 0
 
     if (gestureState.nativeEvent.state === State.END) {
-      setMinValue(
-        min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step,
-      )
-      setMaxValue(
+      const newMinValue =
+        min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step
+      setMinValue(newMinValue)
+
+      const newMaxValue = Math.max(
+        newMinValue + step,
         min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step,
       )
+      setMaxValue(newMaxValue)
+
+      if (newMaxValue !== maxValue) {
+        positionUpperLimit.value = ((newMaxValue - min) / (max - min)) * sliderWidth
+      }
     }
   }
 
@@ -55,22 +61,29 @@ const RangeSlider = (props: ValueSliderProps) => {
     opacityUpperLimit.value = 1
 
     positionUpperLimit.value = Math.max(
-      positionLowerLimit.value + step,
+      positionLowerLimit.value,
       Math.min(sliderWidth, positionUpperLimit.value + velocityX),
     )
 
-    zIndexUpperLimit.value = positionLowerLimit.value > positionUpperLimit.value ? 0 : 1
+    zIndexUpperLimit.value = 1
+    zIndexLowerLimit.value = 0
 
     if (gestureState.nativeEvent.state === State.END) {
-      setMinValue(
+      const newMaxValue =
+        min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step
+      setMaxValue(newMaxValue)
+
+      const newMinValue = Math.min(
+        newMaxValue - step,
         min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step,
       )
-      setMaxValue(
-        min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step,
-      )
+      setMinValue(newMinValue)
+
+      if (newMinValue !== minValue) {
+        positionLowerLimit.value = ((newMinValue - min) / (max - min)) * sliderWidth
+      }
     }
   }
-
   const animatedStyleLowerLimit = useAnimatedStyle(() => ({
     transform: [{ translateX: positionLowerLimit.value }],
     zIndex: zIndexLowerLimit.value,

@@ -17,7 +17,7 @@ export interface Range {
 
 export enum SliderType {
   RangeSlider = 'RANGE_SLIDER',
-  SingleValueSlider = 'SINGLE_VALUE_SLIDER', 
+  SingleValueSlider = 'SINGLE_VALUE_SLIDER',
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

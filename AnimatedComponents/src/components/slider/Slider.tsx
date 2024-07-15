@@ -20,7 +20,7 @@ const Slider = (props: ISliderProps) => {
     thumbColor = '#3F4CF6',
   } = props
 
-  const returnSliderComponent = () => {
+  const renderSlider = () => {
     let component: React.JSX.Element
     switch (type) {
       case SliderType.RangeSlider: {
@@ -68,11 +68,7 @@ const Slider = (props: ISliderProps) => {
     return component
   }
 
-  return (
-    <GestureHandlerRootView style={{ flex: 1, justifyContent: 'center' }}>
-      {returnSliderComponent()}
-    </GestureHandlerRootView>
-  )
+  return <GestureHandlerRootView>{renderSlider()}</GestureHandlerRootView>
 }
 
 export default Slider
