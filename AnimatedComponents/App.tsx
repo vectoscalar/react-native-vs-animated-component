@@ -1,12 +1,13 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { SafeAreaView } from 'react-native'
 
 import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
   IconTransitionButton,
+  LinearProgressBar,
   ProgressButton,
   Select,
   Slider,
@@ -21,6 +22,7 @@ import type { ISelectOption } from './src/components/select/Select'
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [select, setSelect] = useState<ISelectOption>({ title: '', value: '' })
+  const [progress, setProgress] = useState(0)
   const onPress = () => {
     setIsLoading(true)
     setTimeout(() => setIsLoading(false), 3000)
@@ -65,10 +67,18 @@ const App = () => {
   const gradientWaveColor = useMemo(() => ['#1A63C5', '#1A63C5'], [])
   const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress(prev => (prev + 0.1 < 1 ? prev + 0.1 : 0))
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SpringButton label="Press me" onPress={onSpringPress} />
-      {/* <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} /> */}
+      <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
       <Select
         onChange={setSelect}
         options={[
@@ -105,6 +115,7 @@ const App = () => {
         successIcon={<TickIcon />}
       />
       <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
+      <LinearProgressBar progress={progress} />
     </SafeAreaView>
   )
 }
