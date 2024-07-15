@@ -1,5 +1,14 @@
 import React, { useEffect } from 'react'
-import { Modal as RNModal, StyleProp, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
+import {
+  Dimensions,
+  Modal as RNModal,
+  StyleProp,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import Animated, {
   Easing,
   runOnJS,
@@ -13,75 +22,70 @@ import { ModalPreset } from '@constants'
 import styles from './modal-styles'
 
 interface IModalProps {
-  /** isVisible: is a required prop that indicates whether the modal is visible or not */
-  isVisible: boolean
-  /** onClose: is a required prop that handles the closing of the modal */
-  onClose: () => void
-  /** type: is a required prop that specifies the type of animation preset for the modal */
-  type: ModalPreset
+  /** animationType: is a required prop that specifies the type of animation preset for the modal */
+  animationType: ModalPreset
   /** children: is a required prop that indicates the content of the modal */
   children: React.ReactNode
+  /** isOpen: is a required prop that indicates whether the modal is visible or not */
+  isOpen: boolean
+  /** onClose: is a required prop that handles the closing of the modal */
+  onClose: () => void
   /** style: is an optional prop that defines any additional styles for customizing the modal */
   style?: StyleProp<ViewStyle>
 }
 
 const Modal = (props: IModalProps) => {
-  const { isVisible, onClose, type, children, style } = props
+  const { animationType, children, isOpen, onClose, style = {} } = props
+  const { height: screenHeight, width: screenWidth } = Dimensions.get('screen')
 
   const opacity = useSharedValue(0)
-  const translateY = useSharedValue(500)
-  const translateX = useSharedValue(-500)
+  const translateY = useSharedValue(screenHeight)
+  const translateX = useSharedValue(-screenWidth)
   const scale = useSharedValue(0)
-  const rotate = useSharedValue(0)
-  const flip = useSharedValue(1)
 
   const handleAnimation = (isOpening: boolean) => {
     const config = { duration: 500, easing: Easing.inOut(Easing.ease) }
     const onEnd = (finished: boolean | undefined) => {
       'worklet'
-
       if (!isOpening && finished) {
         runOnJS(onClose)()
       }
     }
-    switch (type) {
+
+    switch (animationType) {
       case ModalPreset.FadeIn: {
         opacity.value = withTiming(isOpening ? 1 : 0, config, onEnd)
         break
       }
       case ModalPreset.SlideInLeft: {
-        translateX.value = withTiming(isOpening ? 0 : -500, config, onEnd)
+        translateX.value = withTiming(isOpening ? 0 : -screenWidth, config, onEnd)
         break
       }
       case ModalPreset.Scale: {
         scale.value = withTiming(isOpening ? 1 : 0, config, onEnd)
         break
       }
-      case ModalPreset.RotateIn: {
-        rotate.value = withTiming(isOpening ? 360 : 0, config, onEnd)
-        break
-      }
-      case ModalPreset.FlipIn: {
-        flip.value = withTiming(isOpening ? 1 : -1, config, onEnd)
-        break
-      }
       case ModalPreset.SlideIn: {
-        translateY.value = withTiming(isOpening ? 0 : 500, config, onEnd)
+        translateY.value = withTiming(isOpening ? 0 : screenHeight, config, onEnd)
         break
       }
       default: {
-        console.warn(`Unknown modal type: ${type}`)
+        console.warn(`Unknown modal type: ${animationType}`)
         break
       }
     }
   }
 
   useEffect(() => {
-    handleAnimation(isVisible)
-  }, [isVisible])
+    if (isOpen) {
+      handleAnimation(true)
+    } else {
+      handleAnimation(false)
+    }
+  }, [isOpen])
 
   const animatedStyle = useAnimatedStyle(() => {
-    switch (type) {
+    switch (animationType) {
       case ModalPreset.FadeIn: {
         return { opacity: opacity.value }
       }
@@ -90,12 +94,6 @@ const Modal = (props: IModalProps) => {
       }
       case ModalPreset.Scale: {
         return { transform: [{ scale: scale.value }] }
-      }
-      case ModalPreset.RotateIn: {
-        return { transform: [{ rotate: `${rotate.value}deg` }] }
-      }
-      case ModalPreset.FlipIn: {
-        return { transform: [{ scaleY: flip.value }] }
       }
       case ModalPreset.SlideIn: {
         return { transform: [{ translateY: translateY.value }] }
@@ -107,16 +105,26 @@ const Modal = (props: IModalProps) => {
   })
 
   return (
-    <RNModal transparent visible={isVisible} onRequestClose={onClose}>
-      <View style={styles.modalBackground}>
-        <Animated.View style={[styles.modalContainer, animatedStyle, style]}>
-          {children}
-          <TouchableOpacity onPress={onClose} style={styles.button}>
-            <Text style={styles.buttonText}>Close</Text>
-          </TouchableOpacity>
-        </Animated.View>
-      </View>
-    </RNModal>
+    <GestureHandlerRootView>
+      <RNModal
+        visible={isOpen}
+        onRequestClose={() => {
+          handleAnimation(false)
+        }}>
+        <View style={styles.modalBackground}>
+          <Animated.View style={[styles.modalContainer, animatedStyle, style]}>
+            {children}
+            <TouchableOpacity
+              onPress={() => {
+                handleAnimation(false)
+              }}
+              style={styles.button}>
+              <Text style={styles.buttonText}>Close</Text>
+            </TouchableOpacity>
+          </Animated.View>
+        </View>
+      </RNModal>
+    </GestureHandlerRootView>
   )
 }
 

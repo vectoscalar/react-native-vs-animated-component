@@ -3,13 +3,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo, useState } from 'react'
 import { SafeAreaView } from 'react-native'
-import { GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-handler'
-import { Text } from 'react-native-svg'
 
 import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
   IconTransitionButton,
-  Modal,
   ProgressButton,
   Select,
   Slider,
@@ -17,7 +14,7 @@ import {
   SwipeButton,
   TriDotLoader,
 } from '@components'
-import { ModalPreset, RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
+import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 
 import type { ISelectOption } from './src/components/select/Select'
 
