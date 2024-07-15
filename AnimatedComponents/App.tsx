@@ -2,10 +2,11 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo, useState } from 'react'
-import { SafeAreaView } from 'react-native'
+import { Alert, SafeAreaView } from 'react-native'
 
-import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
+import { CrossIcon, FileIcon, FolderIcon, PenIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
+  FloatingButton,
   IconTransitionButton,
   ProgressButton,
   Select,
@@ -14,7 +15,7 @@ import {
   SwipeButton,
   TriDotLoader,
 } from '@components'
-import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
+import { FloatingButtonPreset, RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 
 import type { ISelectOption } from './src/components/select/Select'
 
@@ -64,6 +65,28 @@ const App = () => {
 
   const gradientWaveColor = useMemo(() => ['#1A63C5', '#1A63C5'], [])
   const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
+  const icons = [
+    {
+      icon: FileIcon,
+      onPress: () => Alert.alert('File Icon Pressed'),
+      iconName: 'File',
+    },
+    {
+      icon: FolderIcon,
+      onPress: () => Alert.alert('Folder Icon Pressed'),
+      iconName: 'Folder',
+    },
+    {
+      icon: PenIcon,
+      onPress: () => Alert.alert('Pen Icon Pressed'),
+      iconName: 'Pen',
+    },
+    {
+      icon: PenIcon,
+      onPress: () => Alert.alert('Pen Icon Pressed'),
+      iconName: 'Pencil',
+    },
+  ]
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -94,6 +117,7 @@ const App = () => {
         successIcon={<TickIcon />}
       />
       <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
+      <FloatingButton buttonType={FloatingButtonPreset.FloatingButtonWithIcon} icons={icons} />
     </SafeAreaView>
   )
 }
