@@ -8,12 +8,7 @@ import {
   UIManager,
   View,
 } from 'react-native'
-import Animated, {
-  useAnimatedStyle,
-  useDerivedValue,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated'
+import Animated, { useDerivedValue, withTiming } from 'react-native-reanimated'
 import { DefaultStyle } from 'react-native-reanimated/lib/typescript/reanimated2/hook/commonTypes'
 import Icon from 'react-native-vector-icons/AntDesign'
 
@@ -62,39 +57,58 @@ const Item: FC<IAccordionItemProps> = props => {
     titleStyle = {},
   } = props
 
+  if (Platform.OS === 'android') {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true)
+    }
+  }
+
   const { activeAccordionId, setActiveAccordionId, isMultipleOpen } = useContext(AccordionContext)
 
-  const open = isMultipleOpen
-    ? useSharedValue(isDefaultOpen)
-    : useSharedValue(activeAccordionId === id)
-
-  const height = useSharedValue(0)
-
-  const derivedHeight = useDerivedValue(
-    () =>
-      withTiming(height.value * Number(open.value), {
-        duration,
-      }),
-    [open],
-  )
-
-  const accordionBodyStyle = useAnimatedStyle(() => ({
-    height: derivedHeight.value,
-  }))
+  const [open, setOpen] = useState(isMultipleOpen ? isDefaultOpen : activeAccordionId === id)
 
   const rotateIconValue = useDerivedValue(() =>
-    withTiming(open.value ? '180deg' : '0deg', { duration: duration }),
+    withTiming(open ? '180deg' : '0deg', { duration: duration }),
   )
 
   const onPress = () => {
     if (!isMultipleOpen) {
       setActiveAccordionId(activeAccordionId === id ? undefined : id)
     }
-    open.value = !open.value
+    setOpen(!open)
+    LayoutAnimation.configureNext({
+      duration: duration,
+      create: {
+        type: LayoutAnimation.Types.easeIn,
+        property: LayoutAnimation.Properties.opacity,
+      },
+      delete: {
+        type: LayoutAnimation.Types.easeOut,
+        property: LayoutAnimation.Properties.opacity,
+      },
+    })
   }
 
   useEffect(() => {
-    open.value = activeAccordionId === id
+    if (activeAccordionId === id && !open) {
+      LayoutAnimation.configureNext({
+        duration: duration,
+        create: {
+          type: LayoutAnimation.Types.easeIn,
+          property: LayoutAnimation.Properties.opacity,
+        },
+      })
+      setOpen(true)
+    } else if (activeAccordionId !== id && open) {
+      LayoutAnimation.configureNext({
+        duration: duration,
+        create: {
+          type: LayoutAnimation.Types.easeOut,
+          property: LayoutAnimation.Properties.opacity,
+        },
+      })
+      setOpen(false)
+    }
   }, [activeAccordionId])
 
   const myIcon = <Icon name={icon ? icon : 'down'} size={20} />
@@ -106,19 +120,11 @@ const Item: FC<IAccordionItemProps> = props => {
         <Animated.View style={{ transform: [{ rotate: rotateIconValue }] }}>{myIcon}</Animated.View>
       </Pressable>
 
-      <View style={styles.content}>
-        <View style={styles.dropdown}>
-          <Animated.View style={[styles.animatedView, accordionBodyStyle]}>
-            <View
-              onLayout={e => {
-                height.value = e.nativeEvent.layout.height
-              }}
-              style={styles.wrapper}>
-              {children}
-            </View>
-          </Animated.View>
-        </View>
-      </View>
+      {open && (
+        <Animated.View>
+          <View>{children}</View>
+        </Animated.View>
+      )}
     </>
   )
 }

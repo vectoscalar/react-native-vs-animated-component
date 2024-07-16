@@ -22,21 +22,4 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: Sizes.Size_20,
   },
-  content: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  dropdown: {
-    width: '100%',
-  },
-  wrapper: {
-    alignItems: 'center',
-    display: 'flex',
-    position: 'absolute',
-    width: '100%',
-  },
-  animatedView: {
-    overflow: 'hidden',
-    width: '100%',
-  },
 })
