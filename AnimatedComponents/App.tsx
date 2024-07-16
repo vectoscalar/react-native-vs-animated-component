@@ -25,9 +25,7 @@ const App = () => {
     setIsLoading(true)
     setTimeout(() => setIsLoading(false), 3000)
   }
-
   const onSpringPress = () => {}
-
   const handleSubmitBtnPress = () => {
     try {
       return true
@@ -35,7 +33,6 @@ const App = () => {
       return false
     }
   }
-
   const onIconTransition = () => {
     try {
       return false
@@ -43,7 +40,6 @@ const App = () => {
       return false
     }
   }
-
   const taskStatusData = useMemo(
     () => ({
       fail: {
@@ -61,10 +57,8 @@ const App = () => {
     }),
     [],
   )
-
   const gradientWaveColor = useMemo(() => ['#1A63C5', '#1A63C5'], [])
   const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SpringButton label="Press me" onPress={onSpringPress} />
@@ -97,5 +91,4 @@ const App = () => {
     </SafeAreaView>
   )
 }
-
 export default App
