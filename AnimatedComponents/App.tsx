@@ -20,7 +20,7 @@ import type { ISelectOption } from './src/components/select/Select'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const [select, setSelect] = useState<ISelectOption>({ title: '', value: '' })
+  const [select, setSelect] = useState<ISelectOption | ISelectOption[]>([])
   const onPress = () => {
     setIsLoading(true)
     setTimeout(() => setIsLoading(false), 3000)
@@ -72,11 +72,14 @@ const App = () => {
       <Select
         onChange={setSelect}
         options={[
-          { title: 'Pranjul', value: 'pranjul' },
-          { title: 'Divyanshu', value: 'divyanshu' },
+          { title: 'Amandeep', value: 'amandeep' },
+          { title: 'Aman Rana', value: 'aman rana' },
+          { title: 'Hargun', value: 'hargun' },
+          { title: 'Ravi', value: 'ravi' },
         ]}
-        selectedOption={select}
-        placeholderText="Enter Value"
+        selectedOptions={select}
+        placeholderText="Select option"
+        multiSelect
       />
       <ProgressButton isLoading={isLoading} onPress={onPress} label="Submit" />
       <SwipeButton
