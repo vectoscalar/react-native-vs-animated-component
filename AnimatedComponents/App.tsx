@@ -2,10 +2,11 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useMemo, useState } from 'react'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, View } from 'react-native'
 
 import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
+  CircularProgressBar,
   IconTransitionButton,
   LinearProgressBar,
   ProgressButton,
@@ -16,6 +17,7 @@ import {
   TriDotLoader,
 } from '@components'
 import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
+import { palette } from '@theme'
 
 import type { ISelectOption } from './src/components/select/Select'
 
@@ -69,7 +71,10 @@ const App = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(prev => (prev + 0.1 < 1 ? prev + 0.1 : 0))
+      setProgress(prevProgress => {
+        const newProgress = prevProgress + 10
+        return newProgress > 100 ? 0 : newProgress
+      })
     }, 1000)
 
     return () => clearInterval(interval)
@@ -116,6 +121,9 @@ const App = () => {
       />
       <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
       <LinearProgressBar progress={progress} />
+      <View style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
+        <CircularProgressBar progress={progress} />
+      </View>
     </SafeAreaView>
   )
 }

@@ -1,11 +1,6 @@
 import React, { useEffect } from 'react'
 import { StyleProp, Text, TextStyle, View, ViewStyle } from 'react-native'
-import Animated, {
-  useAnimatedStyle,
-  useDerivedValue,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated'
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 
 import { styles } from './LinearProgressBar-styles'
 
@@ -32,16 +27,15 @@ const LinearProgressBar = (props: ILinearProgressBarProps) => {
   } = props
 
   const progressValue = useSharedValue(0)
+  const progressText = `${Math.round(progress)}%`
+
+  const progressBarAnimatedStyle = useAnimatedStyle(() => ({
+    width: `${progressValue.value}%`,
+  }))
 
   useEffect(() => {
     progressValue.value = withTiming(progress, { duration })
   }, [progress])
-
-  const progressBarAnimatedStyle = useAnimatedStyle(() => ({
-    width: `${progressValue.value * 100}%`,
-  }))
-
-  const progressText = useDerivedValue(() => `${Math.round(progressValue.value * 100)}%`).value
 
   return (
     <View style={[styles.container, progressBarContainerStyle]}>
