@@ -36,8 +36,8 @@ interface ISearchBarProps {
   searchBarContainer?: DefaultStyle
   /** searchValue: is a prop which dictates the value of the search bar */
   searchValue: string
-  /** wrapperContainer: is an optional prop which dictates the style of the main container which wraps the search bar */
-  wrapperContainer?: DefaultStyle
+  /** wrapperContainerStyle: is an optional prop which dictates the style of the main container which wraps the search bar */
+  wrapperContainerStyle?: DefaultStyle
 }
 
 const SearchBar = (props: ISearchBarProps) => {
@@ -50,7 +50,7 @@ const SearchBar = (props: ISearchBarProps) => {
     iconStyle = {},
     inputContainerStyle = {},
     searchBarContainer = {},
-    wrapperContainer = {},
+    wrapperContainerStyle = {},
     onInputChange,
     placeholderText = 'Search here ...',
     searchValue,
@@ -64,7 +64,7 @@ const SearchBar = (props: ISearchBarProps) => {
     const newShowInput = !showInput
     setShowInput(newShowInput)
 
-    width.value = withTiming(newShowInput ? containerWidth.current * 0.9 : 50, {
+    width.value = withTiming(newShowInput ? containerWidth.current * 1 : 50, {
       duration: duration,
       easing: Easing.ease,
     })
@@ -81,7 +81,7 @@ const SearchBar = (props: ISearchBarProps) => {
 
   return (
     <View
-      style={[styles.container, wrapperContainer]}
+      style={[styles.container, wrapperContainerStyle]}
       onLayout={event => {
         containerWidth.current = event.nativeEvent.layout.width
       }}>

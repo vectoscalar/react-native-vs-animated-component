@@ -82,10 +82,10 @@ const App = () => {
         <SearchBar
           searchValue={searchValue}
           onInputChange={setSearchValue}
-          wrapperContainer={{
+          wrapperContainerStyle={{
             backgroundColor: 'black',
+            marginHorizontal: 20,
             alignItems: 'flex-end',
-            paddingHorizontal: 10,
           }}
         />
       </View>
