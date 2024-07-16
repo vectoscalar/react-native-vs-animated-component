@@ -11,7 +11,7 @@ import { palette } from '@theme'
 
 import { styles } from './infiniteCircularProgressBar-styles'
 
-export interface CircularProgressBarProps {
+export interface InfiniteCircularProgressBarProps {
   /** duration is an optional prop which states the duration of the animation in milliseconds. */
   duration?: number
   /** outerRingColor is an optional prop that sets the color of the outer ring of the progress bar. */
@@ -24,7 +24,7 @@ export interface CircularProgressBarProps {
   strokeWidth?: number
 }
 
-const CircularProgressBar = (props: CircularProgressBarProps) => {
+const InfiniteCircularProgressBar = (props: InfiniteCircularProgressBarProps) => {
   const {
     duration = 800,
     outerRingColor = palette.chineseWhite,
@@ -34,16 +34,14 @@ const CircularProgressBar = (props: CircularProgressBarProps) => {
   } = props
 
   const rotateValue = useSharedValue(0)
-  useEffect(() => {
-    rotateValue.value = withRepeat(
-      withTiming(360, { duration: duration, easing: Easing.linear }),
-      -1,
-    )
-  }, [duration])
 
   const animatedStyles = useAnimatedStyle(() => {
     return { transform: [{ rotate: `${rotateValue.value}deg` }] }
   })
+
+  useEffect(() => {
+    rotateValue.value = withRepeat(withTiming(360, { duration, easing: Easing.linear }), -1)
+  }, [duration])
 
   return (
     <Animated.View
@@ -52,6 +50,7 @@ const CircularProgressBar = (props: CircularProgressBarProps) => {
         {
           borderBottomColor: outerRingColor,
           borderLeftColor: outerRingColor,
+          borderRadius: size / 2,
           borderRightColor: outerRingColor,
           borderTopColor: progressRingColor,
           borderWidth: strokeWidth,
@@ -63,4 +62,4 @@ const CircularProgressBar = (props: CircularProgressBarProps) => {
     />
   )
 }
-export default CircularProgressBar
+export default InfiniteCircularProgressBar

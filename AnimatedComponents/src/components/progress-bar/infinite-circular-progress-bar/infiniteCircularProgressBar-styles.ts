@@ -1,9 +1,11 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 
-import { Sizes } from '@theme'
+interface Styles {
+  container: ViewStyle
+}
 
-export const styles = StyleSheet.create({
+export const styles: Styles = StyleSheet.create({
   container: {
-    borderRadius: Sizes.Size_100,
+    overflow: 'hidden',
   },
 })

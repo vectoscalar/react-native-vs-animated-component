@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { StyleProp, View, ViewStyle } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { LayoutChangeEvent, View, ViewStyle } from 'react-native'
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -20,32 +20,46 @@ interface InfiniteLinearProgressBarProps {
 }
 
 const InfiniteLinearProgressBar = (props: InfiniteLinearProgressBarProps) => {
-  const {
-    duration = 1400,
-    progressBarContainerStyle = { width: 500, height: 20 },
-    progressBarFillStyle = { width: 100 },
-  } = props
+  const { duration = 1400, progressBarContainerStyle = {}, progressBarFillStyle = {} } = props
 
-  const containerWidth = progressBarContainerStyle.width
+  const translation = useSharedValue(0)
+  const [containerWidth, setContainerWidth] = useState(0)
+  const [fillWidth, setFillWidth] = useState(0)
 
-  const fillWidth = progressBarFillStyle.width
-
-  const translation = useSharedValue(-fillWidth!)
-
-  useEffect(() => {
+  const startAnimation = () => {
+    translation.value = -fillWidth
     translation.value = withRepeat(
-      withTiming(containerWidth as number, { duration, easing: Easing.linear }),
+      withTiming(containerWidth, { duration, easing: Easing.linear }),
       -1,
     )
-  }, [containerWidth, duration])
+  }
 
-  const progressAnimatedStyle = useAnimatedStyle(() => {
-    return { transform: [{ translateX: translation.value }] }
-  })
+  const handleContainerLayout = (event: LayoutChangeEvent) => {
+    const { width } = event.nativeEvent.layout
+    setContainerWidth(width)
+  }
+
+  const handleFillLayout = (event: LayoutChangeEvent) => {
+    const { width } = event.nativeEvent.layout
+    setFillWidth(width)
+  }
+
+  const progressAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: translation.value }],
+  }))
+
+  useEffect(() => {
+    if (containerWidth && fillWidth) {
+      startAnimation()
+    }
+  }, [containerWidth, fillWidth, duration])
 
   return (
-    <View style={[styles.container, progressBarContainerStyle]}>
-      <Animated.View style={[styles.subContainer, progressAnimatedStyle, progressBarFillStyle]} />
+    <View style={[styles.container, progressBarContainerStyle]} onLayout={handleContainerLayout}>
+      <Animated.View
+        style={[styles.subContainer, progressAnimatedStyle, progressBarFillStyle]}
+        onLayout={handleFillLayout}
+      />
     </View>
   )
 }

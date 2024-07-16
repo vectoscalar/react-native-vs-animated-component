@@ -1,8 +1,15 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import { Sizes, palette } from '@theme'
 
-export const styles = StyleSheet.create({
+export interface Styles {
+  container: ViewStyle
+  subContainer: ViewStyle
+  labelContainer: ViewStyle
+  label: TextStyle
+}
+
+export const styles: Styles = StyleSheet.create({
   container: {
     backgroundColor: palette.chineseWhite,
     height: Sizes.Size_40,

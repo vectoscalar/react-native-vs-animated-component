@@ -1,8 +1,13 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import { Sizes } from '@theme'
 
-export const styles = StyleSheet.create({
+export interface Styles {
+  labelContainer: ViewStyle
+  label: TextStyle
+}
+
+export const styles: Styles = StyleSheet.create({
   labelContainer: {
     alignItems: 'center',
     justifyContent: 'center',
