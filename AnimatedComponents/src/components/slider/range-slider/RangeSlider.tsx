@@ -84,6 +84,7 @@ const RangeSlider = (props: ValueSliderProps) => {
       }
     }
   }
+
   const animatedStyleLowerLimit = useAnimatedStyle(() => ({
     transform: [{ translateX: positionLowerLimit.value }],
     zIndex: zIndexLowerLimit.value,
@@ -108,6 +109,7 @@ const RangeSlider = (props: ValueSliderProps) => {
   }))
 
   const AnimatedTextInput = Animated.createAnimatedComponent(TextInput)
+
   const minLabelText = useAnimatedProps(() => {
     const value = Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step
     return { text: `${min + value}` } as AnimatedPropsProp<TextInputProps>

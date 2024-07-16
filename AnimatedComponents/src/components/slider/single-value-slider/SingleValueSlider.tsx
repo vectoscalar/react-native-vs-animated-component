@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 import { TextInput, TextInputProps, View } from 'react-native'
 import {
@@ -55,12 +54,13 @@ const SingleValueSlider = (props: ValueSliderProps) => {
     return { text: `${min + value}` } as AnimatedPropsProp<TextInputProps>
   })
   return (
-    <View
-      style={[styles.sliderContainer, { width: sliderWidth, backgroundColor: inactiveTrackColor }]}>
+    <View style={[styles.sliderContainer, { width: sliderWidth }]}>
       <View
         style={[styles.sliderBack, { width: sliderWidth, backgroundColor: activeTrackColor }]}
       />
-      <Animated.View style={[sliderStyle, styles.sliderFront]} />
+      <Animated.View
+        style={[sliderStyle, styles.sliderFront, { backgroundColor: inactiveTrackColor }]}
+      />
       <PanGestureHandler onGestureEvent={handleSlideGesture}>
         <Animated.View style={[animatedStyleLowerLimit, styles.thumb, { borderColor: thumbColor }]}>
           <Animated.View style={[opacityStyleLowerLimit, styles.label]}>

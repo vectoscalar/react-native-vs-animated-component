@@ -86,7 +86,7 @@ const App = () => {
         failedIcon={<CrossIcon />}
         successIcon={<TickIcon />}
       />
-      <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
+      <Slider type={SliderType.SingleValueSlider} sliderWidth={200} min={0} max={100} step={5} />
     </SafeAreaView>
   )
 }
