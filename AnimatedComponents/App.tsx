@@ -8,6 +8,8 @@ import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
   CircularProgressBar,
   IconTransitionButton,
+  InfiniteCircularProgressBar,
+  InfiniteLinearProgressBar,
   LinearProgressBar,
   ProgressButton,
   Select,
@@ -121,9 +123,9 @@ const App = () => {
       />
       <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
       <LinearProgressBar progress={progress} />
-      <View style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-        <CircularProgressBar progress={progress} />
-      </View>
+      <CircularProgressBar progress={progress} />
+      <InfiniteLinearProgressBar />
+      <InfiniteCircularProgressBar size={100} strokeWidth={10} />
     </SafeAreaView>
   )
 }

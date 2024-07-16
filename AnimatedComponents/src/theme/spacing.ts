@@ -43,6 +43,7 @@ enum Sizes {
   Size_48 = 48,
   Size_49 = 49,
   Size_50 = 50,
+  Size_100 = 100,
 }
 
 export { Sizes }

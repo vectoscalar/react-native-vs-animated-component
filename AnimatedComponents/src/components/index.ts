@@ -3,6 +3,8 @@ export { default as IconTransitionButton } from './buttons/icon-transition-butto
 export { default as LinearProgressBar } from './progress-bar/linear-progress-bar/LinearProgressBar'
 export { default as CircularProgressBar } from './progress-bar/circular-progress-bar/CircularProgressBar'
 export { default as ProgressButton } from './buttons/progress-button/ProgressButton'
+export { default as InfiniteLinearProgressBar } from './progress-bar/infinite-linear-progress-bar/InfiniteLinearProgressBar'
+export { default as InfiniteCircularProgressBar } from './progress-bar/infinite-circular-progress-bar/InfiniteCircularProgressBar'
 export { default as RangeSlider } from './range-slider/RangeSlider'
 export { default as Select } from './select/Select'
 export { default as SingleValueSlider } from './single-value-slider/SingleValueSlider'
