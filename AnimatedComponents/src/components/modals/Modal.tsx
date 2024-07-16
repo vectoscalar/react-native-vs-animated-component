@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import {
   Dimensions,
   Modal as RNModal,
+  ModalProps as RNModalProps,
   StyleProp,
   Text,
   TouchableOpacity,
@@ -21,9 +22,9 @@ import { ModalPreset } from '@constants'
 
 import styles from './modal-styles'
 
-interface IModalProps {
-  /** animationType: is a required prop that specifies the type of animation preset for the modal */
-  animationType: ModalPreset
+interface IModalProps extends Omit<RNModalProps, 'animationType'> {
+  /** customAnimationType: is a required prop that specifies the type of animation preset for the modal */
+  customAnimationType: ModalPreset
   /** children: is a required prop that indicates the content of the modal */
   children: React.ReactNode
   /** isOpen: is a required prop that indicates whether the modal is visible or not */
@@ -35,7 +36,7 @@ interface IModalProps {
 }
 
 const Modal = (props: IModalProps) => {
-  const { animationType, children, isOpen, onClose, style = {} } = props
+  const { customAnimationType, children, isOpen, onClose, style = {}, ...rest } = props
   const { height: screenHeight, width: screenWidth } = Dimensions.get('screen')
 
   const opacity = useSharedValue(0)
@@ -52,7 +53,7 @@ const Modal = (props: IModalProps) => {
       }
     }
 
-    switch (animationType) {
+    switch (customAnimationType) {
       case ModalPreset.FadeIn: {
         opacity.value = withTiming(isOpening ? 1 : 0, config, onEnd)
         break
@@ -70,7 +71,7 @@ const Modal = (props: IModalProps) => {
         break
       }
       default: {
-        console.warn(`Unknown modal type: ${animationType}`)
+        console.warn(`Unknown modal type: ${customAnimationType}`)
         break
       }
     }
@@ -85,7 +86,7 @@ const Modal = (props: IModalProps) => {
   }, [isOpen])
 
   const animatedStyle = useAnimatedStyle(() => {
-    switch (animationType) {
+    switch (customAnimationType) {
       case ModalPreset.FadeIn: {
         return { opacity: opacity.value }
       }
@@ -104,21 +105,17 @@ const Modal = (props: IModalProps) => {
     }
   })
 
+  const handleOnPress = () => {
+    handleAnimation(false)
+  }
+
   return (
     <GestureHandlerRootView>
-      <RNModal
-        visible={isOpen}
-        onRequestClose={() => {
-          handleAnimation(false)
-        }}>
+      <RNModal visible={isOpen} onRequestClose={handleOnPress} transparent {...rest}>
         <View style={styles.modalBackground}>
           <Animated.View style={[styles.modalContainer, animatedStyle, style]}>
             {children}
-            <TouchableOpacity
-              onPress={() => {
-                handleAnimation(false)
-              }}
-              style={styles.button}>
+            <TouchableOpacity onPress={handleOnPress} style={styles.button}>
               <Text style={styles.buttonText}>Close</Text>
             </TouchableOpacity>
           </Animated.View>
