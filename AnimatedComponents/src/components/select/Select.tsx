@@ -34,7 +34,7 @@ interface ISelectProps {
   /** selectedOptionStyle: is an optional prop which defines the styles of selected option. */
   selectedOptionStyle?: ViewStyle
   /** selectContainerStyle: is an optional prop which defines the styles of select container. */
-  selectContainerStyle?: ViewStyle | TextStyle
+  selectContainerStyle?: ViewStyle
   /** selectedOptions: is a required prop which dictates the selected options. */
   selectedOptions: ISelectOption[] | ISelectOption
 }
