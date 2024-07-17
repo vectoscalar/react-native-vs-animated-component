@@ -12,7 +12,7 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated'
 
-import { AnimatedPropsProp, MAX_DEFAULT, MIN_DEFAULT, ValueSliderProps } from '@constants'
+import { AnimatedPropsProp, MAX_DEFAULT, MIN_DEFAULT, ValueSliderProps } from '../../constants'
 
 import { styles } from './singleValueSlider-styles'
 

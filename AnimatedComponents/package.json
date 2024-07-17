@@ -1,7 +1,6 @@
 {
-  "name": "AnimatedComponents",
-  "version": "0.0.1",
-  "private": true,
+  "name": "animated-tests-7-npm-public",
+  "version": "0.0.3",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -67,6 +66,10 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vectoscalar/react-native-vs-animated-component"
   },
   "husky": {
     "hooks": {

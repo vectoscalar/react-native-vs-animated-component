@@ -3,9 +3,7 @@ import { ActivityIndicator, Text } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
 import RemixIcon from 'react-native-remix-icon'
 
-import { RemixIcons } from '@constants'
-
-// import { colors } from '@theme'
+import { RemixIcons } from '../../../../constants'
 import { ENTERING_ANIMATION_DURATION, EXITING_ANIMATION_DURATION } from '../constants'
 import { ITaskStatusData } from '../types'
 

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo } from 'react'
 import { StyleProp, View, ViewStyle } from 'react-native'
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 
-import { TriDotLoaderPreset } from '@constants'
+import { TriDotLoaderPreset } from '../../../constants'
 
 import { styles } from './tri-loader-styles'
 

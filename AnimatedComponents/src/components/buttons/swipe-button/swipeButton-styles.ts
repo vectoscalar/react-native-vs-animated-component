@@ -1,6 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-import { Sizes, palette } from '@theme'
+import { Sizes, palette } from '../../../theme'
 
 import { BUTTON_HEIGHT, BUTTON_PADDING, BUTTON_WIDTH } from './constants'
 

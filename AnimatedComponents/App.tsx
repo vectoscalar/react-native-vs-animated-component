@@ -4,7 +4,7 @@
 import React, { useMemo, useState } from 'react'
 import { SafeAreaView } from 'react-native'
 
-import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
+import { CrossIcon, RightArrowIcon, TickIcon } from './src/assets'
 import {
   IconTransitionButton,
   ProgressButton,
@@ -13,10 +13,9 @@ import {
   SpringButton,
   SwipeButton,
   TriDotLoader,
-} from '@components'
-import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
-
+} from './src/components'
 import type { ISelectOption } from './src/components/select/Select'
+import { RemixIcons, SliderType, TriDotLoaderPreset } from './src/constants'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)

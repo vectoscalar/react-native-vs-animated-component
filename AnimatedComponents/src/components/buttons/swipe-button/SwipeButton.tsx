@@ -22,8 +22,8 @@ import RemixIcon from 'react-native-remix-icon'
 
 import { isEqual } from 'lodash'
 
-import { RemixIcons } from '@constants'
-import { palette } from '@theme'
+import { RemixIcons } from '../../../constants'
+import { palette } from '../../../theme'
 
 import { TaskStatus } from './components/TaskStatus'
 import {

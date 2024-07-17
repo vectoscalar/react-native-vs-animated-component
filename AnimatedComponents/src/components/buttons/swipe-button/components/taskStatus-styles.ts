@@ -1,6 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-import { palette } from '@theme'
+import { palette } from '../../../../theme'
 
 interface Styles {
   textContainer: ViewStyle
