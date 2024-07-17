@@ -11,16 +11,16 @@ import Animated, {
 import { styles } from './infiniteLinearProgressBar-styles'
 
 interface InfiniteLinearProgressBarProps {
-  /** duration: is an optional prop which states the duration in milliseconds for the progress animation. */
+  /** duration: is an optional prop which states the duration in milliseconds for the animation. */
   duration?: number
-  /** progressBarContainerStyle: is an optional prop which states the styles for progress bar container. */
-  progressBarContainerStyle?: ViewStyle
-  /** progressBarFillStyle: is an optional prop which states the styles for the filled portion of the progress bar. */
-  progressBarFillStyle?: ViewStyle
+  /** containerStyle: is an optional prop which states the styles for progress bar container. */
+  containerStyle?: ViewStyle
+  /** fillStyle: is an optional prop which states the styles for the filled portion of the progress bar. */
+  fillStyle?: ViewStyle
 }
 
 const InfiniteLinearProgressBar = (props: InfiniteLinearProgressBarProps) => {
-  const { duration = 1400, progressBarContainerStyle = {}, progressBarFillStyle = {} } = props
+  const { duration = 1000, containerStyle = {}, fillStyle = {} } = props
 
   const translation = useSharedValue(0)
   const [containerWidth, setContainerWidth] = useState(0)
@@ -55,9 +55,9 @@ const InfiniteLinearProgressBar = (props: InfiniteLinearProgressBarProps) => {
   }, [containerWidth, fillWidth, duration])
 
   return (
-    <View style={[styles.container, progressBarContainerStyle]} onLayout={handleContainerLayout}>
+    <View style={[styles.container, containerStyle]} onLayout={handleContainerLayout}>
       <Animated.View
-        style={[styles.subContainer, progressAnimatedStyle, progressBarFillStyle]}
+        style={[styles.subContainer, progressAnimatedStyle, fillStyle]}
         onLayout={handleFillLayout}
       />
     </View>

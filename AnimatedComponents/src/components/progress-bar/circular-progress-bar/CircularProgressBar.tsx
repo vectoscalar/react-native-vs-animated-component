@@ -10,17 +10,17 @@ import { styles } from './circularProgressBar-styles'
 export interface CircularProgressBarProps {
   /** duration is an optional prop which states the duration of the animation in milliseconds. */
   duration?: number
-  /** labelStyle is an optional prop that defines the style for the label displayed within the progress bar. */
+  /** labelStyle is an optional prop which states the styles for the label displayed within the circular progress bar. */
   labelStyle?: TextStyle
-  /** outerRingColor is an optional prop that sets the color of the outer ring of the progress bar. */
+  /** outerRingColor is an optional prop which states the color of the outer ring of the circular progress bar. */
   outerRingColor?: string
-  /** progress is a required prop that indicates the current progress value. */
+  /** progress is a required prop which states the current progress value. */
   progress: number
-  /** progressRingColor is an optional prop that states the color of the progress ring. */
+  /** progressRingColor is an optional prop which states the color of the progress ring. */
   progressRingColor?: string
-  /** size is an optional prop that states the determines overall width , height , diameter of progress bar. */
+  /** size is an optional prop which states the overall width , height  of circular progress bar. */
   size?: number
-  /** strokeWidth is an optional prop that sets the stroke width of the progress ring. */
+  /** strokeWidth is an optional prop which states the stroke width of the progress ring. */
   strokeWidth?: number
 }
 

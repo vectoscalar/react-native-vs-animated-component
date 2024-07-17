@@ -2,15 +2,11 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useMemo, useState } from 'react'
-import { SafeAreaView, View } from 'react-native'
+import { SafeAreaView } from 'react-native'
 
 import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
-  CircularProgressBar,
   IconTransitionButton,
-  InfiniteCircularProgressBar,
-  InfiniteLinearProgressBar,
-  LinearProgressBar,
   ProgressButton,
   Select,
   Slider,
@@ -18,8 +14,7 @@ import {
   SwipeButton,
   TriDotLoader,
 } from '@components'
-import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
-import { palette } from '@theme'
+import { ProgressBar, RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 
 import type { ISelectOption } from './src/components/select/Select'
 
@@ -122,10 +117,10 @@ const App = () => {
         successIcon={<TickIcon />}
       />
       <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
-      <LinearProgressBar progress={progress} />
-      <CircularProgressBar progress={progress} />
-      <InfiniteLinearProgressBar />
-      <InfiniteCircularProgressBar size={100} strokeWidth={10} />
+      <ProgressBar.LinearProgressBar progress={progress} />
+      <ProgressBar.CircularProgressBar progress={progress} />
+      <ProgressBar.InfiniteLinearProgressBar />
+      <ProgressBar.InfiniteCircularProgressBar />
     </SafeAreaView>
   )
 }

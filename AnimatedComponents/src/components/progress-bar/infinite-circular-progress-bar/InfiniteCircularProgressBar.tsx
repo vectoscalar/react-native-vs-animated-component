@@ -14,19 +14,19 @@ import { styles } from './infiniteCircularProgressBar-styles'
 export interface InfiniteCircularProgressBarProps {
   /** duration is an optional prop which states the duration of the animation in milliseconds. */
   duration?: number
-  /** outerRingColor is an optional prop that sets the color of the outer ring of the progress bar. */
+  /** outerRingColor is an optional prop which states the color of the outer ring of the circular progress bar. */
   outerRingColor?: string
-  /** progressRingColor is an optional prop that states the color of the progress ring. */
+  /** progressRingColor is an optional prop which states the color of the progress ring. */
   progressRingColor?: string
-  /** size is an optional prop that states the determines overall width , height , diameter of progress bar. */
+  /** size is an optional prop which states the overall width , height  of circular progress bar. */
   size?: number
-  /** strokeWidth is an optional prop that sets the stroke width of the progress ring. */
+  /** strokeWidth is an optional prop which states the stroke width of the progress ring. */
   strokeWidth?: number
 }
 
 const InfiniteCircularProgressBar = (props: InfiniteCircularProgressBarProps) => {
   const {
-    duration = 800,
+    duration = 1000,
     outerRingColor = palette.chineseWhite,
     progressRingColor = palette.frenchBlue,
     size = 100,
