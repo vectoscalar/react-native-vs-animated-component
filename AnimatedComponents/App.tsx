@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo, useState } from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
+import { Platform, SafeAreaView, ScrollView, Text, UIManager, View } from 'react-native'
 
 import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
@@ -17,6 +17,7 @@ import {
 } from '@components'
 import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 
+import AccordionDemo from './src/components/accordion/AccordionDemo'
 import type { ISelectOption } from './src/components/select/Select'
 
 const App = () => {
@@ -106,35 +107,7 @@ const App = () => {
         successIcon={<TickIcon />}
       />
       <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
-      <Accordion showSingleItemAtOnce>
-        <Accordion.Item id={1} title="FAQ">
-          <View style={{ padding: 20, backgroundColor: '#E8C5E5' }}>
-            <Text style={{ fontFamily: 'Robot-Medium', letterSpacing: 1 }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore officia nostrum libero
-              similique iste cumque, perspiciatis quasi exercitationem, suscipit voluptatum autem,
-              fuga maiores? Saepe, vitae perspiciatis. Cumque consequatur facilis incidunt.
-            </Text>
-          </View>
-        </Accordion.Item>
-        <Accordion.Item id={2} title="FAQ">
-          <View style={{ padding: 20, backgroundColor: '#E8C5E5' }}>
-            <Text style={{ fontFamily: 'Robot-Medium', letterSpacing: 1 }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore officia nostrum libero
-              similique iste cumque, perspiciatis quasi exercitationem, suscipit voluptatum autem,
-              fuga maiores? Saepe, vitae perspiciatis. Cumque consequatur facilis incidunt.
-            </Text>
-          </View>
-        </Accordion.Item>
-        <Accordion.Item id={3} title="FAQ">
-          <View style={{ padding: 20, backgroundColor: '#E8C5E5' }}>
-            <Text style={{ fontFamily: 'Robot-Medium', letterSpacing: 1 }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore officia nostrum libero
-              similique iste cumque, perspiciatis quasi exercitationem, suscipit voluptatum autem,
-              fuga maiores? Saepe, vitae perspiciatis. Cumque consequatur facilis incidunt.
-            </Text>
-          </View>
-        </Accordion.Item>
-      </Accordion>
+      <AccordionDemo />
     </SafeAreaView>
   )
 }

@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
   },
+
   accordionHeading: {
     fontWeight: '600',
     fontFamily: 'Roboto-Bold',
@@ -13,6 +14,7 @@ export const styles = StyleSheet.create({
     letterSpacing: Sizes.Size_1,
     maxWidth: '90%',
   },
+
   accordionContainer: {
     alignItems: 'center',
     backgroundColor: '#F7F9F2',
