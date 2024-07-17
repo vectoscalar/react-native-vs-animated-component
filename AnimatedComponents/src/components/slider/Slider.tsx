@@ -2,22 +2,24 @@ import React from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { RangeSlider, SingleValueSlider } from '@components'
-import { SliderType, ValueSliderProps } from '@constants'
+import { SliderType } from '@constants'
+import { palette } from '@theme'
+import { ValueSliderProps } from '@types'
 
 interface ISliderProps extends ValueSliderProps {
-  type?: string
+  type?: SliderType
 }
 
 const Slider = (props: ISliderProps) => {
   const {
-    max,
-    min,
-    sliderWidth,
-    step,
+    activeTrackColor = palette.frenchBlue,
+    inactiveTrackColor = palette.chineseWhite,
+    max = 100,
+    min = 0,
+    sliderWidth = 300,
+    step = 1,
+    thumbColor = palette.frenchBlue,
     type = SliderType.SingleValueSlider,
-    activeTrackColor = '#3F4CF6',
-    inactiveTrackColor = '#DFEAFB',
-    thumbColor = '#3F4CF6',
   } = props
 
   const renderSlider = () => {

@@ -1,8 +1,17 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import { Sizes, palette } from '@theme'
 
-export const styles = StyleSheet.create({
+export interface Styles {
+  sliderContainer: ViewStyle
+  sliderBack: ViewStyle
+  sliderFront: ViewStyle
+  thumb: ViewStyle
+  label: ViewStyle
+  labelText: TextStyle
+}
+
+export const styles: Styles = StyleSheet.create({
   sliderContainer: {
     alignSelf: 'center',
     justifyContent: 'center',
