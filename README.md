@@ -31,17 +31,17 @@ The Search Bar component is an expandable search bar component which can expand 
 
 ## Search Bar Props
 
-| Prop                | Type                 | Description                                                                                      |
-| ------------------- | -------------------- | ------------------------------------------------------------------------------------------------ |
-| duration            | number               | It is an optional prop which dictates the duration of the animation.                             |
-| icon                | ReactNode            | It is an optional prop which dictates the icon to be displayed                                   |
-| iconColorCollapsed  | string               | It is an optional prop which dictates the color of the icon when search bar is collapsed         |
-| iconColorExpanded   | string               | It is an optional prop which dictates the color of the icon when search bar is expanded          |
-| iconSize            | number               | It is an optional prop which dictates the size of the icon                                       |
-| iconStyle           | DefaultStyle         | It is an optional prop which dictates the style of the search icon                               |
-| inputContainerStyle | DefaultStyle         | Its is an optional prop which dictates the style of the input container                          |
-| onInputChange       | (text: string) => {} | It is a prop which handles the input change                                                      |
-| placeholderText     | string               | It is an optional prop which dictates the placeholder text                                       |
-| searchBarContainer  | DefaultStyle         | It is an optional prop which dictates the style of the search bar                                |
-| searchValue         | string               | It is a prop which dictates the value of the search bar                                          |
-| wrapperContainer    | DefaultStyle         | It is an optional prop which dictates the style of the main container which wraps the search bar |
+| Prop                  | Type                 | Description                                                                                                      |
+| --------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| duration              | number               | It is an optional prop which dictates the duration of the animation.                                             |
+| icon                  | ReactNode            | It is an optional prop which dictates the icon to be displayed                                                   |
+| iconColorCollapsed    | string               | It is an optional prop which dictates the color of the icon when search bar is collapsed                         |
+| iconColorExpanded     | string               | It is an optional prop which dictates the color of the icon when search bar is expanded                          |
+| iconSize              | number               | It is an optional prop which dictates the size of the icon                                                       |
+| iconStyle             | DefaultStyle         | It is an optional prop which dictates the style of the search icon                                               |
+| inputContainerStyle   | DefaultStyle         | It is an optional prop which dictates the style of the text input.                                               |
+| onInputChange         | (text: string) => {} | It is a prop which handles the input change                                                                      |
+| placeholderText       | string               | It is an optional prop which dictates the placeholder text                                                       |
+| searchBarContainer    | DefaultStyle         | It is an optional prop which dictates the style of the search bar which contains the input and the search button |
+| searchValue           | string               | It is a prop which dictates the value of the search bar                                                          |
+| wrapperContainerStyle | DefaultStyle         | It is an optional prop which dictates the style of the main container which wraps the search bar container.      |
