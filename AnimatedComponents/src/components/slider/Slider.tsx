@@ -7,6 +7,7 @@ import { palette } from '@theme'
 import { ValueSliderProps } from '@types'
 
 interface ISliderProps extends ValueSliderProps {
+  /** type is an optional prop specifies the type of slider  */
   type?: SliderType
 }
 
