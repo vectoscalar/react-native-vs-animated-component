@@ -53,7 +53,7 @@ const icons = [
 | iconContainerStyle          | ViewStyle            | name of style class created                                                 | It is used to change the styles of the container of the icon in the floating button.                                                 |
 | iconStyle                   | ImageStyle           | name of style class created                                                 | It is used to change the styles of the icons in the floating button.                                                                 |
 | icons                       | array of IconProps   | { icon: 'name of image', onPress: function, iconName: 'name of icon'}       | It is used to pass the name, image and function the for the icon.                                                                    |
-| isLeft                      | ViewStyle            | true/false                                                                  | It is used to change the position of the floating button to left when true otherwise right.                                          |
+| isLeft                      | Boolean              | true/false                                                                  | It is used to change the position of the floating button to left when true otherwise right.                                          |
 | textStyle                   | TextStyle            | name of style class created                                                 | It is used to change the styles of the text when the type of floating button is FloatingButtonWithLabel.                             |
 
 **Note:** All the props are passed to the floating-button component from where it will send the props to the type chosen by the user.
