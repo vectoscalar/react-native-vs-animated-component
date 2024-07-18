@@ -19,7 +19,6 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: Sizes.Size_50,
     justifyContent: 'space-between',
-    paddingHorizontal: Sizes.Size_10,
   },
 
   searchBarTextContainer: { flex: Sizes.Size_1 },
@@ -27,8 +26,8 @@ export const styles = StyleSheet.create({
   searchIconContainer: {
     alignItems: 'center',
     borderRadius: Sizes.Size_50,
-    height: Sizes.Size_40,
+    height: Sizes.Size_50,
     justifyContent: 'center',
-    width: Sizes.Size_40,
+    width: Sizes.Size_50,
   },
 })
