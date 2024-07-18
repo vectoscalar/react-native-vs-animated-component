@@ -2,10 +2,11 @@ import React from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { RangeSlider, SingleValueSlider } from '@components'
-import { SliderType, ValueSliderProps } from '@constants'
+
+import { SliderType, ValueSliderProps } from '../../constants'
 
 interface ISliderProps extends ValueSliderProps {
-  type?: string
+  type?: SliderType
 }
 
 const Slider = (props: ISliderProps) => {
