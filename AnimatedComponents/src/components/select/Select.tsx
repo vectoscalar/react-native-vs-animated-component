@@ -1,14 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import {
-  Animated,
-  FlatList,
-  Modal,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from 'react-native'
+import { Animated, FlatList, Modal, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo'
 
 import styles from './select-styles'

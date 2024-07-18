@@ -68,7 +68,7 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SpringButton label="Press me" onPress={onSpringPress} />
-      <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
+      {/* <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} /> */}
       <Select
         onChange={setSelect}
         options={[
@@ -81,7 +81,14 @@ const App = () => {
         placeholderText="Select option"
         multiSelect
       />
-      <ProgressButton isLoading={isLoading} onPress={onPress} label="Submit" />
+      <ProgressButton
+        isLoading={isLoading}
+        onPress={onPress}
+        label="Submit"
+        buttonContainerStyle={{
+          marginVertical: 20,
+        }}
+      />
       <SwipeButton
         buttonInitialText="Swipe To left"
         gradientWaveColor={gradientWaveColor}
