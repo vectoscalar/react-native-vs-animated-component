@@ -15,8 +15,17 @@ export const SingleValueSlider: Story = {
   args: {
     max: 0,
     min: 10,
-
     type: SliderType.SingleValueSlider,
+    sliderWidth: 300,
+    step: 5,
+  },
+}
+
+export const RangeSlider: Story = {
+  args: {
+    max: 0,
+    min: 10,
+    type: SliderType.RangeSlider,
     sliderWidth: 300,
     step: 5,
   },
