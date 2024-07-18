@@ -4,25 +4,9 @@
 
 The Accordion component lets users show and hide sections of related content on a page.
 
-## Props
+# Preview
 
-## Accordion Item Props
-
-| Prop                | Type             | Description                                                                                                                                       |
-| ------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| title               | string           | It dictates the title of the accordion.                                                                                                           |
-| titleStyle          | DefaultStyle     | It is an optional prop which is used to allow users to change the style of title text.                                                            |
-| isDefaultOpen       | boolean          | It is an optional prop which is used to dictate whether the accordion will be open by default. Only works when showSingleItemAtOnce prop is false |
-| icon                | string           | It is used to dictate the icon name from the ant design library for the accordion dropdown.                                                       |
-| id                  | number or string | It is used to define the id of the accordion item.                                                                                                |
-| titleContainerStyle | DefaultStyle     | It is an optional prop which is used to allow users to change the style of title container.                                                       |
-
-## Accordion Props
-
-| Prop                 | Type    | Description                                                                                     |
-| -------------------- | ------- | ----------------------------------------------------------------------------------------------- |
-| duration             | number  | It is used to control the speed of the animation.                                               |
-| showSingleItemAtOnce | boolean | It is an optional prop which dictates if multiple accordion items can be open at the same time. |
+<img src="https://github.com/user-attachments/assets/d112aecc-645b-4369-ab52-02d49c32722c" width="250" height="500"/>
 
 ## Example
 
@@ -58,3 +42,23 @@ The Accordion component lets users show and hide sections of related content on 
 </Accordion>
 
 ```
+
+## Props
+
+## Accordion Item Props
+
+| Prop                | Type             | Description                                                                                                                                       |
+| ------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| title               | string           | It dictates the title of the accordion.                                                                                                           |
+| titleStyle          | DefaultStyle     | It is an optional prop which is used to allow users to change the style of title text.                                                            |
+| isDefaultOpen       | boolean          | It is an optional prop which is used to dictate whether the accordion will be open by default. Only works when showSingleItemAtOnce prop is false |
+| icon                | string           | It is used to dictate the icon name from the ant design library for the accordion dropdown.                                                       |
+| id                  | number or string | It is used to define the id of the accordion item.                                                                                                |
+| titleContainerStyle | DefaultStyle     | It is an optional prop which is used to allow users to change the style of title container.                                                       |
+
+## Accordion Props
+
+| Prop                 | Type    | Description                                                                                     |
+| -------------------- | ------- | ----------------------------------------------------------------------------------------------- |
+| duration             | number  | It is used to control the speed of the animation.                                               |
+| showSingleItemAtOnce | boolean | It is an optional prop which dictates if multiple accordion items can be open at the same time. |

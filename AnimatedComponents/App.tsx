@@ -68,45 +68,7 @@ const App = () => {
   const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <SpringButton label="Press me" onPress={onSpringPress} />
-      {/* <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} /> */}
-      <Select
-        onChange={setSelect}
-        options={[
-          { title: 'Test 1', value: 'test1' },
-          { title: 'Test 2', value: 'test2' },
-          { title: 'Test 3', value: 'test3' },
-
-          { title: 'Test 4', value: 'test4' },
-        ]}
-        selectedOption={select}
-        placeholderText="Enter Value"
-        optionContainerStyle={{ zIndex: 1000 }}
-      />
-      <ProgressButton
-        isLoading={isLoading}
-        onPress={onPress}
-        label="Submit"
-        buttonContainerStyle={{
-          marginVertical: 20,
-        }}
-      />
-      <SwipeButton
-        buttonInitialText="Swipe To left"
-        gradientWaveColor={gradientWaveColor}
-        onSwipeComplete={handleSubmitBtnPress}
-        onTaskComplete={handleSubmitBtnPress}
-        taskStatusData={taskStatusData}
-        thumbColors={thumbColors}
-      />
-      <IconTransitionButton
-        onPress={onIconTransition}
-        startIcon={<RightArrowIcon />}
-        failedIcon={<CrossIcon />}
-        successIcon={<TickIcon />}
-      />
-      <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
+    <SafeAreaView style={{}}>
       <AccordionDemo />
     </SafeAreaView>
   )
