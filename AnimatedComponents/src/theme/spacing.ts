@@ -1,5 +1,6 @@
 //   Spacing Scale
 enum Sizes {
+  Size_0_5 = 0.5,
   Size_0 = 0,
   Size_1 = 1,
   Size_2 = 2,

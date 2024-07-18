@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { LayoutChangeEvent, Pressable, ViewStyle } from 'react-native'
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 
-import styles from './iconTransition-button-styles'
+import styles from './iconTransitionButton-styles'
 
 interface IIconsTransitionButton {
   /** buttonStyle : is an optional prop which defines the styles of button. */
@@ -43,8 +43,33 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
   const translateX = useSharedValue(0)
   const rotationValue = useSharedValue(0)
   const labelOpacity = useSharedValue(1)
-  const [Icon, setIconName] = useState<React.ReactNode>(startIcon)
+  const [iconName, setIconName] = useState(startLabel)
   const [label, setLabel] = useState<string>(startLabel)
+  const translationDuration = 1500
+
+  const getbuttonStyles = () => {
+    let buttonContainerStyle
+
+    if (isDisabled) {
+      buttonContainerStyle = styles.buttonDisabled
+    } else {
+      switch (label) {
+        case failedLabel: {
+          buttonContainerStyle = styles.buttonFailed
+          break
+        }
+        case successLabel: {
+          buttonContainerStyle = styles.buttonSuccess
+          break
+        }
+        default: {
+          buttonContainerStyle = styles.container
+          break
+        }
+      }
+    }
+    return buttonContainerStyle
+  }
 
   const buttonWidth = useRef<any>(0)
 
@@ -52,11 +77,30 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
     buttonWidth.current = event.nativeEvent.layout.width
   }
 
+  const getIcon = (currentIconName: string) => {
+    let icon
+    switch (currentIconName) {
+      case successLabel: {
+        icon = successIcon
+        break
+      }
+      case failedLabel: {
+        icon = failedIcon
+        break
+      }
+      default: {
+        icon = startIcon
+        break
+      }
+    }
+    return icon
+  }
+
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [
       {
         translateX: withTiming(translateX.value, {
-          duration: 1500,
+          duration: translationDuration,
         }),
       },
       { rotate: `${rotationValue.value}deg` },
@@ -70,44 +114,37 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
   const handlePress = async () => {
     const maxTranslationX = buttonWidth.current - 50
     translateX.value = Math.min(maxTranslationX)
-    rotationValue.value = withTiming(360, { duration: 1500 })
-    const halfway = 750
+    const rotateDuration = 1500
+    const halfwayDuration = 750
+    const iconAnimationDuration = 500
 
-    labelOpacity.value = withTiming(0, { duration: halfway })
+    rotationValue.value = withTiming(360, { duration: rotateDuration })
+    labelOpacity.value = withTiming(0, { duration: halfwayDuration })
 
     const onPressResult = await onPress()
     if (!onPressResult) {
       setTimeout(() => {
-        setIconName(failedIcon)
+        setIconName(failedLabel)
         setLabel(failedLabel)
-        labelOpacity.value = withTiming(1, { duration: 500 })
-      }, halfway)
+        labelOpacity.value = withTiming(1, { duration: iconAnimationDuration })
+      }, halfwayDuration)
       return
     }
     setTimeout(() => {
-      setIconName(successIcon)
+      setIconName(successLabel)
       setLabel(successLabel)
-      labelOpacity.value = withTiming(1, { duration: 500 })
-    }, halfway)
+      labelOpacity.value = withTiming(1, { duration: iconAnimationDuration })
+    }, halfwayDuration)
   }
 
   return (
     <Pressable
       onPress={handlePress}
       disabled={isLoading || isDisabled}
-      style={[
-        isDisabled
-          ? styles.buttonDisabled
-          : label === failedLabel
-          ? styles.buttonFailed
-          : label === successLabel
-          ? styles.buttonSuccess
-          : styles.container,
-        buttonStyle,
-      ]}
+      style={[getbuttonStyles(), buttonStyle]}
       ref={buttonWidth}
       onLayout={onLayout}>
-      <Animated.View style={[styles.ball, animatedStyles]}>{Icon}</Animated.View>
+      <Animated.View style={[styles.ball, animatedStyles]}>{getIcon(iconName)}</Animated.View>
       <Animated.Text style={[styles.label, labelAnimatedStyles]}>{label}</Animated.Text>
     </Pressable>
   )

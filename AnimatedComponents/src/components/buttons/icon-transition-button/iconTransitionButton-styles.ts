@@ -22,6 +22,7 @@ const styles = StyleSheet.create<Styles>({
     position: 'relative',
     width: Sizes.Size_300,
   },
+
   buttonDisabled: {
     alignItems: 'center',
     alignSelf: 'center',
@@ -32,6 +33,7 @@ const styles = StyleSheet.create<Styles>({
     position: 'relative',
     width: Sizes.Size_300,
   },
+
   ball: {
     alignItems: 'center',
     backgroundColor: palette.neutral[0],
@@ -40,13 +42,16 @@ const styles = StyleSheet.create<Styles>({
     justifyContent: 'center',
     width: Sizes.Size_30,
   },
+
   label: {
     alignItems: 'center',
     color: palette.neutral[0],
     display: 'flex',
     flex: Sizes.Size_1,
+    fontWeight: 'bold',
     textAlign: 'center',
   },
+
   buttonFailed: {
     alignItems: 'center',
     alignSelf: 'center',
@@ -57,10 +62,11 @@ const styles = StyleSheet.create<Styles>({
     position: 'relative',
     width: Sizes.Size_300,
   },
+
   buttonSuccess: {
     alignItems: 'center',
     alignSelf: 'center',
-    backgroundColor: palette.silverTree,
+    backgroundColor: palette.goGreen,
     borderRadius: Sizes.Size_15,
     flexDirection: 'row',
     padding: Sizes.Size_10,

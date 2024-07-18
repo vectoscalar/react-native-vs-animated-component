@@ -28,6 +28,7 @@ export const palette = {
   fiord: '#4A5663',
   frenchBlue: '#016FC3',
   goldenYellow: '#FEB804',
+  goGreen: '#00AB66',
   jet: '#353535',
   lemonChiffon: '#F9F4CB',
   lightBeige: '#FFF8E5',
