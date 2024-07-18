@@ -26,6 +26,7 @@ export const palette = {
   davyGrayII: '#515561',
   festival: '#F2C94C',
   fiord: '#4A5663',
+  frenchBlue: '#016FC3',
   goldenYellow: '#FEB804',
   jet: '#353535',
   lemonChiffon: '#F9F4CB',

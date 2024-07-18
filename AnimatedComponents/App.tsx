@@ -30,7 +30,7 @@ const App = () => {
 
   const handleSubmitBtnPress = () => {
     try {
-      return true
+      return false
     } catch {
       return false
     }
@@ -75,7 +75,6 @@ const App = () => {
           { title: 'Test 1', value: 'test1' },
           { title: 'Test 2', value: 'test2' },
           { title: 'Test 3', value: 'test3' },
-
           { title: 'Test 4', value: 'test4' },
         ]}
         selectedOption={select}
@@ -99,10 +98,13 @@ const App = () => {
         thumbColors={thumbColors}
       />
       <IconTransitionButton
+        failedIcon={<CrossIcon />}
+        failedLabel="Payment Failed"
         onPress={onIconTransition}
         startIcon={<RightArrowIcon />}
-        failedIcon={<CrossIcon />}
+        startLabel="Make Payment"
         successIcon={<TickIcon />}
+        successLabel="Payment Successful"
       />
       <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
     </SafeAreaView>
