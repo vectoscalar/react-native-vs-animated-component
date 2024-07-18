@@ -5,3 +5,5 @@ declare module '*.svg' {
   const content: React.FC<SvgProps>
   export default content
 }
+
+declare module 'animated-tests-8-npm-public'
