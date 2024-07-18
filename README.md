@@ -11,9 +11,9 @@
 - **Customizable Styles:** Styles can be customized via props.
 - **Different Icons:** Allows for changing the icons.
 
-## GIF
+## Preview
 
-<img src="./AnimatedComponents/src/assets/gifs/IconTransitionButton.gif" alt="Description of GIF" width="300" height="500">
+<img src="./AnimatedComponents/src/assets/gifs/IconTransitionButton.gif" alt="Icon Transition Button" width="300" height="500">
 
 ## Usage
 
@@ -25,6 +25,9 @@
     return success;
   }}
   startIcon={<StartIconComponent />}
+  failedLabel="Payment Failed"
+  startLabel="Make Payment"
+  successLabel="Payment Successful"
   failedIcon={<FailedIconComponent />}
   successIcon={<SuccessIconComponent />}
   isDisabled={false}
@@ -34,15 +37,18 @@
 
 ## Props
 
-| Prop        | Type                                 | Values                      | Description                                                                                                 |
-| ----------- | ------------------------------------ | --------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| buttonStyle | ViewStyle                            | name of style class created | It is is an optional prop which defines the styles of button.                                               |
-| failedIcon  | React.ReactNode                      | icon as component           | It is a required prop which dictates the icon displayed if the onPress function returns a falsy value.      |
-| isDisabled  | boolean                              | true/false                  | It is an optional prop which dictates that disables the button if true.                                     |
-| isLoading   | boolean                              | true/false                  | It is an optional prop which dictates that disables the button if true, likely to indicate a loading state. |
-| onPress     | () => void / boolean / Promise<void> | name of function to perform | It is a required prop which dictates the function is called when the button is pressed.                     |
-| startIcon   | React.ReactNode                      | icon as component           | It is a required prop which dictates the initial icon displayed on the button.                              |
-| successIcon | React.ReactNode                      | icon as component           | It is a required prop which dictates the icon displayed if the onPress function returns a truth value.      |
+| Prop         | Type                                 | Values                      | Description                                                                                                 |
+| ------------ | ------------------------------------ | --------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| buttonStyle  | ViewStyle                            | name of style class created | It is an optional prop which defines the styles of button.                                                  |
+| failedIcon   | React.ReactNode                      | icon as component           | It is a required prop which dictates the icon displayed if the onPress function returns a falsy value.      |
+| failedLabel  | String                               | text                        | It is a required prop which dictates the label to be displayed when transition fails                        |
+| isDisabled   | boolean                              | true/false                  | It is an optional prop which dictates that disables the button if true.                                     |
+| isLoading    | boolean                              | true/false                  | It is an optional prop which dictates that disables the button if true, likely to indicate a loading state. |
+| onPress      | () => void / boolean / Promise<void> | name of function to perform | It is a required prop which dictates the function is called when the button is pressed.                     |
+| startIcon    | React.ReactNode                      | icon as component           | It is a required prop which dictates the initial icon displayed on the button.                              |
+| startLabel   | String                               | text                        | It is a required prop which dictates the label to be displayed initially.                                   |
+| successIcon  | React.ReactNode                      | icon as component           | It is a required prop which dictates the icon displayed if the onPress function returns a truth value.      |
+| successLabel | String                               | text                        | It is a required prop which dictates the label to be displayed when transition succeeds                     |
 
 **Note:** All the props are passed to the Icon Transition Button component.
 
@@ -51,7 +57,7 @@
 
 # React Native Swipe Button
 
-## GIF
+## Preview
 
 <img src="./AnimatedComponents/src/assets/gifs/SwipeButton.gif" alt="Description of GIF" width="300" height="500">
 
@@ -133,7 +139,7 @@ const handleSubmitBtnPress = () => {
 
 # React Native Progress Button
 
-## GIF
+## Preview
 
 <img src="./AnimatedComponents/src/assets/gifs/ProgressButton.gif" alt="Description of GIF" width="300" height="500">
 
@@ -182,7 +188,7 @@ const onPress = () => {
 
 # React Native Spring Button
 
-## GIF
+## Preview
 
 <img src="./AnimatedComponents/src/assets/gifs/SpringButton.gif" alt="Description of GIF" width="300" height="500">
 
@@ -219,7 +225,7 @@ const onSpringPress = () => {
 
 # React Native Tri-Dot Loader
 
-## GIF
+## Preview
 
 <img src="./AnimatedComponents/src/assets/gifs/Loader.gif" alt="Description of GIF" width="300" height="500">
 
