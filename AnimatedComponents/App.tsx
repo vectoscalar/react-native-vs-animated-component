@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo, useState } from 'react'
 import { SafeAreaView, View } from 'react-native'
-import Icon from 'react-native-vector-icons/AntDesign'
 
 import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
@@ -18,11 +17,11 @@ import {
 } from '@components'
 import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 
+import SearchBarDemo from './src/components/search-bar/SearchBarDemo'
 import type { ISelectOption } from './src/components/select/Select'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const [searchValue, setSearchValue] = useState('')
   const [select, setSelect] = useState<ISelectOption>({ title: '', value: '' })
   const onPress = () => {
     setIsLoading(true)
@@ -70,25 +69,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View
-        style={{
-          marginTop: 22,
-          backgroundColor: 'black',
-          flexDirection: 'row',
-          marginBottom: 20,
-          paddingVertical: 5,
-        }}>
-        <Icon name="apple1" color="white" size={50} />
-        <SearchBar
-          searchValue={searchValue}
-          onInputChange={setSearchValue}
-          wrapperContainerStyle={{
-            backgroundColor: 'black',
-            marginHorizontal: 20,
-            alignItems: 'flex-end',
-          }}
-        />
-      </View>
+      <SearchBarDemo />
       <SpringButton label="Press me" onPress={onSpringPress} />
       {/* <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} /> */}
       <Select

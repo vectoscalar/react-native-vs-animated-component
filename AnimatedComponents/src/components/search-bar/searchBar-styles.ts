@@ -5,21 +5,25 @@ import { Sizes } from '@theme'
 export const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: 'black',
     flex: Sizes.Size_1,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    overflow: 'hidden',
   },
+
   searchBarContainer: {
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'gray',
     borderRadius: Sizes.Size_50,
     flexDirection: 'row',
+    width: '100%',
     height: Sizes.Size_50,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: Sizes.Size_10,
   },
 
   searchBarTextContainer: { flex: Sizes.Size_1 },
+
   searchIconContainer: {
     alignItems: 'center',
     borderRadius: Sizes.Size_50,
