@@ -18,6 +18,7 @@ interface IStyles {
   optionsContainer: ViewStyle
   selectText: TextStyle
   selectedOption: TextStyle
+  selectedChipsContainer: ViewStyle
 }
 
 const styles: IStyles = StyleSheet.create({
@@ -26,6 +27,7 @@ const styles: IStyles = StyleSheet.create({
     position: 'relative',
     width: '100%',
   },
+
   container: {
     alignItems: 'center',
     backgroundColor: palette.neutral[0],
@@ -36,6 +38,7 @@ const styles: IStyles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: Sizes.Size_10,
   },
+
   optionsContainer: {
     backgroundColor: 'white',
     borderColor: palette.chineseSilver,
@@ -45,33 +48,47 @@ const styles: IStyles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
   },
+
   option: {
     alignItems: 'center',
     flexDirection: 'row',
     padding: Sizes.Size_10,
   },
+
   optionText: {
     fontSize: Sizes.Size_16,
   },
+
   selectedOption: {
     color: palette.azure,
   },
+
   optionIcon: {
     color: palette.azure,
     fontSize: Sizes.Size_16,
     marginRight: Sizes.Size_8,
   },
+
   emptyView: {
     padding: Sizes.Size_8,
     marginRight: Sizes.Size_8,
   },
+
   selectText: {
     fontSize: Sizes.Size_16,
   },
+
+  selectedChipsContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+
   chipsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+
   chip: {
     alignItems: 'center',
     backgroundColor: palette.chineseWhite,
@@ -81,13 +98,16 @@ const styles: IStyles = StyleSheet.create({
     paddingHorizontal: Sizes.Size_10,
     paddingVertical: Sizes.Size_1,
   },
+
   chipText: {
     marginRight: Sizes.Size_5,
   },
+
   chipIcon: {
     color: palette.black,
     fontSize: Sizes.Size_16,
   },
+
   modalOverlay: {
     alignItems: 'center',
     backgroundColor: 'transparent',
@@ -95,6 +115,7 @@ const styles: IStyles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginHorizontal: Sizes.Size_10,
   },
+
   modalContent: {
     backgroundColor: palette.neutral[0],
     borderRadius: Sizes.Size_10,

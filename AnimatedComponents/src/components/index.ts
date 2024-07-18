@@ -3,6 +3,7 @@ export { default as IconTransitionButton } from './buttons/icon-transition-butto
 export { default as ProgressButton } from './buttons/progress-button/ProgressButton'
 export { default as RangeSlider } from './range-slider/RangeSlider'
 export { default as Select } from './select/Select'
+export { default as SelectDemo } from './select/SelectDemo'
 export { default as SingleValueSlider } from './single-value-slider/SingleValueSlider'
 export { default as Slider } from './slider/Slider'
 export { default as SpringButton } from './buttons/spring-button/SpringButton'

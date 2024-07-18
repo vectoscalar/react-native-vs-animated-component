@@ -49,6 +49,7 @@ const Select = (props: ISelectProps) => {
   const [dropdownTop, setDropdownTop] = useState(0)
   const dropdownRef = useRef<View>(null)
   const [optionsContainerHeight, setOptionsContainerHeight] = useState(MIN_HEIGHT)
+  const modalHeight = options.length > 4 ? '55%' : '100%'
 
   const heightAnim = useRef(new Animated.Value(0)).current
   const rotateAnim = useRef(new Animated.Value(0)).current
@@ -66,6 +67,10 @@ const Select = (props: ISelectProps) => {
       })
     }
     setIsOpen(!isOpen)
+  }
+
+  const handlePress = () => {
+    setIsOpen(false)
   }
 
   const handleOptionPress = (item: ISelectOption) => () => {
@@ -182,13 +187,7 @@ const Select = (props: ISelectProps) => {
         activeOpacity={10}
         onPress={handleOpenClosePress}
         style={[styles.container, selectContainerStyle]}>
-        <Animated.View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            opacity: fadeAnim,
-          }}>
+        <Animated.View style={[styles.selectedChipsContainer, { opacity: fadeAnim }]}>
           {renderSelectedChips()}
           {!multiSelect && (
             <Text style={styles.selectText}>{selectedOptions.value || placeholderText}</Text>
@@ -199,19 +198,12 @@ const Select = (props: ISelectProps) => {
         </Animated.View>
       </TouchableOpacity>
       {isOpen && (
-        <Modal
-          transparent
-          animationType="none"
-          visible={isOpen}
-          onRequestClose={() => setIsOpen(false)}>
-          <TouchableOpacity
-            style={styles.modalOverlay}
-            activeOpacity={1}
-            onPressOut={() => setIsOpen(false)}>
+        <Modal transparent animationType="none" visible={isOpen} onRequestClose={handlePress}>
+          <TouchableOpacity style={styles.modalOverlay} activeOpacity={1} onPressOut={handlePress}>
             <View
               style={[
                 styles.modalContent,
-                { top: dropdownTop, maxHeight: options.length > 4 ? '55%' : '100%' },
+                { top: dropdownTop, maxHeight: modalHeight },
                 optionContainerStyle,
               ]}>
               {renderOptions()}

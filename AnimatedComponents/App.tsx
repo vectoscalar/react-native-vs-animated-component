@@ -9,6 +9,7 @@ import {
   IconTransitionButton,
   ProgressButton,
   Select,
+  SelectDemo,
   Slider,
   SpringButton,
   SwipeButton,
@@ -20,7 +21,6 @@ import type { ISelectOption } from './src/components/select/Select'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const [select, setSelect] = useState<ISelectOption | ISelectOption[]>([])
   const onPress = () => {
     setIsLoading(true)
     setTimeout(() => setIsLoading(false), 3000)
@@ -69,18 +69,7 @@ const App = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <SpringButton label="Press me" onPress={onSpringPress} />
       {/* <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} /> */}
-      <Select
-        onChange={setSelect}
-        options={[
-          { title: 'Amandeep', value: 'amandeep' },
-          { title: 'Aman Rana', value: 'aman rana' },
-          { title: 'Hargun', value: 'hargun' },
-          { title: 'Ravi', value: 'ravi' },
-        ]}
-        selectedOptions={select}
-        placeholderText="Select option"
-        multiSelect
-      />
+      <SelectDemo />
       <ProgressButton
         isLoading={isLoading}
         onPress={onPress}
