@@ -27,6 +27,7 @@ import { palette } from '@theme'
 
 import { TaskStatus } from './components/TaskStatus'
 import {
+  BUTTON_HEIGHT,
   BUTTON_PADDING,
   BUTTON_WIDTH,
   ENTERING_ANIMATION_DURATION,
@@ -171,7 +172,7 @@ const SwipeButton: React.FC<ISBSwipeButton> = (props: ISBSwipeButton) => {
   })
 
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView style={{ height: BUTTON_HEIGHT }}>
       <View style={[styles.swipeContainer, isDisabled && styles.disabledContainer, style]}>
         <AnimatedLinearGradient
           style={[styles.wave, animatedStyle.wave]}
