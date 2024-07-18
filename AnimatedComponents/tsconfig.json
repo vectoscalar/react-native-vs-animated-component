@@ -1,6 +1,6 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
-  "include": ["./**/*", "./**/.*"],
+  "include": ["./**/*", "./**/.*", ".storybook/stories/Button/Slider.stories.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
