@@ -17,15 +17,15 @@ import styles from './timer-styles'
 const AnimatedSvgCircle = Animated.createAnimatedComponent(SvgCircle)
 
 interface ITimerProps {
-  /**buttonStyles: is an optional prop to style the buttons of the timer */
+  /** buttonStyles: is an optional prop to style the buttons of the timer */
   buttonStyles?: { container?: ViewStyle; text?: TextStyle }
-  /**circularTimerStrokeColor: is an optional prop that indicates the stroke color of circular timer */
+  /** circularTimerStrokeColor: is an optional prop that indicates the stroke color of circular timer */
   circularTimerStrokeColor?: string
-  /**linearTimerColor: is an optional prop that indicates the color of linear timer */
+  /** linearTimerColor: is an optional prop that indicates the color of linear timer */
   linearTimerColor?: string
-  /**timerType: is a required prop that indicates the type of timer, circular or linear */
+  /** timerType: is a required prop that indicates the type of timer, circular or linear */
   timerType: TimerPreset
-  /**totalDurationInSeconds: is a required prop that indicates the total number of seconds of timer */
+  /** totalDurationInSeconds: is a required prop that indicates the total number of seconds of timer */
   totalDurationInSeconds: number
 }
 
@@ -47,21 +47,24 @@ const Timer = (props: ITimerProps) => {
   const handleControl = useCallback(
     (action: 'start' | 'pause' | 'resume') => {
       switch (action) {
-        case 'start':
+        case 'start': {
           setIsRunning(true)
           setIsPaused(false)
           startAnimation(timeLeft * 1000)
           break
-        case 'pause':
+        }
+        case 'pause': {
           setIsRunning(false)
           setIsPaused(true)
           cancelAnimation(progress)
           break
-        case 'resume':
+        }
+        case 'resume': {
           setIsRunning(true)
           setIsPaused(false)
           startAnimation(timeLeft * 1000)
           break
+        }
       }
     },
     [timeLeft, progress],

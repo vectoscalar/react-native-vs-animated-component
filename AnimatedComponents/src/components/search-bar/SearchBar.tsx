@@ -65,7 +65,7 @@ const SearchBar = (props: ISearchBarProps) => {
     setShowInput(newShowInput)
 
     width.value = withTiming(newShowInput ? containerWidth.current * 1 : 50, {
-      duration: duration,
+      duration,
       easing: Easing.ease,
     })
   }
@@ -105,11 +105,9 @@ const SearchBar = (props: ISearchBarProps) => {
             { backgroundColor: showInput ? iconColorCollapsed : iconColorExpanded },
             iconStyle,
           ]}>
-          {icon ? (
-            icon
-          ) : (
+          {icon || (
             <Icon
-              name={'search1'}
+              name="search1"
               size={iconSize}
               color={showInput ? iconColorExpanded : iconColorCollapsed}
             />

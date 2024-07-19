@@ -1,9 +1,6 @@
-import { ImageStyle, StyleSheet, ViewStyle } from 'react-native';
+import { ImageStyle, StyleSheet, ViewStyle } from 'react-native'
 
-
-
-import { Sizes, palette } from '@theme';
-
+import { Sizes } from '@theme'
 
 interface IStyleProps {
   container: ViewStyle
