@@ -2,6 +2,10 @@
 
 # React Native Floating Button
 
+## Preview
+
+<img src="./AnimatedComponents/src/assets/gifs/FloatingButton.gif" width="250" height="500"/>
+
 ## Features
 
 - **Different Types:** Allows users to choose the type of floating button.
@@ -12,9 +16,11 @@
 - **Floating Button With Icon**: Provides a vertical stack of icons with staggered animations.
 - **Floating Button With Label**: Similar to FloatingButtonWithIcon but includes expanding width and text labels for each icon.
 
-## Example
+## Usage
 
 ```jsx
+import FloatingButton from "react-native-animated-components";
+
 const icons = [
     {
       icon: FileIcon,
@@ -37,23 +43,23 @@ const icons = [
       iconName: 'Pencil',
     },
   ]
-  
+
   <FloatingButton buttonType={FloatingButtonPreset.FloatingButtonWithIcon} icons={icons} />
 ```
 
 ## Props
 
-| Prop                        | Type                 | Values                                                                      | Description                                                                                                                          |
-| --------------------------- | -------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| animationTransitionDuration | number               | 0,1,2,3.....                                                                | It is used to change the duration of the transition of animation.                                                                    |
-| buttonContainerStyle        | ViewStyle            | name of style class created                                                 | It is used to change the styles of the container of the floating button.                                                             |
-| buttonType                  | FloatingButtonPreset | FloatingButtonWithIcon / FloatingButtonWithLabel / CircularFloatingButton   | It is used to change the type of the floating button.                                                                                |
-| circleStyle                 | ViewStyle            | name of style class created                                                 | It is used to change the styles of the container of the expanding circle when the type of floating button is CircularFloatingButton. |
-| contentContainerStyle       | ViewStyle            | name of style class created                                                 | It is used to change the styles of the container of the content in the floating button.                                              |
-| iconContainerStyle          | ViewStyle            | name of style class created                                                 | It is used to change the styles of the container of the icon in the floating button.                                                 |
-| iconStyle                   | ImageStyle           | name of style class created                                                 | It is used to change the styles of the icons in the floating button.                                                                 |
-| icons                       | array of IconProps   | { icon: 'name of image', onPress: function, iconName: 'name of icon'}       | It is used to pass the name, image and function the for the icon.                                                                    |
-| isLeft                      | Boolean              | true/false                                                                  | It is used to change the position of the floating button to left when true otherwise right.                                          |
-| textStyle                   | TextStyle            | name of style class created                                                 | It is used to change the styles of the text when the type of floating button is FloatingButtonWithLabel.                             |
+| Prop                        | Type                 | Values                                                                    | Description                                                                                                                          |
+| --------------------------- | -------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| animationTransitionDuration | number               | 0,1,2,3.....                                                              | It is used to change the duration of the transition of animation.                                                                    |
+| buttonContainerStyle        | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the floating button.                                                             |
+| buttonType                  | FloatingButtonPreset | FloatingButtonWithIcon / FloatingButtonWithLabel / CircularFloatingButton | It is used to change the type of the floating button.                                                                                |
+| circleStyle                 | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the expanding circle when the type of floating button is CircularFloatingButton. |
+| contentContainerStyle       | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the content in the floating button.                                              |
+| iconContainerStyle          | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the icon in the floating button.                                                 |
+| iconStyle                   | ImageStyle           | name of style class created                                               | It is used to change the styles of the icons in the floating button.                                                                 |
+| icons                       | array of IconProps   | { icon: 'name of image', onPress: function, iconName: 'name of icon'}     | It is used to pass the name, image and function the for the icon.                                                                    |
+| isLeft                      | Boolean              | true/false                                                                | It is used to change the position of the floating button to left when true otherwise right.                                          |
+| textStyle                   | TextStyle            | name of style class created                                               | It is used to change the styles of the text when the type of floating button is FloatingButtonWithLabel.                             |
 
 **Note:** All the props are passed to the floating-button component from where it will send the props to the type chosen by the user.
