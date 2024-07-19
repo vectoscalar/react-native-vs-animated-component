@@ -1,9 +1,6 @@
-import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-
-
-import { Sizes, palette } from '@theme';
-
+import { Sizes, palette } from '@theme'
 
 interface IStyleProps {
   buttonContainer: ViewStyle
@@ -21,7 +18,7 @@ const styles: IStyleProps = StyleSheet.create({
   },
   contentContainer: {
     alignItems: 'center',
-    backgroundColor: palette.lightCoral,
+    backgroundColor: palette.festival,
     borderRadius: Sizes.Size_50,
     bottom: Sizes.Size_30,
     flexDirection: 'row',
@@ -31,7 +28,7 @@ const styles: IStyleProps = StyleSheet.create({
   },
   contentContainerLeft: {
     alignItems: 'center',
-    backgroundColor: palette.lightCoral,
+    backgroundColor: palette.festival,
     borderRadius: Sizes.Size_50,
     bottom: Sizes.Size_30,
     flexDirection: 'row',

@@ -16,14 +16,14 @@ const styles: IStyleProps = StyleSheet.create({
     flex: Sizes.Size_1,
   },
   contentContainer: {
-    backgroundColor: palette.coral,
+    backgroundColor: palette.black,
     borderRadius: Sizes.Size_50,
     bottom: Sizes.Size_30,
     position: 'absolute',
     right: Sizes.Size_30,
   },
   contentContainerLeft: {
-    backgroundColor: palette.coral,
+    backgroundColor: palette.black,
     borderRadius: Sizes.Size_50,
     bottom: Sizes.Size_30,
     position: 'absolute',
@@ -41,7 +41,7 @@ const styles: IStyleProps = StyleSheet.create({
   },
   expandingCircle: {
     alignItems: 'center',
-    backgroundColor: palette.lightCoral,
+    backgroundColor: palette.skyBlue99,
     borderRadius: Sizes.Size_27,
     height: Sizes.Size_54,
     justifyContent: 'center',

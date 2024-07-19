@@ -15,14 +15,14 @@ const styles: IStyleProps = StyleSheet.create({
     flex: Sizes.Size_1,
   },
   contentContainer: {
-    backgroundColor: palette.lightCoral,
+    backgroundColor: palette.red,
     borderRadius: Sizes.Size_50,
     bottom: Sizes.Size_30,
     position: 'absolute',
     right: Sizes.Size_30,
   },
   contentContainerLeft: {
-    backgroundColor: palette.lightCoral,
+    backgroundColor: palette.red,
     borderRadius: Sizes.Size_50,
     bottom: Sizes.Size_30,
     position: 'absolute',
