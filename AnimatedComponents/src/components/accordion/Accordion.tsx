@@ -78,14 +78,19 @@ const Item: FC<IAccordionItemProps> = props => {
 
   const accordionAnimationConfig = {
     duration,
+    create: {
+      type: LayoutAnimation.Types.easeOut,
+      property: LayoutAnimation.Properties.opacity,
+      delay: duration / 2,
+    },
     update: {
       duration,
       type: LayoutAnimation.Types.easeInEaseOut,
       property: LayoutAnimation.Properties.scaleY,
     },
     delete: {
-      duration: 150,
-      type: LayoutAnimation.Types.easeIn,
+      duration: duration / 2,
+      type: LayoutAnimation.Types.easeOut,
       property: LayoutAnimation.Properties.opacity,
     },
   }
