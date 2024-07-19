@@ -5,29 +5,34 @@ import { Sizes } from '@theme'
 export const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    borderRadius: Sizes.Size_50,
     flex: Sizes.Size_1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     overflow: 'hidden',
+    position: 'relative',
+    marginHorizontal: 0,
   },
 
   searchBarContainer: {
-    alignItems: 'center',
-    backgroundColor: 'gray',
+    justifyContent: 'center',
+    backgroundColor: '#016FC3',
     borderRadius: Sizes.Size_50,
-    flexDirection: 'row',
     width: '100%',
-    height: Sizes.Size_50,
-    justifyContent: 'space-between',
+    paddingHorizontal: 10,
   },
 
   searchBarTextContainer: { flex: Sizes.Size_1 },
 
   searchIconContainer: {
+    position: 'absolute',
+    right: Sizes.Size_0,
     alignItems: 'center',
     borderRadius: Sizes.Size_50,
-    height: Sizes.Size_50,
     justifyContent: 'center',
-    width: Sizes.Size_50,
+  },
+
+  iconStyle: {
+    position: 'absolute',
   },
 })
