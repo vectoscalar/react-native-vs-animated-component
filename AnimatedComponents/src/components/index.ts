@@ -1,4 +1,5 @@
 // export { default as Demo } from './demo'
+export { default as Accordion } from './accordion/Accordion'
 export { default as IconTransitionButton } from './buttons/icon-transition-button/IconTransitionButton'
 export { default as Modal } from './modals/Modal'
 export { default as ProgressButton } from './buttons/progress-button/ProgressButton'
