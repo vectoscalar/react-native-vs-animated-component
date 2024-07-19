@@ -6,6 +6,7 @@ import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-n
 
 import { FileIcon, FolderIcon, PenIcon } from '@assets'
 import {
+  Accordion,
   FloatingButton,
   IconTransitionDemo,
   ProgressButton,
@@ -19,6 +20,7 @@ import {
 import { FloatingButtonPreset, RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 import { Sizes, palette } from '@theme'
 
+import AccordionDemo from './src/components/accordion/AccordionDemo'
 import type { ISelectOption } from './src/components/select/Select'
 
 const App = () => {
@@ -130,6 +132,9 @@ const App = () => {
             step={5}
           />
         </View>
+        <Text style={styles.title}>Accordion</Text>
+        <AccordionDemo />
+        {/* <View style={styles.accordionContainer}></View> */}
       </ScrollView>
       <FloatingButton buttonType={FloatingButtonPreset.CircularFloatingButton} icons={icons} />
     </SafeAreaView>
@@ -148,7 +153,17 @@ const styles = StyleSheet.create({
     marginBottom: Sizes.Size_16,
     paddingBottom: Sizes.Size_16,
   },
-
+  accordionContainer: {
+    alignItems: 'center',
+    borderBottomWidth: Sizes.Size_0_5,
+    borderBottomColor: palette.black,
+    display: 'flex',
+    flex: Sizes.Size_1,
+    flexDirection: 'column',
+    gap: Sizes.Size_10,
+    marginBottom: Sizes.Size_16,
+    paddingBottom: Sizes.Size_16,
+  },
   title: {
     color: palette.black,
     fontSize: Sizes.Size_20,
