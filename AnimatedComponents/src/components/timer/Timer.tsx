@@ -109,26 +109,32 @@ const Timer = (props: ITimerProps) => {
     handleControl('start')
   }, [])
 
+  const handleStart = () => {
+    handleControl('start')
+  }
+
+  const handleResume = () => {
+    handleControl('resume')
+  }
+
+  const handlePause = () => {
+    handleControl('pause')
+  }
+
   const renderControlButtons = useMemo(
     () => (
       <>
         {!isRunning && !isPaused ? (
-          <TouchableOpacity
-            onPress={() => handleControl('start')}
-            style={[styles.button, buttonStyles?.container]}>
+          <TouchableOpacity onPress={handleStart} style={[styles.button, buttonStyles?.container]}>
             <Text style={[styles.buttonText, buttonStyles?.text]}>Start</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity
-            onPress={() => handleControl('pause')}
-            style={[styles.button, buttonStyles?.container]}>
+          <TouchableOpacity onPress={handlePause} style={[styles.button, buttonStyles?.container]}>
             <Text style={[styles.buttonText, buttonStyles?.text]}>Pause</Text>
           </TouchableOpacity>
         )}
         {isPaused && (
-          <TouchableOpacity
-            onPress={() => handleControl('resume')}
-            style={[styles.button, buttonStyles?.container]}>
+          <TouchableOpacity onPress={handleResume} style={[styles.button, buttonStyles?.container]}>
             <Text style={[styles.buttonText, buttonStyles?.text]}>Resume</Text>
           </TouchableOpacity>
         )}
@@ -140,32 +146,43 @@ const Timer = (props: ITimerProps) => {
     [isRunning, isPaused, buttonStyles, handleControl, handleReset],
   )
 
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60)
+    const remainingSeconds = seconds % 60
+    return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`
+  }
+
   const renderTimer = () => {
     return timerType === TimerPreset.Linear ? (
       <View style={styles.linearContainer}>
         <Animated.View style={[styles.linearProgress, animatedLinearStyle]} />
       </View>
     ) : (
-      <Svg width={100} height={100} viewBox="0 0 100 100">
-        <SvgCircle cx="50" cy="50" r="45" stroke="grey" strokeWidth="10" fill="none" />
-        <AnimatedSvgCircle
-          cx="50"
-          cy="50"
-          r="45"
-          stroke={circularTimerStrokeColor}
-          strokeWidth="10"
-          fill="none"
-          strokeDasharray={`${2 * Math.PI * 45}`}
-          animatedProps={animatedCircleProps}
-        />
-      </Svg>
+      <View style={styles.circularContainer}>
+        <Svg width={100} height={100} viewBox="0 0 100 100">
+          <SvgCircle cx="50" cy="50" r="45" stroke="#e0e0e0" strokeWidth="10" fill="none" />
+          <AnimatedSvgCircle
+            cx="50"
+            cy="50"
+            r="45"
+            stroke={circularTimerStrokeColor}
+            strokeWidth="10"
+            fill="none"
+            strokeDasharray={`${2 * Math.PI * 45}`}
+            animatedProps={animatedCircleProps}
+          />
+        </Svg>
+        <Text style={styles.timeLeftTextCircular}>{formatTime(timeLeft)}</Text>
+      </View>
     )
   }
 
   return (
     <View style={styles.container}>
       {renderTimer()}
-      <Text style={styles.timeLeftText}>{timeLeft}s left</Text>
+      {timerType === TimerPreset.Linear && (
+        <Text style={styles.timeLeftTextLinear}>{formatTime(timeLeft)}</Text>
+      )}
       <View style={styles.buttonContainer}>{controls && renderControlButtons}</View>
     </View>
   )

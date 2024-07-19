@@ -1,47 +1,60 @@
 import { StyleSheet } from 'react-native'
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     alignItems: 'center',
-    flex: 1,
     justifyContent: 'center',
+    padding: 20,
   },
 
   linearContainer: {
     backgroundColor: '#e0e0e0',
-    borderRadius: 5,
-    height: 10,
-    marginBottom: 20,
+    borderRadius: 10,
+    height: 20,
+    marginBottom: 10,
     overflow: 'hidden',
-    width: '80%',
+    width: '100%',
+  },
+
+  circularContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   linearProgress: {
     height: '100%',
-  },
-
-  timeLeftText: {
-    fontSize: 24,
-    marginVertical: 10,
+    left: 0,
+    position: 'absolute',
+    top: 0,
   },
 
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '80%',
+    marginTop: 20,
   },
 
   button: {
     backgroundColor: '#007BFF',
     borderRadius: 5,
-    marginHorizontal: 5,
+    margin: 5,
     padding: 10,
   },
 
   buttonText: {
-    color: '#fff',
+    color: 'white',
     fontSize: 16,
+    textAlign: 'center',
+  },
+
+  timeLeftTextLinear: {
+    color: 'black',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+
+  timeLeftTextCircular: {
+    color: 'black',
+    fontSize: 16,
+    position: 'absolute',
   },
 })
-
-export default styles
