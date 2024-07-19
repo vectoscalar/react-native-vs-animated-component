@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo, useState } from 'react'
 import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
+import Icon from 'react-native-vector-icons/AntDesign'
 
 import { FileIcon, FolderIcon, PenIcon } from '@assets'
 import {
@@ -10,6 +11,7 @@ import {
   FloatingButton,
   IconTransitionDemo,
   ProgressButton,
+  SearchBar,
   Select,
   SelectDemo,
   Slider,
@@ -25,6 +27,8 @@ import type { ISelectOption } from './src/components/select/Select'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
+  const [select, setSelect] = useState<ISelectOption>({ title: '', value: '' })
   const onPress = () => {
     setIsLoading(true)
     setTimeout(() => setIsLoading(false), 3000)
@@ -83,6 +87,24 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        <View
+          style={{
+            marginTop: 22,
+            backgroundColor: 'black',
+            flexDirection: 'row',
+            marginBottom: 20,
+            paddingVertical: 5,
+          }}>
+          <SearchBar
+            searchValue={searchValue}
+            onInputChange={setSearchValue}
+            wrapperContainerStyle={{
+              backgroundColor: 'black',
+              marginHorizontal: 20,
+              alignItems: 'flex-end',
+            }}
+          />
+        </View>
         <View style={styles.childrenContainer}>
           <Text style={styles.title}>Spring Button</Text>
           <SpringButton label="Press me" onPress={onSpringPress} />
