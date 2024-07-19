@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { LayoutChangeEvent, View, ViewStyle } from 'react-native'
+import React, { useEffect } from 'react'
+import { View, ViewStyle } from 'react-native'
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -10,55 +10,50 @@ import Animated, {
 
 import { styles } from './infiniteLinearProgressBar-styles'
 
+interface IContainerStyle extends Omit<ViewStyle, 'width'> {
+  width: number
+}
+
 interface InfiniteLinearProgressBarProps {
-  /** duration: is an optional prop which states the duration in milliseconds for the animation. */
+  /** containerStyle is an optional prop which states the styles for progress bar container. */
+  containerStyle?: IContainerStyle
+  /** containerWidth is an optional prop which states width for progress bar container. */
+  containerWidth?: number
+  /** duration is an optional prop which states the duration in milliseconds for the animation. */
   duration?: number
-  /** containerStyle: is an optional prop which states the styles for progress bar container. */
-  containerStyle?: ViewStyle
-  /** fillStyle: is an optional prop which states the styles for the filled portion of the progress bar. */
+  /** fillStyle is an optional prop which states the styles for the filled portion of the progress bar. */
   fillStyle?: ViewStyle
+  /** fillWidth is an optional prop which states the width for the filled portion of the progress bar. */
+  fillWidth?: number
 }
 
 const InfiniteLinearProgressBar = (props: InfiniteLinearProgressBarProps) => {
-  const { duration = 1000, containerStyle = {}, fillStyle = {} } = props
+  const {
+    containerStyle = {},
+    containerWidth = 400,
+    duration = 1000,
+    fillStyle = {},
+    fillWidth = 100,
+  } = props
 
-  const translation = useSharedValue(0)
-  const [containerWidth, setContainerWidth] = useState(0)
-  const [fillWidth, setFillWidth] = useState(0)
+  const translateX = useSharedValue(-fillWidth)
 
-  const startAnimation = () => {
-    translation.value = -fillWidth
-    translation.value = withRepeat(
-      withTiming(containerWidth, { duration, easing: Easing.linear }),
-      -1,
-    )
-  }
-
-  const handleContainerLayout = (event: LayoutChangeEvent) => {
-    const { width } = event.nativeEvent.layout
-    setContainerWidth(width)
-  }
-
-  const handleFillLayout = (event: LayoutChangeEvent) => {
-    const { width } = event.nativeEvent.layout
-    setFillWidth(width)
-  }
-
-  const progressAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: translation.value }],
+  const fillAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: translateX.value }],
   }))
 
   useEffect(() => {
-    if (containerWidth && fillWidth) {
-      startAnimation()
-    }
+    const totalTranslation = containerWidth + fillWidth
+    translateX.value = withRepeat(
+      withTiming(totalTranslation, { duration, easing: Easing.linear }),
+      -1,
+    )
   }, [containerWidth, fillWidth, duration])
 
   return (
-    <View style={[styles.container, containerStyle]} onLayout={handleContainerLayout}>
+    <View style={[styles.container, containerStyle, { width: containerWidth }]}>
       <Animated.View
-        style={[styles.subContainer, progressAnimatedStyle, fillStyle]}
-        onLayout={handleFillLayout}
+        style={[styles.subContainer, fillStyle, fillAnimatedStyle, { width: fillWidth }]}
       />
     </View>
   )

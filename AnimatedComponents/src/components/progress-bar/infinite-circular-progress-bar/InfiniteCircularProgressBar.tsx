@@ -43,23 +43,21 @@ const InfiniteCircularProgressBar = (props: InfiniteCircularProgressBarProps) =>
     rotateValue.value = withRepeat(withTiming(360, { duration, easing: Easing.linear }), -1)
   }, [duration])
 
-  return (
-    <Animated.View
-      style={[
-        styles.container,
-        {
-          borderBottomColor: outerRingColor,
-          borderLeftColor: outerRingColor,
-          borderRadius: size / 2,
-          borderRightColor: outerRingColor,
-          borderTopColor: progressRingColor,
-          borderWidth: strokeWidth,
-          height: size,
-          width: size,
-        },
-        animatedStyles,
-      ]}
-    />
-  )
+  const circularProgressBarStyles = [
+    styles.container,
+    {
+      borderBottomColor: outerRingColor,
+      borderLeftColor: outerRingColor,
+      borderRadius: size / 2,
+      borderRightColor: outerRingColor,
+      borderTopColor: progressRingColor,
+      borderWidth: strokeWidth,
+      height: size,
+      width: size,
+    },
+    animatedStyles,
+  ]
+
+  return <Animated.View style={circularProgressBarStyles} />
 }
 export default InfiniteCircularProgressBar

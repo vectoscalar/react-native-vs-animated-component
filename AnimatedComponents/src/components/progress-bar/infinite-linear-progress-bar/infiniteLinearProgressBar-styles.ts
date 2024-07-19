@@ -13,6 +13,7 @@ export const styles: Styles = StyleSheet.create({
     height: Sizes.Size_20,
     overflow: 'hidden',
   },
+
   subContainer: {
     backgroundColor: palette.frenchBlue,
     height: '100%',

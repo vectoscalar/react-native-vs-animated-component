@@ -15,6 +15,7 @@ export const styles: Styles = StyleSheet.create({
     position: 'absolute',
     top: Sizes.Size_0,
   },
+  
   label: {
     color: 'black',
     fontSize: Sizes.Size_16,

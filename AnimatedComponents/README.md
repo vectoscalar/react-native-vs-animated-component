@@ -78,25 +78,18 @@ To learn more about React Native, take a look at the following resources:
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
 
+# Components
 
+-- Spring Button
 
-# Components 
- -- Spring Button 
+-- Icon transition Button
 
- -- Icon transition Button 
+-- Progress Button
 
- -- Progress Button 
+-- Swipe Button
 
- -- Swipe Button 
+-- Slider
 
- -- Slider
+-- Select
 
- -- Select
-
- 
-
-
-
-
-
-
+-- Progress Bar

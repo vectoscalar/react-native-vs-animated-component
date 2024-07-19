@@ -12,13 +12,18 @@ export interface Styles {
 export const styles: Styles = StyleSheet.create({
   container: {
     backgroundColor: palette.chineseWhite,
-    height: Sizes.Size_40,
+    height: Sizes.Size_20,
     position: 'relative',
+    borderRadius: Sizes.Size_100,
+    overflow: 'hidden',
   },
+
   subContainer: {
     backgroundColor: palette.frenchBlue,
     height: '100%',
+    borderRadius: Sizes.Size_100,
   },
+
   labelContainer: {
     alignItems: 'center',
     bottom: Sizes.Size_0,
@@ -28,9 +33,9 @@ export const styles: Styles = StyleSheet.create({
     right: Sizes.Size_0,
     top: Sizes.Size_0,
   },
+
   label: {
     color: palette.neutral[0],
     fontSize: Sizes.Size_16,
-    fontWeight: 'bold',
   },
 })
