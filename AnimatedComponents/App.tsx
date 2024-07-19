@@ -17,9 +17,16 @@ import {
   Slider,
   SpringButton,
   SwipeButton,
+  Timer,
   TriDotLoader,
 } from '@components'
-import { FloatingButtonPreset, RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
+import {
+  FloatingButtonPreset,
+  RemixIcons,
+  SliderType,
+  TimerPreset,
+  TriDotLoaderPreset,
+} from '@constants'
 import { Sizes, palette } from '@theme'
 
 import AccordionDemo from './src/components/accordion/AccordionDemo'
@@ -156,7 +163,10 @@ const App = () => {
         </View>
         <Text style={styles.title}>Accordion</Text>
         <AccordionDemo />
+        <Text style={styles.title}>Timer</Text>
         {/* <View style={styles.accordionContainer}></View> */}
+        <Timer totalDurationInSeconds={10} timerType={TimerPreset.Circular} />
+        <Timer totalDurationInSeconds={10} timerType={TimerPreset.Linear} />
       </ScrollView>
       <FloatingButton buttonType={FloatingButtonPreset.CircularFloatingButton} icons={icons} />
     </SafeAreaView>
@@ -172,8 +182,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     gap: Sizes.Size_10,
-    marginBottom: Sizes.Size_16,
-    paddingBottom: Sizes.Size_16,
+    marginBottom: Sizes.Size_30,
+    paddingBottom: Sizes.Size_30,
   },
   accordionContainer: {
     alignItems: 'center',
@@ -188,7 +198,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: palette.black,
-    fontSize: Sizes.Size_20,
+    fontSize: Sizes.Size_15,
     textAlign: 'center',
   },
 
