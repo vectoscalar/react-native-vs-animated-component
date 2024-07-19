@@ -53,7 +53,6 @@ const Select = (props: ISelectProps) => {
 
   const heightAnim = useRef(new Animated.Value(0)).current
   const rotateAnim = useRef(new Animated.Value(0)).current
-  const fadeAnim = useRef(new Animated.Value(0)).current
 
   const rotateArrow = rotateAnim.interpolate({
     inputRange: [0, 1],
@@ -74,22 +73,16 @@ const Select = (props: ISelectProps) => {
   }
 
   const handleOptionPress = (item: ISelectOption) => () => {
-    Animated.timing(fadeAnim, {
-      toValue: 0,
-      duration: 50,
-      useNativeDriver: true,
-    }).start(() => {
-      if (multiSelect && Array.isArray(selectedOptions)) {
-        const isSelected = selectedOptions.some(option => option.value === item.value)
-        const newSelectedOptions = isSelected
-          ? selectedOptions.filter(option => option.value !== item.value)
-          : [...selectedOptions, item]
-        onChange(newSelectedOptions)
-      } else {
-        const isSelected = selectedOptions.value === item.value
-        onChange(isSelected ? { title: '', value: '' } : item)
-      }
-    })
+    if (multiSelect && Array.isArray(selectedOptions)) {
+      const isSelected = selectedOptions.some(option => option.value === item.value)
+      const newSelectedOptions = isSelected
+        ? selectedOptions.filter(option => option.value !== item.value)
+        : [...selectedOptions, item]
+      onChange(newSelectedOptions)
+    } else {
+      const isSelected = selectedOptions.value === item.value
+      onChange(isSelected ? { title: '', value: '' } : item)
+    }
     if (!multiSelect) {
       setIsOpen(false)
     }
@@ -101,7 +94,7 @@ const Select = (props: ISelectProps) => {
       duration: 200,
       useNativeDriver: false,
     }).start()
-  }, [isOpen, heightAnim])
+  }, [isOpen, heightAnim, optionsContainerHeight])
 
   useEffect(() => {
     Animated.timing(rotateAnim, {
@@ -110,14 +103,6 @@ const Select = (props: ISelectProps) => {
       useNativeDriver: false,
     }).start()
   }, [isOpen, rotateAnim])
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: true,
-    }).start()
-  }, [selectedOptions, fadeAnim])
 
   const renderOptions = useCallback(() => {
     return (
@@ -153,7 +138,14 @@ const Select = (props: ISelectProps) => {
         }}
       />
     )
-  }, [selectedOptions, options.length])
+  }, [
+    selectedOptions,
+    options.length,
+    optionsContainerHeight,
+    multiSelect,
+    selectedOptionStyle,
+    optionStyle,
+  ])
 
   const renderSelectedChips = () => {
     if (!multiSelect || !Array.isArray(selectedOptions)) return null
@@ -187,12 +179,12 @@ const Select = (props: ISelectProps) => {
         activeOpacity={10}
         onPress={handleOpenClosePress}
         style={[styles.container, selectContainerStyle]}>
-        <Animated.View style={[styles.selectedChipsContainer, { opacity: fadeAnim }]}>
+        <View style={styles.selectedChipsContainer}>
           {renderSelectedChips()}
           {!multiSelect && (
             <Text style={styles.selectText}>{selectedOptions.value || placeholderText}</Text>
           )}
-        </Animated.View>
+        </View>
         <Animated.View style={{ transform: [{ rotate: rotateArrow }] }}>
           <Icon name="chevron-down" size={20} />
         </Animated.View>

@@ -68,7 +68,7 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SpringButton label="Press me" onPress={onSpringPress} />
-      {/* <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} /> */}
+      <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
       <SelectDemo />
       <ProgressButton
         isLoading={isLoading}
