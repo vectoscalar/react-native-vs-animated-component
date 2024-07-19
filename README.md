@@ -8,7 +8,7 @@ The Accordion component lets users show and hide sections of related content on 
 
 <img src="https://github.com/user-attachments/assets/d112aecc-645b-4369-ab52-02d49c32722c" width="250" height="500"/>
 
-## Example
+## Usage
 
 ```jsx
 <Accordion showSingleItemAtOnce={false}>
