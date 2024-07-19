@@ -1,14 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import {
-  Animated,
-  FlatList,
-  Modal,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from 'react-native'
+import { Animated, FlatList, Modal, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo'
 
 import styles from './select-styles'
@@ -19,18 +10,27 @@ export interface ISelectOption {
 }
 
 interface ISelectProps {
-  onChange: (newValue: ISelectOption) => void
-  optionContainerStyle?: ViewStyle
+  /** multiSelect: is an optional prop which dictates whether multiple selections is allowed or not. */
+  multiSelect?: boolean
+  /** onChange: is a required prop which dictates the function which will be called on clicking the options. */
+  onChange: (newValue: ISelectOption[] | ISelectOption) => void
+  /** options: is an required prop which dictates an array containing titles and values for options. */
   options: Array<ISelectOption>
+  /** optionContainerStyle: is an optional prop which defines the styles of option container. */
+  optionContainerStyle?: ViewStyle
+  /** optionStyle: is an optional prop which defines the styles of options. */
   optionStyle?: ViewStyle
+  /** placeholderText: is an optional prop which dictates the text of placeholder. */
   placeholderText?: string
+  /** selectedOptionStyle: is an optional prop which defines the styles of selected option. */
   selectedOptionStyle?: ViewStyle
-  style?: ViewStyle | TextStyle
-  selectedOption: ISelectOption
+  /** selectContainerStyle: is an optional prop which defines the styles of select container. */
+  selectContainerStyle?: ViewStyle
+  /** selectedOptions: is a required prop which dictates the selected options. */
+  selectedOptions: ISelectOption[] | ISelectOption
 }
-const MIN_HEIGHT = 10
 
-const DEFAULT_SELECTED_OPTION: ISelectOption = { title: '', value: '' }
+const MIN_HEIGHT = 10
 
 const Select = (props: ISelectProps) => {
   const {
@@ -40,19 +40,20 @@ const Select = (props: ISelectProps) => {
     optionStyle,
     placeholderText,
     selectedOptionStyle,
-    style,
-    selectedOption,
+    selectContainerStyle,
+    selectedOptions,
+    multiSelect = false,
   } = props
 
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedHeight, setSelectedHeight] = useState(0)
-  const [optionsContainerHeight, setOptionsContainerHeight] = useState(10)
+  const [dropdownTop, setDropdownTop] = useState(0)
+  const dropdownRef = useRef<View>(null)
+  const [optionsContainerHeight, setOptionsContainerHeight] = useState(MIN_HEIGHT)
+  const modalHeight = options.length > 4 ? '55%' : '100%'
 
   const heightAnim = useRef(new Animated.Value(0)).current
   const rotateAnim = useRef(new Animated.Value(0)).current
   const fadeAnim = useRef(new Animated.Value(0)).current
-
-  const { value, title } = selectedOption
 
   const rotateArrow = rotateAnim.interpolate({
     inputRange: [0, 1],
@@ -60,7 +61,16 @@ const Select = (props: ISelectProps) => {
   })
 
   const handleOpenClosePress = () => {
+    if (dropdownRef.current) {
+      dropdownRef.current.measure((fx, fy, width, height, px, py) => {
+        setDropdownTop(py + height)
+      })
+    }
     setIsOpen(!isOpen)
+  }
+
+  const handlePress = () => {
+    setIsOpen(false)
   }
 
   const handleOptionPress = (item: ISelectOption) => () => {
@@ -69,10 +79,20 @@ const Select = (props: ISelectProps) => {
       duration: 50,
       useNativeDriver: true,
     }).start(() => {
-      const isSelected = item.value === value
-      onChange(isSelected ? DEFAULT_SELECTED_OPTION : item)
+      if (multiSelect && Array.isArray(selectedOptions)) {
+        const isSelected = selectedOptions.some(option => option.value === item.value)
+        const newSelectedOptions = isSelected
+          ? selectedOptions.filter(option => option.value !== item.value)
+          : [...selectedOptions, item]
+        onChange(newSelectedOptions)
+      } else {
+        const isSelected = selectedOptions.value === item.value
+        onChange(isSelected ? { title: '', value: '' } : item)
+      }
     })
-    setIsOpen(false)
+    if (!multiSelect) {
+      setIsOpen(false)
+    }
   }
 
   useEffect(() => {
@@ -97,14 +117,17 @@ const Select = (props: ISelectProps) => {
       duration: 500,
       useNativeDriver: true,
     }).start()
-  }, [value, fadeAnim])
+  }, [selectedOptions, fadeAnim])
 
   const renderOptions = useCallback(() => {
     return (
       <FlatList
         data={options}
         renderItem={({ item, index }) => {
-          const isSelected = item.value === value
+          const isSelected = multiSelect
+            ? Array.isArray(selectedOptions) &&
+              selectedOptions.some(option => option.value === item.value)
+            : selectedOptions.value === item.value
           const selectedStyle = isSelected ? [styles.selectedOption, selectedOptionStyle] : []
 
           return (
@@ -115,40 +138,79 @@ const Select = (props: ISelectProps) => {
               }
               activeOpacity={10}
               onPress={handleOptionPress(item)}>
-              <Text
-                style={[styles.option, styles.optionText, optionStyle, ...selectedStyle]}
-                key={`${item.value}-${index}`}>
-                {item.title}
-              </Text>
+              <View style={[styles.option, optionStyle]}>
+                {isSelected ? (
+                  <Icon name="check" style={styles.optionIcon} />
+                ) : (
+                  <View style={styles.emptyView} />
+                )}
+                <Text style={[styles.optionText, ...selectedStyle]} key={`${item.value}-${index}`}>
+                  {item.title}
+                </Text>
+              </View>
             </TouchableOpacity>
           )
         }}
       />
     )
-  }, [value, options.length])
+  }, [selectedOptions, options.length])
+
+  const renderSelectedChips = () => {
+    if (!multiSelect || !Array.isArray(selectedOptions)) return null
+
+    const displayedChips = selectedOptions.slice(0, 2)
+    const additionalChips = selectedOptions.length > 2 ? selectedOptions.length - 2 : 0
+
+    return (
+      <View style={styles.chipsContainer}>
+        {displayedChips.map(option => (
+          <View key={option.value} style={styles.chip}>
+            <Text style={styles.chipText}>{option.title}</Text>
+            <TouchableOpacity onPress={() => handleOptionPress(option)()}>
+              <Icon name="cross" style={styles.chipIcon} />
+            </TouchableOpacity>
+          </View>
+        ))}
+        {additionalChips > 0 && (
+          <View style={styles.chip}>
+            <Text style={styles.chipText}>{`+${additionalChips} more`}</Text>
+          </View>
+        )}
+      </View>
+    )
+  }
 
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity
+        ref={dropdownRef}
         activeOpacity={10}
-        onLayout={event => setSelectedHeight(event.nativeEvent.layout.height)}
         onPress={handleOpenClosePress}
-        style={[styles.container, style]}>
-        <Animated.Text style={[styles.selectText, { opacity: fadeAnim }]}>
-          {title || placeholderText}
-        </Animated.Text>
+        style={[styles.container, selectContainerStyle]}>
+        <Animated.View style={[styles.selectedChipsContainer, { opacity: fadeAnim }]}>
+          {renderSelectedChips()}
+          {!multiSelect && (
+            <Text style={styles.selectText}>{selectedOptions.value || placeholderText}</Text>
+          )}
+        </Animated.View>
         <Animated.View style={{ transform: [{ rotate: rotateArrow }] }}>
           <Icon name="chevron-down" size={20} />
         </Animated.View>
       </TouchableOpacity>
-      <Animated.View
-        style={[
-          styles.optionsContainer,
-          optionContainerStyle,
-          { top: selectedHeight, height: heightAnim, maxHeight: 200 },
-        ]}>
-        {renderOptions()}
-      </Animated.View>
+      {isOpen && (
+        <Modal transparent animationType="none" visible={isOpen} onRequestClose={handlePress}>
+          <TouchableOpacity style={styles.modalOverlay} activeOpacity={1} onPressOut={handlePress}>
+            <View
+              style={[
+                styles.modalContent,
+                { top: dropdownTop, maxHeight: modalHeight },
+                optionContainerStyle,
+              ]}>
+              {renderOptions()}
+            </View>
+          </TouchableOpacity>
+        </Modal>
+      )}
     </View>
   )
 }

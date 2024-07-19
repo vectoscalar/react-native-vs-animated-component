@@ -10,3 +10,8 @@ export enum TriDotLoaderPreset {
   Medium = 'Medium',
   Large = 'Large',
 }
+
+export enum TimerPreset {
+  Linear = 'LINEAR',
+  Circular = 'CIRCULAR',
+}
