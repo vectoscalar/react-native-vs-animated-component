@@ -1,6 +1,8 @@
 // export { default as Demo } from './demo'
+export { default as Accordion } from './accordion/Accordion'
 export { default as IconTransitionButton } from './buttons/icon-transition-button/IconTransitionButton'
 export { default as IconTransitionDemo } from './buttons/icon-transition-button/IconTransitionDemo'
+export { default as Modal } from './modals/Modal'
 export { default as ProgressButton } from './buttons/progress-button/ProgressButton'
 export { default as RangeSlider } from './range-slider/RangeSlider'
 export { default as Select } from './select/Select'
