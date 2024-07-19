@@ -12,9 +12,10 @@ import {
   Slider,
   SpringButton,
   SwipeButton,
+  Timer,
   TriDotLoader,
 } from '@components'
-import { RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
+import { RemixIcons, SliderType, TimerPreset, TriDotLoaderPreset } from '@constants'
 
 import type { ISelectOption } from './src/components/select/Select'
 
@@ -88,6 +89,7 @@ const App = () => {
         successIcon={<TickIcon />}
       />
       <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
+      <Timer totalDurationInSeconds={10} timerType={TimerPreset.Circular} />
     </SafeAreaView>
   )
 }

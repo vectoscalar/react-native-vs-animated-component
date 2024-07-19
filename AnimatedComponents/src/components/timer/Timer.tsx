@@ -21,6 +21,8 @@ interface ITimerProps {
   buttonStyles?: { container?: ViewStyle; text?: TextStyle }
   /**circularTimerStrokeColor: is an optional prop that indicates the stroke color of circular timer */
   circularTimerStrokeColor?: string
+  /**controls: is an optional prop that indicates whether control buttons are visible or not */
+  controls?: boolean
   /**linearTimerColor: is an optional prop that indicates the color of linear timer */
   linearTimerColor?: string
   /**timerType: is a required prop that indicates the type of timer, circular or linear */
@@ -33,6 +35,7 @@ const Timer = (props: ITimerProps) => {
   const {
     buttonStyles,
     circularTimerStrokeColor = 'black',
+    controls = false,
     linearTimerColor = 'black',
     timerType,
     totalDurationInSeconds,
@@ -42,7 +45,7 @@ const Timer = (props: ITimerProps) => {
   const [isRunning, setIsRunning] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
 
-  const progress = useSharedValue(1) // Initialize progress as a shared value
+  const progress = useSharedValue(1)
 
   const handleControl = useCallback(
     (action: 'start' | 'pause' | 'resume') => {
@@ -102,6 +105,10 @@ const Timer = (props: ITimerProps) => {
     }
   }, [timeLeft])
 
+  useEffect(() => {
+    handleControl('start')
+  }, [])
+
   const renderControlButtons = useMemo(
     () => (
       <>
@@ -159,7 +166,7 @@ const Timer = (props: ITimerProps) => {
     <View style={styles.container}>
       {renderTimer()}
       <Text style={styles.timeLeftText}>{timeLeft}s left</Text>
-      <View style={styles.buttonContainer}>{renderControlButtons}</View>
+      <View style={styles.buttonContainer}>{controls && renderControlButtons}</View>
     </View>
   )
 }
