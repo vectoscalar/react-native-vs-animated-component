@@ -11,6 +11,7 @@ import {
   Modal,
   ProgressButton,
   Select,
+  SelectDemo,
   Slider,
   SpringButton,
   SwipeButton,
@@ -69,21 +70,8 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <SpringButton label="Press me" onPress={onSpringPress} />
-      {/* <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} /> */}
-      <Select
-        onChange={setSelect}
-        options={[
-          { title: 'Test 1', value: 'test1' },
-          { title: 'Test 2', value: 'test2' },
-          { title: 'Test 3', value: 'test3' },
-
-          { title: 'Test 4', value: 'test4' },
-        ]}
-        selectedOption={select}
-        placeholderText="Enter Value"
-        optionContainerStyle={{ zIndex: 1000 }}
-      />
-
+      <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
+      <SelectDemo />
       <ProgressButton
         isLoading={isLoading}
         onPress={onPress}

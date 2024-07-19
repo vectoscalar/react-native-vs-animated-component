@@ -10,6 +10,7 @@ const style = StyleSheet.create({
     position: 'relative',
     width: '90%',
     alignSelf: 'center',
+    marginBottom: 20,
   },
   label: {
     color: 'white',
