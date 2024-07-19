@@ -10,3 +10,10 @@ export enum TriDotLoaderPreset {
   Medium = 'Medium',
   Large = 'Large',
 }
+
+export enum ModalPreset {
+  FadeIn = 'FADE_IN',
+  Scale = 'SCALE',
+  SlideIn = 'SLIDE_IN',
+  SlideInLeft = 'SLIDE_IN_LEFT',
+}
