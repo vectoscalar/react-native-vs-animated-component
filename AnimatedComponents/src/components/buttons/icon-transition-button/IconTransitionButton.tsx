@@ -45,6 +45,7 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
   const labelOpacity = useSharedValue(1)
   const [iconName, setIconName] = useState(startLabel)
   const [label, setLabel] = useState<string>(startLabel)
+  const [transition, setTransition] = useState(false)
   const translationDuration = 1500
 
   const getbuttonStyles = () => {
@@ -135,6 +136,10 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
       setLabel(successLabel)
       labelOpacity.value = withTiming(1, { duration: iconAnimationDuration })
     }, halfwayDuration)
+
+    setTimeout(() => {
+      setTransition(true)
+    }, halfwayDuration)
   }
 
   return (
@@ -145,7 +150,9 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
       ref={buttonWidth}
       onLayout={onLayout}>
       <Animated.View style={[styles.ball, animatedStyles]}>{getIcon(iconName)}</Animated.View>
-      <Animated.Text style={[styles.label, labelAnimatedStyles]}>{label}</Animated.Text>
+      <Animated.Text style={[styles.label, !transition && labelAnimatedStyles]}>
+        {label}
+      </Animated.Text>
     </Pressable>
   )
 }
