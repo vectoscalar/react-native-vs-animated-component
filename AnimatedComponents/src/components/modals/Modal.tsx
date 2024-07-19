@@ -24,7 +24,7 @@ import styles from './modal-styles'
 
 interface IModalProps extends Omit<RNModalProps, 'animationType'> {
   /** customAnimationType: is a required prop that specifies the type of animation preset for the modal */
-  customAnimationType: ModalPreset
+  animationType: ModalPreset
   /** children: is a required prop that indicates the content of the modal */
   children: React.ReactNode
   /** isOpen: is a required prop that indicates whether the modal is visible or not */
@@ -36,7 +36,7 @@ interface IModalProps extends Omit<RNModalProps, 'animationType'> {
 }
 
 const Modal = (props: IModalProps) => {
-  const { customAnimationType, children, isOpen, onClose, style = {}, ...rest } = props
+  const { animationType, children, isOpen, onClose, style = {}, ...rest } = props
   const { height: screenHeight, width: screenWidth } = Dimensions.get('screen')
 
   const opacity = useSharedValue(0)
@@ -48,12 +48,13 @@ const Modal = (props: IModalProps) => {
     const config = { duration: 500, easing: Easing.inOut(Easing.ease) }
     const onEnd = (finished: boolean | undefined) => {
       'worklet'
+
       if (!isOpening && finished) {
         runOnJS(onClose)()
       }
     }
 
-    switch (customAnimationType) {
+    switch (animationType) {
       case ModalPreset.FadeIn: {
         opacity.value = withTiming(isOpening ? 1 : 0, config, onEnd)
         break
@@ -71,7 +72,7 @@ const Modal = (props: IModalProps) => {
         break
       }
       default: {
-        console.warn(`Unknown modal type: ${customAnimationType}`)
+        console.warn(`Unknown modal type: ${animationType}`)
         break
       }
     }
@@ -86,7 +87,7 @@ const Modal = (props: IModalProps) => {
   }, [isOpen])
 
   const animatedStyle = useAnimatedStyle(() => {
-    switch (customAnimationType) {
+    switch (animationType) {
       case ModalPreset.FadeIn: {
         return { opacity: opacity.value }
       }
