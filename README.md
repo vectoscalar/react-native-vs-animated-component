@@ -40,15 +40,15 @@ const Component = () => {
 
 ## Props
 
-| Prop           | Type      | Description                                                                                        |
-| -------------- | --------- | -------------------------------------------------------------------------------------------------- |
-| containerStyle | ViewStyle | containerStyle is an optional prop which states the styles for progress bar container.             |
-| containerWidth | number    | containerWidth is an optional prop which states width for progress bar container.                  |
-| duration       | number    | duration is an optional prop which states the duration in milliseconds for the progress animation. |
-| fillStyle      | ViewStyle | fillStyle is an optional prop which states the styles for the filled portion of the progress bar.  |
-| labelStyle     | TextStyle | labelStyle is an optional prop which states the styles for the progress label.                     |
-| maxValue       | number    | maxValue is an optional prop which states the maximum value of progress bar.                       |
-| value          | number    | value is a required prop which states the progress value.                                          |
+| Prop           | Type                                      | Description                                                                                        |
+| -------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| containerStyle | Omit<ViewStyle, 'width'> & {width:number} | containerStyle is an optional prop which states the styles for progress bar container.             |
+| containerWidth | number                                    | containerWidth is an optional prop which states width for progress bar container.                  |
+| duration       | number                                    | duration is an optional prop which states the duration in milliseconds for the progress animation. |
+| fillStyle      | Omit<ViewStyle, 'width'> & {width:number} | fillStyle is an optional prop which states the styles for the filled portion of the progress bar.  |
+| labelStyle     | TextStyle                                 | labelStyle is an optional prop which states the styles for the progress label.                     |
+| maxValue       | number                                    | maxValue is an optional prop which states the maximum value of progress bar.                       |
+| value          | number                                    | value is a required prop which states the progress value.                                          |
 
 <br/>
 <br/>
@@ -97,10 +97,10 @@ const Component = () => {
 | labelStyle        | TextStyle | labelStyle is an optional prop which states the styles for the label displayed within the circular progress bar. |
 | maxValue          | number    | maxValue is an optional prop which states the maximum value for the progress bar.                                |
 | outerRingColor    | string    | outerRingColor is an optional prop which states the color of the outer ring of the circular progress bar.        |
-| value             | number    | value is a required prop which states the current progress value.                                                |
 | progressRingColor | string    | progressRingColor is an optional prop which states the color of the progress ring.                               |
 | size              | number    | size is an optional prop which states the overall width , height of circular progress bar.                       |
 | strokeWidth       | number    | strokeWidth is an optional prop which states the stroke width of the progress ring.                              |
+| value             | number    | value is a required prop which states the current progress value.                                                |
 
 <br/>
 <br/>
@@ -130,13 +130,13 @@ const Component = () => {
 
 ## Props
 
-| Prop           | Type            | Description                                                                                       |
-| -------------- | --------------- | ------------------------------------------------------------------------------------------------- |
-| containerStyle | IContainerStyle | containerStyle is an optional prop which states the styles for the progress bar container.        |
-| containerWidth | number          | containerWidth is an optional prop which states the width for the progress bar container.         |
-| duration       | number          | duration is an optional prop which states the duration of the animation in milliseconds.          |
-| fillStyle      | ViewStyle       | fillStyle is an optional prop which states the styles for the filled portion of the progress bar. |
-| fillWidth      | number          | fillWidth is an optional prop which states the width for the filled portion of the progress bar.  |
+| Prop           | Type                                     | Description                                                                                       |
+| -------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| containerStyle | Omit<ViewStyle, 'width'> &{width:number} | containerStyle is an optional prop which states the styles for the progress bar container.        |
+| containerWidth | number                                   | containerWidth is an optional prop which states the width for the progress bar container.         |
+| duration       | number                                   | duration is an optional prop which states the duration of the animation in milliseconds.          |
+| fillStyle      | Omit<ViewStyle, 'width'> &{width:number} | fillStyle is an optional prop which states the styles for the filled portion of the progress bar. |
+| fillWidth      | number                                   | fillWidth is an optional prop which states the width for the filled portion of the progress bar.  |
 
 <br/>
 <br/>

@@ -14,6 +14,8 @@ interface IContainerStyle extends Omit<ViewStyle, 'width'> {
   width: number
 }
 
+interface IFillStyle extends IContainerStyle {}
+
 interface InfiniteLinearProgressBarProps {
   /** containerStyle is an optional prop which states the styles for progress bar container. */
   containerStyle?: IContainerStyle
@@ -22,7 +24,7 @@ interface InfiniteLinearProgressBarProps {
   /** duration is an optional prop which states the duration in milliseconds for the animation. */
   duration?: number
   /** fillStyle is an optional prop which states the styles for the filled portion of the progress bar. */
-  fillStyle?: ViewStyle
+  fillStyle?: IFillStyle
   /** fillWidth is an optional prop which states the width for the filled portion of the progress bar. */
   fillWidth?: number
 }
