@@ -3,57 +3,60 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Sizes, palette } from '@theme'
 
 export interface Styles {
-  sliderContainer: ViewStyle
+  labelContainer: ViewStyle
+  labelText: TextStyle
   sliderBack: ViewStyle
+  sliderContainer: ViewStyle
   sliderFront: ViewStyle
   thumb: ViewStyle
-  label: ViewStyle
-  labelText: TextStyle
+  thumbContainer: ViewStyle
 }
 
 export const styles: Styles = StyleSheet.create({
   sliderContainer: {
-    alignSelf: 'center',
+    height: Sizes.Size_8,
     justifyContent: 'center',
-    marginTop: Sizes.Size_10,
   },
+
   sliderBack: {
     backgroundColor: palette.chineseWhite,
     borderRadius: Sizes.Size_20,
-    height: Sizes.Size_8,
+    height: '100%',
   },
+
   sliderFront: {
     backgroundColor: palette.frenchBlue,
     borderRadius: Sizes.Size_20,
-    height: Sizes.Size_8,
+    height: '100%',
     position: 'absolute',
   },
-  thumb: {
-    backgroundColor: palette.neutral[0],
-    borderColor: palette.frenchBlue,
-    borderRadius: Sizes.Size_10,
-    borderWidth: Sizes.Size_5,
-    height: Sizes.Size_20,
+
+  thumbContainer: {
+    alignItems: 'center',
+    bottom: -Sizes.Size_10,
     left: -Sizes.Size_10,
     position: 'absolute',
-    width: Sizes.Size_20,
   },
-  label: {
-    alignItems: 'center',
-    alignSelf: 'center',
+
+  thumb: {
+    backgroundColor: palette.frenchBlue,
+    width: Sizes.Size_28,
+    height: Sizes.Size_28,
+    borderRadius: Sizes.Size_50,
+  },
+
+  labelContainer: {
     backgroundColor: palette.black,
     borderRadius: Sizes.Size_5,
-    bottom: Sizes.Size_20,
-    justifyContent: 'center',
-    position: 'absolute',
-    top: -Sizes.Size_40,
+    marginBottom: Sizes.Size_10,
+    padding: Sizes.Size_4,
   },
+
   labelText: {
-    color: 'white',
+    color: palette.neutral[0],
     fontSize: Sizes.Size_16,
     fontWeight: 'bold',
-    padding: Sizes.Size_5,
-    width: '100%',
     textAlign: 'center',
+    width: '100%',
   },
 })

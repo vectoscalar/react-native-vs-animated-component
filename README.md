@@ -1,5 +1,122 @@
 # react-native-vs-animated-component
 
+# React Native Slider
+
+## Single Value Slider
+
+## Preview
+
+<img src="./AnimatedComponents/src/assets/gifs/SingleValueSlider.gif" width="250" height="500"/>
+
+## Features
+
+- **Customizable Styles:** Styles can be customized via props.
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+
+## Usage
+
+```jsx
+import Slider from "react-native-animated-components";
+import Icon from "react-native-vector-icons/MaterialIcons";
+
+const Component = () => {
+  const [value, setValue] = useState(0);
+
+  return (
+    <View>
+      <Slider.SingleValue setValue={setValue} />
+      <Slider.SingleValue
+        setValue={setValue}
+        thumbIcon={<Icon name="hive" size={35} color="black" />}
+        activeTrackStyle={{ backgroundColor: "red" }}
+        inactiveTrackStyle={{ backgroundColor: "plum" }}
+      />
+    </View>
+  );
+};
+```
+
+## Props
+
+| Prop                | Type                                           | Description                                                                                        |
+| ------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| activeTrackStyle    | `Omit<ViewStyle, 'width'>`                     | It is an optional prop that specifies the styles of the active track of the slider.                |
+| duration            | `number`                                       | It is an optional prop which specifies the duration of animation in milliseconds.                  |
+| inactiveTrackStyle  | `Omit<ViewStyle, 'width'> `                    | It is an optional prop that specifies the styles of the inactive track of the slider.              |
+| labelContainerStyle | `ViewStyle`                                    | It is an optional prop that specifies the styles for the label container.                          |
+| labelTextStyle      | `TextStyle`                                    | It is an optional prop that specifies the styles for the label text.                               |
+| max                 | `number`                                       | It is an optional prop that specifies the maximum value for the slider.                            |
+| min                 | `number`                                       | It is an optional prop that specifies the minimum value for the slider.                            |
+| setValue            | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which updates the value state for the slider.                                |
+| sliderHeight        | `number`                                       | It is an optional prop that specifies the height of the slider.                                    |
+| sliderWidth         | `number`                                       | It is an optional prop that specifies the width of the slider.                                     |
+| step                | `number`                                       | It is an optional prop that specifies the increment or decrement in the slider value when sliding. |
+| thumbIcon           | `React.ReactNode`                              | It is an optional prop that specifies the icon for the slider thumb.                               |
+| thumbSize           | `number`                                       | It is an optional prop that specifies the size of the slider thumb.                                |
+| thumbStyle          | `ViewStyle`                                    | It is an optional prop that specifies the styles of the slider thumb.                              |
+
+<br/>
+<br/>
+
+## Range Slider
+
+## Preview
+
+## Features
+
+- **Customizable Styles:** Styles can be customized via props.
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+
+## Usage
+
+<img src="./AnimatedComponents/src/assets/gifs/RangeSlider.gif" width="250" height="500"/>
+
+```jsx
+import Slider from "react-native-animated-components";
+import Icon from "react-native-vector-icons/MaterialIcons";
+
+const Component = () => {
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(100);
+
+  return (
+    <View>
+      <Slider.Range setMinValue={setMinValue} setMaxValue={setMaxValue} />
+      <Slider.Range
+        setMinValue={setMinValue}
+        setMaxValue={setMaxValue}
+        thumbIcon={<Icon name="hive" size={35} color="black" />}
+        activeTrackStyle={{ backgroundColor: "red" }}
+        inactiveTrackStyle={{ backgroundColor: "plum" }}
+      />
+    </View>
+  );
+};
+```
+
+## Props
+
+| Prop                | Type                                           | Description                                                                                        |
+| ------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| activeTrackStyle    | `Omit<ViewStyle, 'width'>`                     | It is an optional prop that specifies the styles of the active track of the slider.                |
+| duration            | `number`                                       | It is an optional prop which specifies the duration of animation in milliseconds.                  |
+| inactiveTrackStyle  | `Omit<ViewStyle, 'width'>`                     | It is an optional prop that specifies the styles of the inactive track of the slider.              |
+| labelContainerStyle | `ViewStyle`                                    | It is an optional prop that specifies the styles for the label container.                          |
+| labelTextStyle      | `TextStyle`                                    | It is an optional prop that specifies the styles for the label text.                               |
+| max                 | `number`                                       | It is an optional prop that specifies the maximum value for the slider.                            |
+| min                 | `number`                                       | It is an optional prop that specifies the minimum value for the slider.                            |
+| setMaxValue         | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which sets the maximum value for the slider.                                 |
+| setMinValue         | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which updates the minimum value state for the slider.                        |
+| sliderHeight        | `number`                                       | It is an optional prop that specifies the height of the slider.                                    |
+| sliderWidth         | `number`                                       | It is an optional prop that specifies the width of the slider.                                     |
+| step                | `number`                                       | It is an optional prop that specifies the increment or decrement in the slider value when sliding. |
+| thumbIcon           | `React.ReactNode`                              | It is an optional prop that specifies the icon for the slider thumb.                               |
+| thumbSize           | `number`                                       | It is an optional prop that specifies the size of the slider thumb.                                |
+| thumbStyle          | `ViewStyle`                                    | It is an optional prop that specifies the styles of the slider thumb.                              |
+
+<br/>
+<br/>
+
 # React Native Select Box
 
 ## Preview

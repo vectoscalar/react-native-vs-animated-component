@@ -1,20 +1,30 @@
-import { SharedValue } from 'react-native-reanimated'
+import { TextStyle, ViewStyle } from 'react-native'
 
-export type AnimatedProps<T> = Partial<Record<keyof T, SharedValue<any>>>
-
-export interface ValueSliderProps {
-  /** sliderWidth is an optional prop which states the slider width. */
-  sliderWidth?: number
-  /** min is an optional prop which states the min value for slider. */
-  min?: number
-  /** max is an optional prop which states the max value for slider. */
+export interface ISliderProps {
+  /** activeTrackStyle is an optional prop that specifies the styles of the active track of the slider. */
+  activeTrackStyle?: Omit<ViewStyle, 'width'>
+  /** duration is an optional prop which specifies the duration of animation in milliseconds. */
+  duration?: number
+  /** inactiveTrackStyle is an optional prop that specifies the styles of the inactive track of the slider. */
+  inactiveTrackStyle?: Omit<ViewStyle, 'width'>
+  /** labelContainerStyle is an optional prop that specifies the styles for label container */
+  labelContainerStyle?: ViewStyle
+  /** labelTextStyle is an optional prop that specifies the styles for label text */
+  labelTextStyle?: TextStyle
+  /** max is an optional prop that specifies the maximum value for the slider. */
   max?: number
-  /** step is an optional prop which states the increment or decrement in slider value on sliding. */
+  /** min is an optional prop that specifies the minimum value for the slider. */
+  min?: number
+  /** sliderWidth is an optional prop that specifies the width of the slider. */
+  sliderWidth?: number
+  /** sliderHeight is an optional prop that specifies the height of slider. */
+  sliderHeight?: number
+  /** step is an optional prop that specifies the increment or decrement in the slider value when sliding. */
   step?: number
-  /** activeTrackColor is an optional prop which states the color of the active track of the slider. */
-  activeTrackColor?: string
-  /** inactiveTrackColor is an optional prop which states the color of the inactive track of the slider. */
-  inactiveTrackColor?: string
-  /** thumbColor is an optional prop which states the color of slider thumb */
-  thumbColor?: string
+  /** thumbIcon is an optional prop that specifies the icon for the slider thumb. */
+  thumbIcon?: React.ReactNode
+  /** thumbSize is an optional prop that specifies the size of the slider thumb. */
+  thumbSize?: number
+  /** thumbStyle is an optional prop that specifies the styles of the slider thumb. */
+  thumbStyle?: ViewStyle
 }

@@ -3,18 +3,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo, useState } from 'react'
 import { Button, SafeAreaView, Text } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
   IconTransitionButton,
   Modal,
-  ProgressButton, SelectDemo,
+  ProgressButton,
+  SelectDemo,
   Slider,
   SpringButton,
   SwipeButton,
-  TriDotLoader
+  TriDotLoader,
 } from '@components'
-import { ModalPreset, RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
+import { ModalPreset, RemixIcons, TriDotLoaderPreset } from '@constants'
 
 import AccordionDemo from './src/components/accordion/AccordionDemo'
 import type { ISelectOption } from './src/components/select/Select'
@@ -26,6 +28,9 @@ const App = () => {
   const [slideInVisible, setSlideInVisible] = useState(false)
   const [scaleVisible, setScaleVisible] = useState(false)
   const [slideInLeftVisible, setSlideInLeftVisible] = useState(false)
+  const [minValue, setMinValue] = useState(1)
+  const [maxValue, setMaxValue] = useState(100)
+
   const onPress = () => {
     setIsLoading(true)
     setTimeout(() => setIsLoading(false), 3000)
@@ -93,11 +98,23 @@ const App = () => {
         failedIcon={<CrossIcon />}
         successIcon={<TickIcon />}
       />
-      <Slider type={SliderType.SingleValueSlider} />
 
+      <Slider.SingleValue setValue={setMinValue} />
+      <Slider.SingleValue
+        setValue={setMinValue}
+        thumbIcon={<Icon name="hive" size={35} color="black" />}
+        activeTrackStyle={{ backgroundColor: 'red' }}
+        inactiveTrackStyle={{ backgroundColor: 'plum' }}
+      />
+      <Slider.Range setMinValue={setMinValue} setMaxValue={setMaxValue} />
+      <Slider.Range
+        setMinValue={setMinValue}
+        setMaxValue={setMaxValue}
+        thumbIcon={<Icon name="hive" size={35} color="black" />}
+        activeTrackStyle={{ backgroundColor: 'red' }}
+        inactiveTrackStyle={{ backgroundColor: 'plum' }}
+      />
       <AccordionDemo />
-
-      <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
 
       <Button title="Show Fade in Modal" onPress={() => setFadeInVisible(true)} />
       <Button title="Show Slide in Modal" onPress={() => setSlideInVisible(true)} />

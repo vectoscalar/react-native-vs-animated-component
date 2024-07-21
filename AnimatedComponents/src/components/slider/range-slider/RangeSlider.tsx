@@ -1,170 +1,201 @@
-import React, { useState } from 'react'
-import { TextInput, TextInputProps, View } from 'react-native'
-import {
-  PanGestureHandler,
-  PanGestureHandlerGestureEvent,
-  State,
-} from 'react-native-gesture-handler'
+import React, { useCallback, useMemo, useState } from 'react'
+import { Text, View } from 'react-native'
+import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'
 import Animated, {
-  useAnimatedProps,
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
+  withTiming,
 } from 'react-native-reanimated'
 
-import { MAX_DEFAULT, MIN_DEFAULT } from '@constants'
-import { palette } from '@theme'
-import { AnimatedProps, ValueSliderProps } from '@types'
+import { ISliderProps } from '@types'
 
 import { styles } from './rangeSlider-styles'
 
-const RangeSlider = (props: ValueSliderProps) => {
+interface IRangeSliderProps extends ISliderProps {
+  /** setMaxValue is a required function prop which sets the maximum value for slider. */
+  setMaxValue: React.Dispatch<React.SetStateAction<number>>
+  /** setMinValue is a required function prop which updates the min value state for slider. */
+  setMinValue: React.Dispatch<React.SetStateAction<number>>
+}
+
+const RangeSlider = (props: IRangeSliderProps) => {
   const {
-    activeTrackColor = palette.frenchBlue,
-    inactiveTrackColor = palette.chineseWhite,
+    activeTrackStyle = {},
+    duration = 1000,
+    inactiveTrackStyle = {},
+    labelContainerStyle = {},
+    labelTextStyle,
     max = 100,
     min = 0,
-    sliderWidth = 400,
+    setMaxValue,
+    setMinValue,
+    sliderHeight = 8,
+    sliderWidth = 300,
     step = 1,
-    thumbColor = palette.frenchBlue,
+    thumbIcon,
+    thumbSize = 28,
+    thumbStyle = {},
   } = props
+
   const positionLowerLimit = useSharedValue(0)
   const positionUpperLimit = useSharedValue(sliderWidth)
-  const opacityLowerLimit = useSharedValue(0)
-  const opacityUpperLimit = useSharedValue(0)
-  const zIndexLowerLimit = useSharedValue(0)
-  const zIndexUpperLimit = useSharedValue(0)
-  const [minValue, setMinValue] = useState(MIN_DEFAULT)
-  const [maxValue, setMaxValue] = useState(MAX_DEFAULT)
+  const lowerLabelOpacity = useSharedValue(0)
+  const upperLabelOpacity = useSharedValue(0)
+  const lowerThumbZIndex = useSharedValue(0)
+  const upperThumbZIndex = useSharedValue(0)
+  const [lowerLabelValue, setLowerLabelValue] = useState(min)
+  const [upperLabelValue, setUpperLabelValue] = useState(max)
 
-  Animated.addWhitelistedNativeProps({ text: true })
+  const getSliderMinValue = useCallback(() => {
+    'worklet'
+    const stepCount = (max - min) / step
+    const sliderStepWidth = sliderWidth / stepCount
+    const newMinValue = min + Math.floor(positionLowerLimit.value / sliderStepWidth) * step
+    return newMinValue
+  }, [max, min, step, sliderWidth, positionLowerLimit.value])
 
-  const handleLowerLimitGesture = (gestureState: PanGestureHandlerGestureEvent) => {
-    const velocityX = gestureState.nativeEvent.velocityX / 50
-    opacityLowerLimit.value = 1
+  const getSliderMaxValue = useCallback(() => {
+    'worklet'
+    const stepCount = (max - min) / step
+    const sliderStepWidth = sliderWidth / stepCount
+    const newMaxValue = min + Math.floor(positionUpperLimit.value / sliderStepWidth) * step
+    return newMaxValue
+  }, [max, min, step, sliderWidth, positionUpperLimit.value])
 
-    positionLowerLimit.value = Math.max(
-      0,
-      Math.min(positionLowerLimit.value + velocityX, positionUpperLimit.value),
-    )
-
-    zIndexLowerLimit.value = 1
-    zIndexUpperLimit.value = 0
-
-    if (gestureState.nativeEvent.state === State.END) {
-      const newMinValue =
-        min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step
-      setMinValue(newMinValue)
-
-      const newMaxValue = Math.max(
-        newMinValue + step,
-        min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step,
+  const handleLowerThumbGesture = Gesture.Pan()
+    .onTouchesDown(() => {
+      lowerLabelOpacity.value = 1
+    })
+    .onTouchesUp(() => {
+      lowerLabelOpacity.value = withTiming(0, { duration })
+    })
+    .onUpdate(event => {
+      const velocityX = event.velocityX / 50
+      lowerLabelOpacity.value = 1
+      positionLowerLimit.value = Math.max(
+        0,
+        Math.min(positionLowerLimit.value + velocityX, positionUpperLimit.value),
       )
-      setMaxValue(newMaxValue)
 
-      if (newMaxValue !== maxValue) {
-        positionUpperLimit.value = ((newMaxValue - min) / (max - min)) * sliderWidth
-      }
-    }
-  }
+      lowerThumbZIndex.value = 1
+      upperThumbZIndex.value = 0
+      const sliderMinValue = getSliderMinValue()
+      runOnJS(setLowerLabelValue)(sliderMinValue)
+    })
+    .onEnd(() => {
+      lowerLabelOpacity.value = withTiming(0, { duration })
+      const sliderMinValue = getSliderMinValue()
+      runOnJS(setMinValue)(sliderMinValue)
+    })
 
-  const handleUpperLimitGesture = (gestureState: PanGestureHandlerGestureEvent) => {
-    const velocityX = gestureState.nativeEvent.velocityX / 50
-    opacityUpperLimit.value = 1
-
-    positionUpperLimit.value = Math.max(
-      positionLowerLimit.value,
-      Math.min(sliderWidth, positionUpperLimit.value + velocityX),
-    )
-
-    zIndexUpperLimit.value = 1
-    zIndexLowerLimit.value = 0
-
-    if (gestureState.nativeEvent.state === State.END) {
-      const newMaxValue =
-        min + Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step
-      setMaxValue(newMaxValue)
-
-      const newMinValue = Math.min(
-        newMaxValue - step,
-        min + Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step,
+  const handleUpperThumbGesture = Gesture.Pan()
+    .onTouchesDown(() => {
+      upperLabelOpacity.value = 1
+    })
+    .onTouchesUp(() => {
+      upperLabelOpacity.value = withTiming(0, { duration })
+    })
+    .onUpdate(event => {
+      const velocityX = event.velocityX / 50
+      upperLabelOpacity.value = 1
+      positionUpperLimit.value = Math.max(
+        positionLowerLimit.value,
+        Math.min(sliderWidth, positionUpperLimit.value + velocityX),
       )
-      setMinValue(newMinValue)
 
-      if (newMinValue !== minValue) {
-        positionLowerLimit.value = ((newMinValue - min) / (max - min)) * sliderWidth
-      }
-    }
-  }
+      upperThumbZIndex.value = 1
+      lowerThumbZIndex.value = 0
+      const sliderMaxValue = getSliderMaxValue()
+      runOnJS(setUpperLabelValue)(sliderMaxValue)
+    })
+    .onEnd(() => {
+      upperLabelOpacity.value = withTiming(0, { duration })
+      const sliderMaxValue = getSliderMaxValue()
+      runOnJS(setMaxValue)(sliderMaxValue)
+    })
 
-  const animatedStyleLowerLimit = useAnimatedStyle(() => ({
+  const lowerThumbContainerAnimatedStyles = useAnimatedStyle(() => ({
     transform: [{ translateX: positionLowerLimit.value }],
-    zIndex: zIndexLowerLimit.value,
+    zIndex: lowerThumbZIndex.value,
   }))
 
-  const animatedStyleUpperLimit = useAnimatedStyle(() => ({
+  const upperThumbContainerAnimatedStyles = useAnimatedStyle(() => ({
     transform: [{ translateX: positionUpperLimit.value }],
-    zIndex: zIndexUpperLimit.value,
+    zIndex: upperThumbZIndex.value,
   }))
 
-  const opacityStyleLowerLimit = useAnimatedStyle(() => ({
-    opacity: opacityLowerLimit.value,
+  const lowerLabelAnimatedStyles = useAnimatedStyle(() => ({
+    opacity: lowerLabelOpacity.value,
   }))
 
-  const opacityStyleUpperLimit = useAnimatedStyle(() => ({
-    opacity: opacityUpperLimit.value,
+  const upperLabelAnimatedStyles = useAnimatedStyle(() => ({
+    opacity: upperLabelOpacity.value,
   }))
 
-  const sliderStyle = useAnimatedStyle(() => ({
+  const sliderAnimatedStyles = useAnimatedStyle(() => ({
     transform: [{ translateX: positionLowerLimit.value }],
     width: positionUpperLimit.value - positionLowerLimit.value,
   }))
 
-  const AnimatedTextInput = Animated.createAnimatedComponent(TextInput)
+  const sliderContainerStyles = useMemo(
+    () => [styles.sliderContainer, { width: sliderWidth }],
+    [sliderWidth],
+  )
 
-  const minLabelText = useAnimatedProps(() => {
-    const value = Math.floor(positionLowerLimit.value / (sliderWidth / ((max - min) / step))) * step
-    return { text: `${min + value}` } as AnimatedProps<TextInputProps>
-  })
+  const lowerThumbContainerStyles = useMemo(
+    () => [
+      styles.thumbContainer,
+      lowerThumbContainerAnimatedStyles,
+      { bottom: (sliderHeight - thumbSize) / 2 },
+    ],
+    [positionLowerLimit.value, sliderHeight, thumbSize, upperThumbZIndex.value],
+  )
 
-  const maxLabelText = useAnimatedProps(() => {
-    const value = Math.floor(positionUpperLimit.value / (sliderWidth / ((max - min) / step))) * step
-    return { text: `${min + value}` } as AnimatedProps<TextInputProps>
-  })
+  const upperThumbContainerStyles = useMemo(
+    () => [
+      styles.thumbContainer,
+      upperThumbContainerAnimatedStyles,
+      { bottom: (sliderHeight - thumbSize) / 2 },
+    ],
+    [positionUpperLimit.value, sliderHeight, thumbSize, upperThumbZIndex.value],
+  )
+
+  const sliderThumbStyles = useMemo(
+    () => [
+      styles.thumb,
+      { width: thumbSize, height: thumbSize, borderRadius: thumbSize / 2 },
+      thumbStyle,
+    ],
+    [thumbSize, thumbStyle],
+  )
 
   return (
-    <View style={[styles.sliderContainer, { width: sliderWidth }]}>
-      <View
-        style={[styles.sliderBack, { width: sliderWidth, backgroundColor: inactiveTrackColor }]}
-      />
-      <Animated.View
-        style={[sliderStyle, styles.sliderFront, { backgroundColor: activeTrackColor }]}
-      />
-      <PanGestureHandler onGestureEvent={handleLowerLimitGesture}>
-        <Animated.View style={[animatedStyleLowerLimit, styles.thumb, { borderColor: thumbColor }]}>
-          <Animated.View style={[opacityStyleLowerLimit, styles.label]}>
-            <AnimatedTextInput
-              style={styles.labelText}
-              animatedProps={minLabelText}
-              editable={false}
-              defaultValue="0"
-            />
+    <GestureHandlerRootView>
+      <View style={sliderContainerStyles}>
+        <View style={[styles.sliderBack, inactiveTrackStyle]} />
+        <Animated.View style={[styles.sliderFront, activeTrackStyle, sliderAnimatedStyles]} />
+        <GestureDetector gesture={handleLowerThumbGesture}>
+          <Animated.View style={lowerThumbContainerStyles}>
+            <Animated.View
+              style={[styles.labelContainer, labelContainerStyle, lowerLabelAnimatedStyles]}>
+              <Text style={[styles.labelText, labelTextStyle]}>{lowerLabelValue}</Text>
+            </Animated.View>
+            {thumbIcon || <View style={sliderThumbStyles} />}
           </Animated.View>
-        </Animated.View>
-      </PanGestureHandler>
-      <PanGestureHandler onGestureEvent={handleUpperLimitGesture}>
-        <Animated.View style={[animatedStyleUpperLimit, styles.thumb, { borderColor: thumbColor }]}>
-          <Animated.View style={[opacityStyleUpperLimit, styles.label]}>
-            <AnimatedTextInput
-              style={styles.labelText}
-              animatedProps={maxLabelText}
-              editable={false}
-              defaultValue="0"
-            />
+        </GestureDetector>
+        <GestureDetector gesture={handleUpperThumbGesture}>
+          <Animated.View style={upperThumbContainerStyles}>
+            <Animated.View
+              style={[styles.labelContainer, labelContainerStyle, upperLabelAnimatedStyles]}>
+              <Text style={[styles.labelText, labelTextStyle]}>{upperLabelValue}</Text>
+            </Animated.View>
+            {thumbIcon || <View style={sliderThumbStyles} />}
           </Animated.View>
-        </Animated.View>
-      </PanGestureHandler>
-    </View>
+        </GestureDetector>
+      </View>
+    </GestureHandlerRootView>
   )
 }
 
-export default RangeSlider
+export default React.memo(RangeSlider)
