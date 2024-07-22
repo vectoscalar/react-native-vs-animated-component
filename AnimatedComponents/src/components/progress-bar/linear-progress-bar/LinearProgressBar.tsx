@@ -23,6 +23,8 @@ interface ILinearProgressBarProps {
   labelStyle?: TextStyle
   /** maxValue is an optional prop which states the maximum value of progress bar. */
   maxValue?: number
+  /** showLabel is an optional prop which states whether the percentage label will be be visible or not. */
+  showLabel?: boolean
   /** value is a required prop which states the progress value. */
   value: number
 }
@@ -30,12 +32,13 @@ interface ILinearProgressBarProps {
 const LinearProgressBar = (props: ILinearProgressBarProps) => {
   const {
     containerStyle = {},
+    containerWidth = 400,
     duration = 1000,
     fillStyle = {},
     labelStyle = {},
     maxValue = 100,
+    showLabel = true,
     value,
-    containerWidth = 400,
   } = props
 
   const translateX = useSharedValue(0)
@@ -53,9 +56,11 @@ const LinearProgressBar = (props: ILinearProgressBarProps) => {
   return (
     <View style={[styles.container, containerStyle, { width: containerWidth }]}>
       <Animated.View style={[styles.subContainer, fillStyle, fillAnimatedStyle]} />
-      <View style={styles.labelContainer}>
-        <Text style={[styles.label, labelStyle]}>{progressText}</Text>
-      </View>
+      {showLabel && (
+        <View style={styles.labelContainer}>
+          <Text style={[styles.label, labelStyle]}>{progressText}</Text>
+        </View>
+      )}
     </View>
   )
 }
