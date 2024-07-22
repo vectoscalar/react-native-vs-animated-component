@@ -71,7 +71,7 @@ const App = () => {
   const gradientWaveColor = useMemo(() => ['#1A63C5', '#1A63C5'], [])
   const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       <SearchBarDemo />
       <SpringButton label="Press me" onPress={onSpringPress} />
       <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
@@ -104,8 +104,6 @@ const App = () => {
       <AccordionDemo />
 
       <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
-      <Timer duration={10} type={TimerPreset.Circular} />
-      <Timer duration={10} type={TimerPreset.Linear} controls={true} />
 
       <Button title="Show Fade in Modal" onPress={() => setFadeInVisible(true)} />
       <Button title="Show Slide in Modal" onPress={() => setSlideInVisible(true)} />
@@ -135,7 +133,9 @@ const App = () => {
         animationType={ModalPreset.SlideInLeft}>
         <Text>This is a slide-in left modal</Text>
       </Modal>
-    </SafeAreaView>
+      <Timer duration={120} type={TimerPreset.Circular} />
+      <Timer duration={20} type={TimerPreset.Linear} controls />
+    </ScrollView>
   )
 }
 export default App

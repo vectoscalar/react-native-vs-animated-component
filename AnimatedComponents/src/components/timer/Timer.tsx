@@ -54,6 +54,19 @@ const Timer = (props: ITimerProps) => {
   const isRunning = useSharedValue(false)
   const isPaused = useSharedValue(false)
 
+  const startAnimation = (duration: number) => {
+    progress.value = withTiming(
+      1,
+      {
+        duration,
+        easing: Easing.linear,
+      },
+      () => {
+        isRunning.value = false
+      },
+    )
+  }
+
   const handleControl = useCallback(
     (action: 'start' | 'pause' | 'resume') => {
       switch (action) {
@@ -83,19 +96,6 @@ const Timer = (props: ITimerProps) => {
     },
     [duration],
   )
-
-  const startAnimation = (duration: number) => {
-    progress.value = withTiming(
-      1,
-      {
-        duration,
-        easing: Easing.linear,
-      },
-      () => {
-        isRunning.value = false
-      },
-    )
-  }
 
   const handleReset = useCallback(() => {
     progress.value = 0
