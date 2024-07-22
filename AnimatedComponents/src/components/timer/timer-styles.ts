@@ -1,60 +1,50 @@
 import { StyleSheet } from 'react-native'
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    flex: 1,
     justifyContent: 'center',
-    padding: 20,
+    alignItems: 'center',
   },
-
   linearContainer: {
+    height: 10,
+    width: 300, // Adjust this width to your needs
     backgroundColor: '#e0e0e0',
-    borderRadius: 10,
-    height: 20,
-    marginBottom: 10,
     overflow: 'hidden',
-    width: '100%',
+    justifyContent: 'flex-start',
+    borderRadius: 10,
   },
-
-  circularContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
   linearProgress: {
     height: '100%',
-    left: 0,
-    position: 'absolute',
-    top: 0,
+    width: '100%', // Keep this full width for translation
   },
-
+  circularContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  timeLeftTextCircular: {
+    position: 'absolute',
+    fontSize: 18,
+    color: 'black',
+  },
+  timeLeftTextLinear: {
+    marginTop: 10,
+    fontSize: 18,
+    color: 'black',
+  },
   buttonContainer: {
     flexDirection: 'row',
     marginTop: 20,
   },
-
   button: {
-    backgroundColor: '#007BFF',
-    borderRadius: 5,
-    margin: 5,
+    marginHorizontal: 10,
     padding: 10,
+    backgroundColor: '#2196F3',
+    borderRadius: 5,
   },
-
   buttonText: {
     color: 'white',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-
-  timeLeftTextLinear: {
-    color: 'black',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-
-  timeLeftTextCircular: {
-    color: 'black',
-    fontSize: 16,
-    position: 'absolute',
   },
 })
+
+export default styles

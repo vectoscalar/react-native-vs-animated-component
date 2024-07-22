@@ -89,8 +89,8 @@ const App = () => {
         successIcon={<TickIcon />}
       />
       <Slider type={SliderType.SingleValueSlider} sliderWidth={300} min={0} max={100} step={5} />
-      <Timer totalDurationInSeconds={100} timerType={TimerPreset.Circular} />
-      <Timer totalDurationInSeconds={10} timerType={TimerPreset.Linear} />
+      <Timer duration={10} type={TimerPreset.Circular} />
+      <Timer duration={10} type={TimerPreset.Linear} controls={true} strokeColor="red" />
     </SafeAreaView>
   )
 }
