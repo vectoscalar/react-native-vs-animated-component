@@ -116,12 +116,12 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
     const maxTranslationX = buttonWidth.current - 50
     translateX.value = Math.min(maxTranslationX)
     const rotateDuration = 1500
-    const halfwayDuration = 950
+    const transitionDuration = 1000
     const iconAnimationDuration = 500
-    const opacityDuration = 750
+    const textOpacityDuration = 750
 
     rotationValue.value = withTiming(360, { duration: rotateDuration })
-    labelOpacity.value = withTiming(0, { duration: opacityDuration })
+    labelOpacity.value = withTiming(0, { duration: textOpacityDuration })
 
     const onPressResult = await onPress()
     if (!onPressResult) {
@@ -129,18 +129,18 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
         setIconName(failedLabel)
         setLabel(failedLabel)
         labelOpacity.value = withTiming(1, { duration: iconAnimationDuration })
-      }, halfwayDuration)
+      }, transitionDuration)
       return
     }
     setTimeout(() => {
       setIconName(successLabel)
       setLabel(successLabel)
       labelOpacity.value = withTiming(1, { duration: iconAnimationDuration })
-    }, halfwayDuration)
+    }, transitionDuration)
 
     setTimeout(() => {
       setTransition(true)
-    }, halfwayDuration)
+    }, transitionDuration)
   }
 
   return (
