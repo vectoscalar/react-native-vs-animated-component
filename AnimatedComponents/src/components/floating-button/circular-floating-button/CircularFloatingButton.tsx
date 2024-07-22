@@ -35,6 +35,7 @@ const CircularFloatingButton = (props: FloatingButtonProps) => {
   const iconSize = 54
   const circleScale = Number((width / iconSize).toFixed(1))
   const circleSize = circleScale * iconSize
+  // The angularDistance determines how far each icon is placed from the center of the circular layout.
   const angularDistance = circleSize / 2 - iconSize * 1.5
   const radius = angularDistance * 1.5
 
@@ -66,7 +67,7 @@ const CircularFloatingButton = (props: FloatingButtonProps) => {
     }
   })
 
-  const scalingStylesAnimation = useAnimatedStyle(() => {
+  const scalingAnimation = useAnimatedStyle(() => {
     const scale = interpolate(progress.value, [0, 1], [0, circleScale])
 
     return isLeftAligned
@@ -84,7 +85,7 @@ const CircularFloatingButton = (props: FloatingButtonProps) => {
 
   return (
     <View style={styles.container}>
-      <Animated.View style={[circleStyle, scalingStylesAnimation]} />
+      <Animated.View style={[circleStyle, scalingAnimation]} />
       {icons.map((item, index) => (
         <Animated.View
           key={item.iconName}
