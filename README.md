@@ -153,7 +153,7 @@ The Accordion component lets users show and hide sections of related content on 
 - **Customizable Styles:** Styles can be customized via props.
 - **Single open:** Allows users to choose the if multiple accordions will be open or only single accordion will be open at a time.
 
-## Example
+## Usage
 
 ```jsx
 <Accordion showSingleItemAtOnce={false}>
@@ -293,9 +293,11 @@ export default App;
 
 ## Features
 
-- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
 - **Customizable Styles:** Styles can be customized via props.
-- **Different Icons:** Allows for changing the icons.
+- **Flexibility:** Highly flexible with support for custom icons and labels for different states (start, success, failure). This makes it adaptable to various use cases.
+- **Multiple States Handling:** Efficiently handles various states such as success and failure. This can be particularly useful for forms or any action that requires feedback based on the result of an asynchronous operation.
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Smooth Transition Animations:** Provide smooth and visually appealing transition animations for icons and labels. This can enhance the user experience significantly.
 
 ## Preview
 
@@ -304,6 +306,8 @@ export default App;
 ## Usage
 
 ```jsx
+import IconTransitionButton from "react-native-animated-components";
+
 <IconTransitionButton
   onPress={async () => {
     // Perform some async operation
@@ -318,7 +322,7 @@ export default App;
   successIcon={<SuccessIconComponent />}
   isDisabled={false}
   isLoading={false}
-/>
+/>;
 ```
 
 | Prop         | Type                                 | Values                      | Description                                                                                                 |
@@ -353,6 +357,8 @@ export default App;
 ## Usage
 
 ```jsx
+import SwipeButton from "react-native-animated-components";
+
 const gradientWaveColor = useMemo(() => ["#1A63C5", "#1A63C5"], []);
 const thumbColors = useMemo(() => ["#1A63C5", "#1A63C5"], []);
 
@@ -435,6 +441,8 @@ const handleSubmitBtnPress = () => {
 ## Usage
 
 ```jsx
+import ProgressButton from "react-native-animated-components";
+
 const [isLoading, setIsLoading] = useState(false);
 
 const onPress = () => {
@@ -484,6 +492,8 @@ const onPress = () => {
 ## Usage
 
 ```jsx
+import SpringButton from "react-native-animated-components";
+
 const onSpringPress = () => {
   console.log("Button Pressed");
 };
@@ -521,7 +531,9 @@ const onSpringPress = () => {
 ## Usage
 
 ```jsx
-<TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
+import TriDotLoader from "react-native-animated-components";
+
+<TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />;
 ```
 
 ## Props

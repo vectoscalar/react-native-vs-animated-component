@@ -1,5 +1,6 @@
 //   Spacing Scale
 enum Sizes {
+  Size_0_5 = 0.5,
   Size_0 = 0,
   Size_0_25 = 0.25,
   Size_1 = 1,
@@ -47,6 +48,7 @@ enum Sizes {
   Size_50 = 50,
   Size_54 = 54,
   Size_60 = 60,
+  Size_300 = 300,
 }
 
 export { Sizes }
