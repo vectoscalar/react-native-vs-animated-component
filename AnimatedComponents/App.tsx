@@ -10,6 +10,7 @@ import {
   IconTransitionButton,
   Modal,
   ProgressButton,
+  SearchBar,
   Select,
   SelectDemo,
   Slider,
@@ -20,6 +21,7 @@ import {
 import { ModalPreset, RemixIcons, SliderType, TriDotLoaderPreset } from '@constants'
 
 import AccordionDemo from './src/components/accordion/AccordionDemo'
+import SearchBarDemo from './src/components/search-bar/SearchBarDemo'
 import type { ISelectOption } from './src/components/select/Select'
 
 const App = () => {
@@ -69,6 +71,7 @@ const App = () => {
   const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <SearchBarDemo />
       <SpringButton label="Press me" onPress={onSpringPress} />
       <TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
       <SelectDemo />

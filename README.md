@@ -62,7 +62,13 @@ The Accordion component lets users show and hide sections of related content on 
 
 # Preview
 
-<img src="https://github.com/user-attachments/assets/d112aecc-645b-4369-ab52-02d49c32722c" width="250" height="500"/>
+<img src="https://github.com/user-attachments/assets/ac939947-d3e6-43de-a341-ac203620cee6" width="250" height="500"/>
+
+## Features
+
+- **Animation Transition Duration:** Control the duration of the opening/closing animation.
+- **Customizable Styles:** Styles can be customized via props.
+- **Single open:** Allows users to choose the if multiple accordions will be open or only single accordion will be open at a time.
 
 ## Example
 
@@ -444,3 +450,41 @@ const onSpringPress = () => {
 | loaderPreset      | TriDotLoaderPreset   | Small / Medium / Large      | It is an optional prop which defines the size preset of the dots in the loader. |
 
 **Note:** All the props are passed to the Tri-Dot Loader component.
+
+<br/>
+<br/>
+
+# React Native Search Bar
+
+The Search Bar component is an expandable search bar component which can expand and collapse by clicking on search icon.
+
+# Preview
+
+<img src="https://github.com/user-attachments/assets/742a32e7-d938-4106-b846-c82a7ded5c88" width="250" height="500"/>
+
+## Features
+
+- **Animation Transition Duration:** Control the duration of the opening/closing animation.
+- **Customizable Styles:** Styles can be customized via props.
+- **Icon Selection:** Allows users to choose their own icons.
+- **Performance Optimizations:** Only renders the dropdown and animations when needed, reducing unnecessary re-renders.
+
+## Props
+
+| Prop                        | Type                   | Description                                                                                    |
+| --------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------- |
+| **CloseIcon**               | React.ReactNode        | It is an optional prop which holds the icon to be displayed to close the search bar.           |
+| **duration**                | number                 | It is an optional prop which indicates the duration of the animation.                          |
+| **iconSize**                | number                 | It is an optional prop which indicates the size of the icon.                                   |
+| **iconStyle**               | DefaultStyle           | It is an optional prop which holds the style of the search icon.                               |
+| **inputContainerStyle**     | DefaultStyle           | It is an optional prop which holds the style of the input container.                           |
+| **handleInputChange**       | (text: string) => void | It is a prop which handles the input change.                                                   |
+| **height**                  | number                 | It is an optional prop which indicates the height of the search bar.                           |
+| **iconBackgroundColor**     | string                 | It is an optional prop which indicates the color of the icon background.                       |
+| **iconColor**               | string                 | It is an optional prop which indicates the color of the icon.                                  |
+| **placeholderText**         | string                 | It is an optional prop which holds the placeholder text.                                       |
+| **placeholderTextColor**    | string                 | It is an optional prop which holds the placeholder text color.                                 |
+| **searchBarContainerStyle** | DefaultStyle           | It is an optional prop which holds the style of the search bar.                                |
+| **SearchIcon**              | React.ReactNode        | It is an optional prop which holds the icon to be displayed.                                   |
+| **searchValue**             | string                 | It is a prop which holds the value of the search bar.                                          |
+| **wrapperContainerStyle**   | DefaultStyle           | It is an optional prop which holds the style of the main container which wraps the search bar. |
