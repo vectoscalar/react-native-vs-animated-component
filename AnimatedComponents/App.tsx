@@ -2,16 +2,14 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo, useState } from 'react'
-import { Button, Platform, SafeAreaView, ScrollView, Text, UIManager, View } from 'react-native'
+import { Button, SafeAreaView, Text } from 'react-native'
 
 import { CrossIcon, RightArrowIcon, TickIcon } from '@assets'
 import {
-  Accordion,
+  FloatingButtonDemo,
   IconTransitionButton,
   Modal,
   ProgressButton,
-  SearchBar,
-  Select,
   SelectDemo,
   Slider,
   SpringButton,
@@ -132,6 +130,7 @@ const App = () => {
         animationType={ModalPreset.SlideInLeft}>
         <Text>This is a slide-in left modal</Text>
       </Modal>
+      <FloatingButtonDemo />
     </SafeAreaView>
   )
 }
