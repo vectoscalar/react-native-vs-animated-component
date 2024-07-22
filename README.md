@@ -4,7 +4,27 @@
 
 ## Preview
 
+### Floating Button All Variants
+
 <img src="./AnimatedComponents/src/assets/gifs/FloatingButton.gif" width="250" height="500"/>
+
+<br/>
+
+### Floating Button With Icon
+
+<img src="./AnimatedComponents/src/assets/gifs/FloatingButtonWithIcon.gif" width="250" height="500"/>
+
+<br/>
+
+### Floating Button With Label
+
+<img src="./AnimatedComponents/src/assets/gifs/FloatingButtonWithLabel.gif" width="250" height="500"/>
+
+<br/>
+
+### Circular Floating Button
+
+<img src="./AnimatedComponents/src/assets/gifs/CircularFloatingButton.gif" width="250" height="500"/>
 
 ## Features
 
@@ -59,7 +79,7 @@ const icons = [
 | iconContainerStyle          | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the icon in the floating button.                                                 |
 | iconStyle                   | ImageStyle           | name of style class created                                               | It is used to change the styles of the icons in the floating button.                                                                 |
 | icons                       | array of IconProps   | { icon: 'name of image', onPress: function, iconName: 'name of icon'}     | It is used to pass the name, image and function the for the icon.                                                                    |
-| isLeft                      | Boolean              | true/false                                                                | It is used to change the position of the floating button to left when true otherwise right.                                          |
+| isLeftAligned               | Boolean              | true/false                                                                | It is used to change the position of the floating button to left when true otherwise right.                                          |
 | textStyle                   | TextStyle            | name of style class created                                               | It is used to change the styles of the text when the type of floating button is FloatingButtonWithLabel.                             |
 
 **Note:** All the props are passed to the floating-button component from where it will send the props to the type chosen by the user.

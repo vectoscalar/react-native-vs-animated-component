@@ -27,21 +27,21 @@ const FloatingButtonWithLabel = (props: FloatingButtonProps) => {
     iconContainerStyle = styles.iconContainer,
     iconStyle = styles.icon,
     textStyle = styles.text,
-    isLeft = false,
+    isLeftAligned = false,
   } = props
 
   const isOpen = useSharedValue(false)
   const opacity = useSharedValue(0)
   const progress = useDerivedValue(() => (isOpen.value ? withTiming(1) : withTiming(0)))
-  const length = icons?.length
+  const iconLength = icons.length
   const sharedValues: SharedValue<number>[] = []
   const sharedWidthValues: SharedValue<number>[] = []
 
-  for (let i = 0; i < length; i += 1) {
+  for (let i = 0; i < iconLength; i += 1) {
     sharedValues.push(useSharedValue(30))
   }
 
-  for (let i = 0; i < length; i += 1) {
+  for (let i = 0; i < iconLength; i += 1) {
     sharedWidthValues.push(useSharedValue(60))
   }
 
@@ -73,13 +73,13 @@ const FloatingButtonWithLabel = (props: FloatingButtonProps) => {
     isOpen.value = !isOpen.value
   }
 
-  const opacityText = useAnimatedStyle(() => {
+  const opacityTextAnimation = useAnimatedStyle(() => {
     return {
       opacity: opacity.value,
     }
   })
 
-  const animatedStyles = sharedValues.map((item, index) =>
+  const animatedStylesAnimation = sharedValues.map((item, index) =>
     useAnimatedStyle(() => {
       const scale = interpolate(
         item.value,
@@ -87,6 +87,7 @@ const FloatingButtonWithLabel = (props: FloatingButtonProps) => {
         [0, 1],
         Extrapolation.CLAMP,
       )
+
       return {
         bottom: item.value,
         transform: [{ scale }],
@@ -95,7 +96,7 @@ const FloatingButtonWithLabel = (props: FloatingButtonProps) => {
     }),
   )
 
-  const plusIcon = useAnimatedStyle(() => {
+  const plusIconAnimation = useAnimatedStyle(() => {
     return {
       transform: [{ rotate: `${progress.value * 45}deg` }],
     }
@@ -107,23 +108,23 @@ const FloatingButtonWithLabel = (props: FloatingButtonProps) => {
         <Animated.View
           key={item.iconName}
           style={[
-            isLeft ? styles.contentContainerLeft : contentContainerStyle,
-            animatedStyles[index],
+            isLeftAligned ? styles.contentContainerLeft : contentContainerStyle,
+            animatedStylesAnimation[index],
           ]}>
           <Pressable onPress={item.onPress} style={iconContainerStyle}>
             <View>
               <Image source={item.icon} style={iconStyle} />
             </View>
-            <Animated.Text style={[textStyle, opacityText]}>{item.iconName}</Animated.Text>
+            <Animated.Text style={[textStyle, opacityTextAnimation]}>{item.iconName}</Animated.Text>
           </Pressable>
         </Animated.View>
       ))}
       <Pressable
-        style={[isLeft ? styles.contentContainerLeft : contentContainerStyle]}
+        style={[isLeftAligned ? styles.contentContainerLeft : contentContainerStyle]}
         onPress={() => {
           handlePress()
         }}>
-        <Animated.View style={[buttonContainerStyle, plusIcon]}>
+        <Animated.View style={[buttonContainerStyle, plusIconAnimation]}>
           <Image source={PlusIcon} style={iconStyle} />
         </Animated.View>
       </Pressable>

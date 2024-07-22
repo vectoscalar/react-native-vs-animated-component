@@ -16,6 +16,7 @@ const styles: IStyleProps = StyleSheet.create({
   container: {
     flex: Sizes.Size_1,
   },
+
   contentContainer: {
     alignItems: 'center',
     backgroundColor: palette.festival,
@@ -26,6 +27,7 @@ const styles: IStyleProps = StyleSheet.create({
     position: 'absolute',
     right: Sizes.Size_30,
   },
+
   contentContainerLeft: {
     alignItems: 'center',
     backgroundColor: palette.festival,
@@ -36,6 +38,7 @@ const styles: IStyleProps = StyleSheet.create({
     position: 'absolute',
     left: Sizes.Size_30,
   },
+
   iconContainer: {
     alignItems: 'center',
     display: 'flex',
@@ -46,16 +49,19 @@ const styles: IStyleProps = StyleSheet.create({
     padding: Sizes.Size_20,
     width: '100%',
   },
+
   buttonContainer: {
     alignItems: 'center',
     height: Sizes.Size_60,
     justifyContent: 'center',
     width: Sizes.Size_60,
   },
+
   icon: {
     height: Sizes.Size_26,
     width: Sizes.Size_26,
   },
+  
   text: {
     color: palette.neutral[0],
     fontSize: Sizes.Size_18,

@@ -15,6 +15,7 @@ const styles: IStyleProps = StyleSheet.create({
   container: {
     flex: Sizes.Size_1,
   },
+
   contentContainer: {
     backgroundColor: palette.black,
     borderRadius: Sizes.Size_50,
@@ -22,6 +23,7 @@ const styles: IStyleProps = StyleSheet.create({
     position: 'absolute',
     right: Sizes.Size_30,
   },
+
   contentContainerLeft: {
     backgroundColor: palette.black,
     borderRadius: Sizes.Size_50,
@@ -29,16 +31,19 @@ const styles: IStyleProps = StyleSheet.create({
     position: 'absolute',
     left: Sizes.Size_30,
   },
+
   iconContainer: {
     alignItems: 'center',
     height: Sizes.Size_60,
     justifyContent: 'center',
     width: Sizes.Size_60,
   },
+
   icon: {
     height: Sizes.Size_26,
     width: Sizes.Size_26,
   },
+
   expandingCircle: {
     alignItems: 'center',
     backgroundColor: palette.skyBlue99,

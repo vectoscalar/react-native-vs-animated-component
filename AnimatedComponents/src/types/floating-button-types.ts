@@ -17,6 +17,6 @@ export interface FloatingButtonProps {
   iconContainerStyle?: ViewStyle
   iconStyle?: ImageStyle
   icons: IconProps[]
+  isLeftAligned?: boolean
   textStyle?: TextStyle
-  isLeft?: boolean
 }

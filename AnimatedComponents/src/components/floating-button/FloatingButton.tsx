@@ -11,19 +11,31 @@ import styles from './floatingButton-styles'
 
 const FloatingButton = (props: FloatingButtonProps) => {
   const { buttonType } = props
-  return (
-    <SafeAreaView style={styles.container}>
-      {buttonType === FloatingButtonPreset.FloatingButtonWithIcon && (
-        <FloatingButtonWithIcon {...props} />
-      )}
-      {buttonType === FloatingButtonPreset.FloatingButtonWithLabel && (
-        <FloatingButtonWithLabel {...props} />
-      )}
-      {buttonType === FloatingButtonPreset.CircularFloatingButton && (
-        <CircularFloatingButton {...props} />
-      )}
-    </SafeAreaView>
-  )
+  const renderButton = () => {
+    let buttonComponent
+    switch (buttonType) {
+      case FloatingButtonPreset.FloatingButtonWithIcon: {
+        buttonComponent = <FloatingButtonWithIcon {...props} />
+        break
+      }
+      case FloatingButtonPreset.FloatingButtonWithLabel: {
+        buttonComponent = <FloatingButtonWithLabel {...props} />
+        break
+      }
+      case FloatingButtonPreset.CircularFloatingButton: {
+        buttonComponent = <CircularFloatingButton {...props} />
+        break
+      }
+      default: {
+        buttonComponent = undefined
+        break
+      }
+    }
+
+    return buttonComponent
+  }
+
+  return <SafeAreaView style={styles.container}>{renderButton()}</SafeAreaView>
 }
 
 export default FloatingButton

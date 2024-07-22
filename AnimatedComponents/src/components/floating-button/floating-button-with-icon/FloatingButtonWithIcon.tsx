@@ -25,15 +25,15 @@ const FloatingButtonWithIcon = (props: FloatingButtonProps) => {
     icons,
     iconContainerStyle = styles.iconContainer,
     iconStyle = styles.icon,
-    isLeft = false,
+    isLeftAligned = false,
   } = props
 
   const isOpen = useSharedValue(false)
   const progress = useDerivedValue(() => (isOpen.value ? withTiming(1) : withTiming(0)))
-  const length = icons?.length
+  const iconLength = icons.length
   const sharedValues: SharedValue<number>[] = []
 
-  for (let i = 0; i < length; i += 1) {
+  for (let i = 0; i < iconLength; i += 1) {
     sharedValues.push(useSharedValue(30))
   }
 
@@ -57,7 +57,7 @@ const FloatingButtonWithIcon = (props: FloatingButtonProps) => {
     isOpen.value = !isOpen.value
   }
 
-  const animatedStyles = sharedValues.map((item, index) =>
+  const animatedStylesAnimation = sharedValues.map((item, index) =>
     useAnimatedStyle(() => {
       const scale = interpolate(
         item.value,
@@ -65,6 +65,7 @@ const FloatingButtonWithIcon = (props: FloatingButtonProps) => {
         [0, 1],
         Extrapolation.CLAMP,
       )
+
       return {
         bottom: item.value,
         transform: [{ scale }],
@@ -72,7 +73,7 @@ const FloatingButtonWithIcon = (props: FloatingButtonProps) => {
     }),
   )
 
-  const plusIcon = useAnimatedStyle(() => {
+  const plusIconAnimation = useAnimatedStyle(() => {
     return {
       transform: [{ rotate: `${progress.value * 45}deg` }],
     }
@@ -84,8 +85,8 @@ const FloatingButtonWithIcon = (props: FloatingButtonProps) => {
         <Animated.View
           key={item.iconName}
           style={[
-            isLeft ? styles.contentContainerLeft : contentContainerStyle,
-            animatedStyles[index],
+            isLeftAligned ? styles.contentContainerLeft : contentContainerStyle,
+            animatedStylesAnimation[index],
           ]}>
           <Pressable onPress={item.onPress} style={iconContainerStyle}>
             <Image source={item.icon} style={iconStyle} />
@@ -93,11 +94,11 @@ const FloatingButtonWithIcon = (props: FloatingButtonProps) => {
         </Animated.View>
       ))}
       <Pressable
-        style={isLeft ? styles.contentContainerLeft : contentContainerStyle}
+        style={isLeftAligned ? styles.contentContainerLeft : contentContainerStyle}
         onPress={() => {
           handlePress()
         }}>
-        <Animated.View style={[iconContainerStyle, plusIcon]}>
+        <Animated.View style={[iconContainerStyle, plusIconAnimation]}>
           <Image source={PlusIcon} style={iconStyle} />
         </Animated.View>
       </Pressable>
