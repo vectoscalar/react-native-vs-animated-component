@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo } from 'react'
-import { Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native'
+import { Text, TextInput, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native'
 import Animated, {
   Easing,
   cancelAnimation,
@@ -15,25 +15,25 @@ import { TimerPreset } from '@constants'
 import styles from './timer-styles'
 
 const AnimatedSvgCircle = Animated.createAnimatedComponent(SvgCircle)
-
+const ReanimatedText = Animated.createAnimatedComponent(TextInput)
 interface ITimerProps {
-  /**buttonStyles: is an optional prop to style the buttons of the timer */
+  /** buttonStyles: is an optional prop to style the buttons of the timer */
   buttonStyles?: { container?: ViewStyle; text?: TextStyle }
-  /**circularTimerRadius: is an optional prop that indicates the radius of circular timer */
+  /** circularTimerRadius: is an optional prop that indicates the radius of circular timer */
   circularTimerRadius?: number
-  /**controls: is an optional prop that indicates whether control buttons are visible or not */
+  /** controls: is an optional prop that indicates whether control buttons are visible or not */
   controls?: boolean
-  /**duration: is a required prop that indicates the total number of seconds of timer */
+  /** duration: is a required prop that indicates the total number of seconds of timer */
   duration: number
-  /**linearTimerWidth: is an optional prop that indicates the width of the linear timer */
+  /** linearTimerWidth: is an optional prop that indicates the width of the linear timer */
   linearTimerWidth?: number
-  /**showTimeLeft: is an optional prop that indicates whether to display time left on screen or not. */
+  /** showTimeLeft: is an optional prop that indicates whether to display time left on screen or not. */
   showTimeLeft?: boolean
-  /**strokeColor: is an optional prop that indicates the color of timer */
+  /** strokeColor: is an optional prop that indicates the color of timer */
   strokeColor?: string
-  /**timeLeftTextStyle: is an optional prop to style the time left text of the timer */
+  /** timeLeftTextStyle: is an optional prop to style the time left text of the timer */
   timeLeftTextStyle?: TextStyle
-  /**type: is a required prop that indicates the type of timer, circular or linear */
+  /** type: is a required prop that indicates the type of timer, circular or linear */
   type: TimerPreset
 }
 
@@ -57,24 +57,28 @@ const Timer = (props: ITimerProps) => {
   const handleControl = useCallback(
     (action: 'start' | 'pause' | 'resume') => {
       switch (action) {
-        case 'start':
+        case 'start': {
           isRunning.value = true
           isPaused.value = false
           startAnimation(duration * 1000)
           break
-        case 'pause':
+        }
+        case 'pause': {
           isRunning.value = false
           isPaused.value = true
           cancelAnimation(progress)
           break
-        case 'resume':
+        }
+        case 'resume': {
           isRunning.value = true
           isPaused.value = false
           startAnimation((1 - progress.value) * duration * 1000)
           break
-        default:
+        }
+        default: {
           console.warn(`Unexpected action: ${action}`)
           break
+        }
       }
     },
     [duration],
@@ -109,6 +113,16 @@ const Timer = (props: ITimerProps) => {
     borderRadius: 10,
     height: linearTimerWidth,
   }))
+
+  const reanimatedProps = useAnimatedProps(() => {
+    const remainingTime = Math.floor(duration * (1 - progress.value))
+    const minutes = Math.floor(remainingTime / 60)
+    const seconds = Math.floor(remainingTime % 60)
+    const text = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    return {
+      text: `${text}`,
+    } as any
+  })
 
   useEffect(() => {
     handleControl('start')
@@ -151,12 +165,6 @@ const Timer = (props: ITimerProps) => {
     [isRunning, isPaused, buttonStyles, handleControl, handleReset],
   )
 
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60)
-    const remainingSeconds = seconds % 60
-    return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`
-  }
-
   const renderTimer = () => {
     return type === TimerPreset.Linear ? (
       <View
@@ -192,9 +200,10 @@ const Timer = (props: ITimerProps) => {
           />
         </Svg>
         {showTimeLeft && (
-          <Animated.Text style={[styles.timeLeftTextCircular, timeLeftTextStyle]}>
-            {formatTime(duration * (1 - progress.value))}
-          </Animated.Text>
+          <ReanimatedText
+            style={[styles.timeLeftTextLinear, timeLeftTextStyle]}
+            animatedProps={reanimatedProps}
+          />
         )}
       </View>
     )
@@ -204,9 +213,10 @@ const Timer = (props: ITimerProps) => {
     <View style={styles.container}>
       {renderTimer()}
       {type === TimerPreset.Linear && showTimeLeft && (
-        <Animated.Text style={[styles.timeLeftTextLinear, timeLeftTextStyle]}>
-          {formatTime(duration * (1 - progress.value))}
-        </Animated.Text>
+        <ReanimatedText
+          style={[styles.timeLeftTextLinear, timeLeftTextStyle]}
+          animatedProps={reanimatedProps}
+        />
       )}
       <View style={styles.buttonContainer}>{controls && renderControlButtons}</View>
     </View>
