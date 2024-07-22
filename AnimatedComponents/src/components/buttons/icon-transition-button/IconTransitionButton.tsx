@@ -128,18 +128,18 @@ const IconTransitionButton = (props: IIconsTransitionButton) => {
         setIconName(failedLabel)
         setLabel(failedLabel)
         labelOpacity.value = withTiming(1, { duration: iconAnimationDuration })
-      }, halfwayDuration)
+      }, halfwayDuration + 200)
       return
     }
     setTimeout(() => {
       setIconName(successLabel)
       setLabel(successLabel)
       labelOpacity.value = withTiming(1, { duration: iconAnimationDuration })
-    }, halfwayDuration)
+    }, halfwayDuration + 200)
 
     setTimeout(() => {
       setTransition(true)
-    }, halfwayDuration)
+    }, halfwayDuration + 200)
   }
 
   return (

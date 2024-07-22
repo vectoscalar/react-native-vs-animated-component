@@ -18,6 +18,7 @@ import { ModalPreset, RemixIcons, SliderType, TriDotLoaderPreset } from '@consta
 import { Sizes, palette } from '@theme'
 
 import AccordionDemo from './src/components/accordion/AccordionDemo'
+import SearchBarDemo from './src/components/search-bar/SearchBarDemo'
 import type { ISelectOption } from './src/components/select/Select'
 
 const App = () => {
@@ -61,6 +62,10 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        <View style={styles.childrenContainer}>
+          <Text style={styles.title}>Search Bar</Text>
+          <SearchBarDemo />
+        </View>
         <View style={styles.childrenContainer}>
           <Text style={styles.title}>Spring Button</Text>
           <SpringButton label="Press me" onPress={onSpringPress} />
