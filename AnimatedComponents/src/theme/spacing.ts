@@ -2,9 +2,11 @@
 enum Sizes {
   Size_0_5 = 0.5,
   Size_0 = 0,
+  Size_0_25 = 0.25,
   Size_1 = 1,
   Size_2 = 2,
   Size_3 = 3,
+  Size_3_84 = 3.84,
   Size_4 = 4,
   Size_5 = 5,
   Size_6 = 6,

@@ -8,7 +8,7 @@ import {
   IconTransitionDemo,
   Modal,
   ProgressButton,
-  Select,
+  SelectDemo,
   Slider,
   SpringButton,
   SwipeButton,
@@ -71,18 +71,7 @@ const App = () => {
         </View>
         <View style={styles.childrenContainer}>
           <Text style={styles.title}>Select Box</Text>
-          <Select
-            onChange={setSelect}
-            options={[
-              { title: 'Test 1', value: 'test1' },
-              { title: 'Test 2', value: 'test2' },
-              { title: 'Test 3', value: 'test3' },
-              { title: 'Test 4', value: 'test4' },
-            ]}
-            selectedOption={select}
-            placeholderText="Enter Value"
-            optionContainerStyle={{ zIndex: 1000 }}
-          />
+          <SelectDemo />
         </View>
         <View style={styles.childrenContainer}>
           <Text style={styles.title}>Progress Button</Text>
