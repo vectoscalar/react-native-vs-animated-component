@@ -5,6 +5,7 @@ import React, { useMemo, useState } from 'react'
 import { Button, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 
 import {
+  FloatingButtonDemo,
   IconTransitionDemo,
   Modal,
   ProgressButton,
@@ -151,6 +152,7 @@ const App = () => {
           </View>
         </View>
       </ScrollView>
+      <FloatingButtonDemo />
     </SafeAreaView>
   )
 }
