@@ -54,11 +54,11 @@ const Timer = (props: ITimerProps) => {
   const progress = useSharedValue(0)
   const isRunning = useSharedValue(false)
 
-  const startAnimation = (duration: number) => {
+  const startAnimation = (animationDuration: number) => {
     progress.value = withTiming(
       1,
       {
-        duration,
+        duration: animationDuration,
         easing: Easing.linear,
       },
       () => {
