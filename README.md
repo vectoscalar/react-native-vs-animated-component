@@ -1,5 +1,271 @@
 # react-native-vs-animated-component
 
+# React Native Progress Bars
+
+## Linear Progress Bar
+
+- It shows progress in form of a linear bar
+
+## Preview
+
+<img src="./AnimatedComponents/src/assets/gifs/LinearProgresssBar.gif" width="250" height="500"/>
+
+## Features
+
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Fully customizable:** Each element of progress bar can be customized by props.
+
+## Usage
+
+```jsx
+import ProgressBar from "react-native-animated-components";
+
+const Component = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        const newProgress = prevProgress + 10;
+        return newProgress > 100 ? 0 : newProgress;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <ProgressBar.Linear value={progress} maxValue={100} />;
+};
+```
+
+## Props
+
+| Prop           | Type                                      | Description                                                                                  |
+| -------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------- |
+| containerStyle | Omit<ViewStyle, 'width'> & {width:number} | It is an optional prop which states the styles for progress bar container.                   |
+| containerWidth | number                                    | It is an optional prop which states width for progress bar container.                        |
+| duration       | number                                    | It is an optional prop which states the duration in milliseconds for the progress animation. |
+| fillStyle      | Omit<ViewStyle, 'width'> & {width:number} | It is an optional prop which states the styles for the filled portion of the progress bar.   |
+| labelStyle     | TextStyle                                 | It is an optional prop which states the styles for the progress label.                       |
+| maxValue       | number                                    | It is an optional prop which states the maximum value of progress bar.                       |
+| showLabel      | boolean                                   | It is an optional prop which states whether the percentage label will be be visible or not.  |
+| value          | number                                    | It is a required prop which states the progress value.                                       |
+
+<br/>
+<br/>
+
+## Circular Progress Bar
+
+- It shows progress in form of a circular bar
+
+## Preview
+
+<img src="./AnimatedComponents/src/assets/gifs/CircularProgressBar.gif" width="250" height="500"/>
+
+## Features
+
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Fully customizable:** Each element of progress bar can be customized by props.
+
+## Usage
+
+```jsx
+import ProgressBar from "react-native-animated-components";
+
+const Component = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        const newProgress = prevProgress + 10;
+        return newProgress > 100 ? 0 : newProgress;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <ProgressBar.Circular value={progress} maxValue={100} />;
+};
+```
+
+## Props
+
+| Prop              | Type      | Description                                                                                              |
+| ----------------- | --------- | -------------------------------------------------------------------------------------------------------- |
+| duration          | number    | It is an optional prop which states the duration of the animation in milliseconds.                       |
+| labelStyle        | TextStyle | It is an optional prop which states the styles for the label displayed within the circular progress bar. |
+| maxValue          | number    | It is an optional prop which states the maximum value for the progress bar.                              |
+| outerRingColor    | string    | It is an optional prop which states the color of the outer ring of the circular progress bar.            |
+| progressRingColor | string    | It is an optional prop which states the color of the progress ring.                                      |
+| showLabel         | boolean   | It is an optional prop which states whether the percentage label will be be visible or not.              |
+| size              | number    | It is an optional prop which states the overall width , height of circular progress bar.                 |
+| strokeWidth       | number    | It is an optional prop which states the stroke width of the progress ring.                               |
+| value             | number    | It is a required prop which states the current progress value.                                           |
+
+<br/>
+<br/>
+
+## Infinite Linear Progress Bar
+
+- It provides an animated, continuously progressing bar to indicate loading.
+
+## Preview
+
+<img src="./AnimatedComponents/src/assets/gifs/InfiniteLinearProgressBar.gif" width="250" height="500"/>
+
+## Features
+
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Fully customizable:** Each element of progress bar can be customized by props.
+
+## Usage
+
+```jsx
+import ProgressBar from "react-native-animated-components";
+
+const Component = () => {
+  return <ProgressBar.InfiniteLinear />;
+};
+```
+
+## Props
+
+| Prop           | Type                                      | Description                                                                                |
+| -------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------ |
+| containerStyle | Omit<ViewStyle, 'width'> & {width:number} | It is an optional prop which states the styles for the progress bar container.             |
+| containerWidth | number                                    | It is an optional prop which states the width for the progress bar container.              |
+| duration       | number                                    | It is an optional prop which states the duration of the animation in milliseconds.         |
+| fillStyle      | Omit<ViewStyle, 'width'> & {width:number} | It is an optional prop which states the styles for the filled portion of the progress bar. |
+| fillWidth      | number                                    | It is an optional prop which states the width for the filled portion of the progress bar.  |
+
+<br/>
+<br/>
+
+## Infinite Circular Progress Bar
+
+- It provides an provides a continuous, animated circular indicator for loading.
+
+## Preview
+
+<img src="./AnimatedComponents/src/assets/gifs/InfiniteCircularProgressBar.gif" width="250" height="500"/>
+
+## Features
+
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Fully customizable:** Each element of progress bar can be customized by props.
+
+## Usage
+
+```jsx
+import ProgressBar from "react-native-animated-components";
+
+const Component = () => {
+  return <ProgressBar.InfiniteCircular />;
+};
+```
+
+## Props
+
+| Prop              | Type   | Description                                                                                    |
+| ----------------- | ------ | ---------------------------------------------------------------------------------------------- |
+| duration          | number | It is an optional prop which states the duration of the animation in milliseconds.             |
+| outerRingColor    | string | It is an optional prop which states the color of the outer ring of the circular progress bar.  |
+| progressRingColor | string | It is an optional prop which states the color of the progress ring.                            |
+| size              | number | It is an optional prop which states the overall width and height of the circular progress bar. |
+| strokeWidth       | number | It is an optional prop which states the stroke width of the progress ring.                     |
+
+<br>
+<br>
+
+# React Native Floating Button
+
+## Preview
+
+### Floating Button All Variants
+
+<img src="./AnimatedComponents/src/assets/gifs/FloatingButton.gif" width="250" height="500"/>
+
+<br/>
+
+### Floating Button With Icon
+
+<img src="./AnimatedComponents/src/assets/gifs/FloatingButtonWithIcon.gif" width="250" height="500"/>
+
+<br/>
+
+### Floating Button With Label
+
+<img src="./AnimatedComponents/src/assets/gifs/FloatingButtonWithLabel.gif" width="250" height="500"/>
+
+<br/>
+
+### Circular Floating Button
+
+<img src="./AnimatedComponents/src/assets/gifs/CircularFloatingButton.gif" width="250" height="500"/>
+
+## Features
+
+- **Different Types:** Allows users to choose the type of floating button.
+- **Animation Transition Duration**: Control the duration of the opening/closing animation.
+- **Responsive Design**: Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Customizable Styles**: Styles can be customized via props.
+- **Circular Floating Button**: Offers a circular expansion with animated icons along the circumference.
+- **Floating Button With Icon**: Provides a vertical stack of icons with staggered animations.
+- **Floating Button With Label**: Similar to FloatingButtonWithIcon but includes expanding width and text labels for each icon.
+
+## Usage
+
+```jsx
+import FloatingButton from "react-native-animated-components";
+
+const icons = [
+    {
+      icon: FileIcon,
+      onPress: () => Alert.alert('File Icon Pressed'),
+      iconName: 'File',
+    },
+    {
+      icon: FolderIcon,
+      onPress: () => Alert.alert('Folder Icon Pressed'),
+      iconName: 'Folder',
+    },
+    {
+      icon: PenIcon,
+      onPress: () => Alert.alert('Pen Icon Pressed'),
+      iconName: 'Pen',
+    },
+    {
+      icon: PenIcon,
+      onPress: () => Alert.alert('Pen Icon Pressed'),
+      iconName: 'Pencil',
+    },
+  ]
+
+  <FloatingButton buttonType={FloatingButtonPreset.FloatingButtonWithIcon} icons={icons} />
+```
+
+## Props
+
+| Prop                        | Type                 | Values                                                                    | Description                                                                                                                          |
+| --------------------------- | -------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| animationTransitionDuration | number               | 0,1,2,3.....                                                              | It is used to change the duration of the transition of animation.                                                                    |
+| buttonContainerStyle        | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the floating button.                                                             |
+| buttonType                  | FloatingButtonPreset | FloatingButtonWithIcon / FloatingButtonWithLabel / CircularFloatingButton | It is used to change the type of the floating button.                                                                                |
+| circleStyle                 | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the expanding circle when the type of floating button is CircularFloatingButton. |
+| contentContainerStyle       | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the content in the floating button.                                              |
+| iconContainerStyle          | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the icon in the floating button.                                                 |
+| iconStyle                   | ImageStyle           | name of style class created                                               | It is used to change the styles of the icons in the floating button.                                                                 |
+| icons                       | array of IconProps   | { icon: 'name of image', onPress: function, iconName: 'name of icon'}     | It is used to pass the name, image and function the for the icon.                                                                    |
+| isLeftAligned               | Boolean              | true/false                                                                | It is used to change the position of the floating button to left when true otherwise right.                                          |
+| textStyle                   | TextStyle            | name of style class created                                               | It is used to change the styles of the text when the type of floating button is FloatingButtonWithLabel.                             |
+
+**Note:** All the props are passed to the floating-button component from where it will send the props to the type chosen by the user.
+
+<br/>
+<br/>
+
 # React Native Select Box
 
 ## Preview
@@ -16,8 +282,6 @@
 - **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
 - **Single/Multi-selection:** Supports both single and multi-select use cases with the same component, reducing the need for multiple components.
 - **TypeScript Support:** Fully typed with TypeScript, providing type safety and better developer experience.
-
-## Usage
 
 ```jsx
 import Select from "react-native-animated-components";
@@ -36,8 +300,6 @@ const [select, setSelect] = useState<ISelectOption | ISelectOption[]>([])
   placeholderText="Select option"
 />
 ```
-
-## Props
 
 | Prop                 | Type                                              | Values                                                         | Description                                                                                     |
 | -------------------- | ------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -70,7 +332,7 @@ The Accordion component lets users show and hide sections of related content on 
 - **Customizable Styles:** Styles can be customized via props.
 - **Single open:** Allows users to choose the if multiple accordions will be open or only single accordion will be open at a time.
 
-## Example
+## Usage
 
 ```jsx
 <Accordion showSingleItemAtOnce={false}>
@@ -210,9 +472,11 @@ export default App;
 
 ## Features
 
-- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
 - **Customizable Styles:** Styles can be customized via props.
-- **Different Icons:** Allows for changing the icons.
+- **Flexibility:** Highly flexible with support for custom icons and labels for different states (start, success, failure). This makes it adaptable to various use cases.
+- **Multiple States Handling:** Efficiently handles various states such as success and failure. This can be particularly useful for forms or any action that requires feedback based on the result of an asynchronous operation.
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Smooth Transition Animations:** Provide smooth and visually appealing transition animations for icons and labels. This can enhance the user experience significantly.
 
 ## Preview
 
@@ -221,6 +485,8 @@ export default App;
 ## Usage
 
 ```jsx
+import IconTransitionButton from "react-native-animated-components";
+
 <IconTransitionButton
   onPress={async () => {
     // Perform some async operation
@@ -235,7 +501,7 @@ export default App;
   successIcon={<SuccessIconComponent />}
   isDisabled={false}
   isLoading={false}
-/>
+/>;
 ```
 
 | Prop         | Type                                 | Values                      | Description                                                                                                 |
@@ -270,6 +536,8 @@ export default App;
 ## Usage
 
 ```jsx
+import SwipeButton from "react-native-animated-components";
+
 const gradientWaveColor = useMemo(() => ["#1A63C5", "#1A63C5"], []);
 const thumbColors = useMemo(() => ["#1A63C5", "#1A63C5"], []);
 
@@ -352,6 +620,8 @@ const handleSubmitBtnPress = () => {
 ## Usage
 
 ```jsx
+import ProgressButton from "react-native-animated-components";
+
 const [isLoading, setIsLoading] = useState(false);
 
 const onPress = () => {
@@ -401,6 +671,8 @@ const onPress = () => {
 ## Usage
 
 ```jsx
+import SpringButton from "react-native-animated-components";
+
 const onSpringPress = () => {
   console.log("Button Pressed");
 };
@@ -438,7 +710,9 @@ const onSpringPress = () => {
 ## Usage
 
 ```jsx
-<TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
+import TriDotLoader from "react-native-animated-components";
+
+<TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />;
 ```
 
 ## Props
