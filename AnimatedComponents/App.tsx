@@ -134,7 +134,7 @@ const App = () => {
         </View>
         <View style={styles.childrenContainer}>
           <Text style={styles.title}>Slider</Text>
-          {/* <Slider.Single setValue={setValue} />
+          <Slider.Single setValue={setValue} />
           <Slider.Single
             setValue={setValue}
             thumbIcon={<Icon name="hive" size={30} color="black" />}
@@ -147,7 +147,7 @@ const App = () => {
             onMaxValSwipeEnd={setMaxValue}
             minValue={minValue}
             maxValue={maxValue}
-          /> */}
+          />
           <Slider.Range
             activeTrackStyle={{ backgroundColor: 'red' }}
             inactiveTrackStyle={{ backgroundColor: 'plum' }}
