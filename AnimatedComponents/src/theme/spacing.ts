@@ -48,6 +48,7 @@ enum Sizes {
   Size_50 = 50,
   Size_54 = 54,
   Size_60 = 60,
+  Size_100 = 100,
   Size_300 = 300,
 }
 

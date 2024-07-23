@@ -1,13 +1,14 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Button, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 
 import {
   FloatingButtonDemo,
   IconTransitionDemo,
   Modal,
+  ProgressBar,
   ProgressButton,
   SelectDemo,
   Slider,
@@ -29,6 +30,8 @@ const App = () => {
   const [slideInVisible, setSlideInVisible] = useState(false)
   const [scaleVisible, setScaleVisible] = useState(false)
   const [slideInLeftVisible, setSlideInLeftVisible] = useState(false)
+  const [progress, setProgress] = useState(0)
+
   const onPress = () => {
     setIsLoading(true)
     setTimeout(() => setIsLoading(false), 3000)
@@ -58,6 +61,18 @@ const App = () => {
     }),
     [],
   )
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress(prevProgress => {
+        const newProgress = prevProgress + 10
+        return newProgress > 100 ? 0 : newProgress
+      })
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+
   const gradientWaveColor = useMemo(() => ['#1A63C5', '#1A63C5'], [])
   const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
   return (
@@ -105,9 +120,14 @@ const App = () => {
             thumbColors={thumbColors}
           />
         </View>
-
         <AccordionDemo />
-
+        <View style={styles.childrenContainer}>
+          <Text style={styles.title}>Progress Bars</Text>
+          <ProgressBar.Linear value={progress} maxValue={100} containerWidth={300} />
+          <ProgressBar.Circular value={progress} maxValue={100} />
+          <ProgressBar.InfiniteLinear containerWidth={300} />
+          <ProgressBar.InfiniteCircular />
+        </View>
         <View style={styles.childrenContainer}>
           <Text style={styles.title}>Slider</Text>
           <Slider
