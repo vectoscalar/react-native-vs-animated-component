@@ -3,8 +3,7 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Sizes, palette } from '@theme'
 
 export interface Styles {
-  labelContainer: ViewStyle
-  labelText: TextStyle
+  tooltip: TextStyle
   sliderBack: ViewStyle
   sliderContainer: ViewStyle
   sliderFront: ViewStyle
@@ -30,6 +29,7 @@ export const styles: Styles = StyleSheet.create({
     position: 'absolute',
     height: '100%',
   },
+
   thumbContainer: {
     alignItems: 'center',
     bottom: -Sizes.Size_10,
@@ -41,20 +41,17 @@ export const styles: Styles = StyleSheet.create({
     backgroundColor: palette.frenchBlue,
     width: Sizes.Size_28,
     height: Sizes.Size_28,
-    borderRadius: Sizes.Size_50,
+    borderRadius: Sizes.Size_100,
   },
 
-  labelContainer: {
+  tooltip: {
     backgroundColor: palette.black,
     borderRadius: Sizes.Size_5,
-    marginBottom: Sizes.Size_10,
-    padding: Sizes.Size_4,
-  },
-
-  labelText: {
     color: palette.neutral[0],
     fontSize: Sizes.Size_16,
     fontWeight: 'bold',
+    marginBottom: Sizes.Size_10,
+    padding: Sizes.Size_4,
     textAlign: 'center',
     width: '100%',
   },

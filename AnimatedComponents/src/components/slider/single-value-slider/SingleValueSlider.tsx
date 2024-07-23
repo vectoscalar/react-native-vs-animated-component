@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import { Text, View } from 'react-native'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import { TextInput, View } from 'react-native'
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'
 import Animated, {
   runOnJS,
@@ -15,6 +15,8 @@ import { styles } from './singleValueSlider-styles'
 interface ISingleValueSliderProps extends ISliderProps {
   /** setValue is a required prop which updates the  value state for slider. */
   setValue: React.Dispatch<React.SetStateAction<number>>
+  /** value is an optional prop which states the current value of the slider */
+  value?: number
 }
 
 const SingleValueSlider = (props: ISingleValueSliderProps) => {
@@ -22,8 +24,6 @@ const SingleValueSlider = (props: ISingleValueSliderProps) => {
     activeTrackStyle = {},
     duration = 1000,
     inactiveTrackStyle = {},
-    labelContainerStyle = {},
-    labelTextStyle = {},
     max = 100,
     min = 0,
     setValue,
@@ -33,11 +33,18 @@ const SingleValueSlider = (props: ISingleValueSliderProps) => {
     thumbIcon,
     thumbSize = 28,
     thumbStyle = {},
+    tooltipStyle = {},
+    value = min,
   } = props
 
-  const [labelValue, setLabelValue] = useState(min)
   const positionLowerLimit = useSharedValue(0)
-  const labelOpacity = useSharedValue(0)
+  const tooltipOpacity = useSharedValue(0)
+  const tooltipRef = useRef<TextInput>(null)
+  const AnimatedInput = Animated.createAnimatedComponent(TextInput)
+
+  const setToolTipText = (value: string) => {
+    tooltipRef.current?.setNativeProps({ text: value })
+  }
 
   const getSliderValue = useCallback(() => {
     'worklet'
@@ -49,23 +56,24 @@ const SingleValueSlider = (props: ISingleValueSliderProps) => {
 
   const handleThumbGesture = Gesture.Pan()
     .onTouchesDown(() => {
-      labelOpacity.value = 1
+      tooltipOpacity.value = 1
     })
     .onTouchesUp(() => {
-      labelOpacity.value = withTiming(0, { duration })
+      tooltipOpacity.value = withTiming(0, { duration })
     })
     .onUpdate(event => {
       const velocityX = event.velocityX / 50
-      labelOpacity.value = 1
+      tooltipOpacity.value = 1
       positionLowerLimit.value = Math.max(
         min,
         Math.min(positionLowerLimit.value + velocityX, sliderWidth),
       )
       const sliderValue = getSliderValue()
-      runOnJS(setLabelValue)(sliderValue)
+
+      runOnJS(setToolTipText)(String(sliderValue))
     })
     .onEnd(() => {
-      labelOpacity.value = withTiming(0, { duration })
+      tooltipOpacity.value = withTiming(0, { duration })
       const sliderValue = getSliderValue()
       runOnJS(setValue)(sliderValue)
     })
@@ -74,8 +82,8 @@ const SingleValueSlider = (props: ISingleValueSliderProps) => {
     transform: [{ translateX: positionLowerLimit.value }],
   }))
 
-  const labelAnimatedStyles = useAnimatedStyle(() => ({
-    opacity: labelOpacity.value,
+  const tooltipAnimatedStyles = useAnimatedStyle(() => ({
+    opacity: tooltipOpacity.value,
   }))
 
   const sliderAnimatedStyles = useAnimatedStyle(() => ({
@@ -98,13 +106,17 @@ const SingleValueSlider = (props: ISingleValueSliderProps) => {
   )
 
   const sliderThumbStyles = useMemo(
-    () => [
-      styles.thumb,
-      { width: thumbSize, height: thumbSize, borderRadius: thumbSize / 2 },
-      thumbStyle,
-    ],
+    () => [styles.thumb, { width: thumbSize, height: thumbSize }, thumbStyle],
     [thumbSize, thumbStyle],
   )
+
+  useEffect(() => {
+    const stepCount = (max - min) / step
+    const sliderStepWidth = sliderWidth / stepCount
+    const clampedValue = Math.min(Math.max(value, min), max)
+    positionLowerLimit.value = ((clampedValue - min) * sliderStepWidth) / step
+    setToolTipText(String(clampedValue))
+  }, [value, min, max, step, sliderWidth])
 
   return (
     <GestureHandlerRootView>
@@ -113,10 +125,12 @@ const SingleValueSlider = (props: ISingleValueSliderProps) => {
         <Animated.View style={[styles.sliderFront, inactiveTrackStyle, sliderAnimatedStyles]} />
         <GestureDetector gesture={handleThumbGesture}>
           <Animated.View style={thumbContainerStyles}>
-            <Animated.View
-              style={[styles.labelContainer, labelContainerStyle, labelAnimatedStyles]}>
-              <Text style={[styles.labelText, labelTextStyle]}>{labelValue}</Text>
-            </Animated.View>
+            <AnimatedInput
+              editable={false}
+              ref={tooltipRef}
+              style={[styles.tooltip, tooltipStyle, tooltipAnimatedStyles]}
+              defaultValue={String(value)}
+            />
             {thumbIcon || <View style={sliderThumbStyles} />}
           </Animated.View>
         </GestureDetector>

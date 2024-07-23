@@ -62,14 +62,14 @@ const Component = () => {
 
 ## Preview
 
+<img src="./AnimatedComponents/src/assets/gifs/RangeSlider.gif" width="250" height="500"/>
+
 ## Features
 
 - **Customizable Styles:** Styles can be customized via props.
 - **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
 
 ## Usage
-
-<img src="./AnimatedComponents/src/assets/gifs/RangeSlider.gif" width="250" height="500"/>
 
 ```jsx
 import Slider from "react-native-animated-components";
@@ -114,6 +114,91 @@ const Component = () => {
 | thumbSize           | `number`                                       | It is an optional prop that specifies the size of the slider thumb.                                |
 | thumbStyle          | `ViewStyle`                                    | It is an optional prop that specifies the styles of the slider thumb.                              |
 
+<br>
+<br>
+
+# React Native Floating Button
+
+## Preview
+
+### Floating Button All Variants
+
+<img src="./AnimatedComponents/src/assets/gifs/FloatingButton.gif" width="250" height="500"/>
+
+<br/>
+
+### Floating Button With Icon
+
+<img src="./AnimatedComponents/src/assets/gifs/FloatingButtonWithIcon.gif" width="250" height="500"/>
+
+<br/>
+
+### Floating Button With Label
+
+<img src="./AnimatedComponents/src/assets/gifs/FloatingButtonWithLabel.gif" width="250" height="500"/>
+
+<br/>
+
+### Circular Floating Button
+
+<img src="./AnimatedComponents/src/assets/gifs/CircularFloatingButton.gif" width="250" height="500"/>
+
+## Features
+
+- **Different Types:** Allows users to choose the type of floating button.
+- **Animation Transition Duration**: Control the duration of the opening/closing animation.
+- **Responsive Design**: Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Customizable Styles**: Styles can be customized via props.
+- **Circular Floating Button**: Offers a circular expansion with animated icons along the circumference.
+- **Floating Button With Icon**: Provides a vertical stack of icons with staggered animations.
+- **Floating Button With Label**: Similar to FloatingButtonWithIcon but includes expanding width and text labels for each icon.
+
+## Usage
+
+```jsx
+import FloatingButton from "react-native-animated-components";
+
+const icons = [
+    {
+      icon: FileIcon,
+      onPress: () => Alert.alert('File Icon Pressed'),
+      iconName: 'File',
+    },
+    {
+      icon: FolderIcon,
+      onPress: () => Alert.alert('Folder Icon Pressed'),
+      iconName: 'Folder',
+    },
+    {
+      icon: PenIcon,
+      onPress: () => Alert.alert('Pen Icon Pressed'),
+      iconName: 'Pen',
+    },
+    {
+      icon: PenIcon,
+      onPress: () => Alert.alert('Pen Icon Pressed'),
+      iconName: 'Pencil',
+    },
+  ]
+
+  <FloatingButton buttonType={FloatingButtonPreset.FloatingButtonWithIcon} icons={icons} />
+```
+
+| Prop                        | Type                 | Values                                                                    | Description                                                                                                                          |
+| --------------------------- | -------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| animationTransitionDuration | number               | 0,1,2,3.....                                                              | It is used to change the duration of the transition of animation.                                                                    |
+| buttonContainerStyle        | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the floating button.                                                             |
+| buttonType                  | FloatingButtonPreset | FloatingButtonWithIcon / FloatingButtonWithLabel / CircularFloatingButton | It is used to change the type of the floating button.                                                                                |
+| circleStyle                 | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the expanding circle when the type of floating button is CircularFloatingButton. |
+| contentContainerStyle       | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the content in the floating button.                                              |
+| iconContainerStyle          | ViewStyle            | name of style class created                                               | It is used to change the styles of the container of the icon in the floating button.                                                 |
+| iconStyle                   | ImageStyle           | name of style class created                                               | It is used to change the styles of the icons in the floating button.                                                                 |
+| icons                       | array of IconProps   | { icon: 'name of image', onPress: function, iconName: 'name of icon'}     | It is used to pass the name, image and function the for the icon.                                                                    |
+| isLeftAligned               | Boolean              | true/false                                                                | It is used to change the position of the floating button to left when true otherwise right.                                          |
+| textStyle                   | TextStyle            | name of style class created                                               | It is used to change the styles of the text when the type of floating button is FloatingButtonWithLabel.                             |
+
+**Note:** All the props are passed to the floating-button component from where it will send the props to the type chosen by the user.
+
 <br/>
 <br/>
 
@@ -134,8 +219,6 @@ const Component = () => {
 - **Single/Multi-selection:** Supports both single and multi-select use cases with the same component, reducing the need for multiple components.
 - **TypeScript Support:** Fully typed with TypeScript, providing type safety and better developer experience.
 
-## Usage
-
 ```jsx
 import Select from "react-native-animated-components";
 
@@ -153,8 +236,6 @@ const [select, setSelect] = useState<ISelectOption | ISelectOption[]>([])
   placeholderText="Select option"
 />
 ```
-
-## Props
 
 | Prop                 | Type                                              | Values                                                         | Description                                                                                     |
 | -------------------- | ------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -179,9 +260,15 @@ The Accordion component lets users show and hide sections of related content on 
 
 # Preview
 
-<img src="https://github.com/user-attachments/assets/d112aecc-645b-4369-ab52-02d49c32722c" width="250" height="500"/>
+<img src="https://github.com/user-attachments/assets/ac939947-d3e6-43de-a341-ac203620cee6" width="250" height="500"/>
 
-## Example
+## Features
+
+- **Animation Transition Duration:** Control the duration of the opening/closing animation.
+- **Customizable Styles:** Styles can be customized via props.
+- **Single open:** Allows users to choose the if multiple accordions will be open or only single accordion will be open at a time.
+
+## Usage
 
 ```jsx
 <Accordion showSingleItemAtOnce={false}>
@@ -321,9 +408,11 @@ export default App;
 
 ## Features
 
-- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
 - **Customizable Styles:** Styles can be customized via props.
-- **Different Icons:** Allows for changing the icons.
+- **Flexibility:** Highly flexible with support for custom icons and labels for different states (start, success, failure). This makes it adaptable to various use cases.
+- **Multiple States Handling:** Efficiently handles various states such as success and failure. This can be particularly useful for forms or any action that requires feedback based on the result of an asynchronous operation.
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Smooth Transition Animations:** Provide smooth and visually appealing transition animations for icons and labels. This can enhance the user experience significantly.
 
 ## Preview
 
@@ -332,6 +421,8 @@ export default App;
 ## Usage
 
 ```jsx
+import IconTransitionButton from "react-native-animated-components";
+
 <IconTransitionButton
   onPress={async () => {
     // Perform some async operation
@@ -346,7 +437,7 @@ export default App;
   successIcon={<SuccessIconComponent />}
   isDisabled={false}
   isLoading={false}
-/>
+/>;
 ```
 
 | Prop         | Type                                 | Values                      | Description                                                                                                 |
@@ -381,6 +472,8 @@ export default App;
 ## Usage
 
 ```jsx
+import SwipeButton from "react-native-animated-components";
+
 const gradientWaveColor = useMemo(() => ["#1A63C5", "#1A63C5"], []);
 const thumbColors = useMemo(() => ["#1A63C5", "#1A63C5"], []);
 
@@ -463,6 +556,8 @@ const handleSubmitBtnPress = () => {
 ## Usage
 
 ```jsx
+import ProgressButton from "react-native-animated-components";
+
 const [isLoading, setIsLoading] = useState(false);
 
 const onPress = () => {
@@ -512,6 +607,8 @@ const onPress = () => {
 ## Usage
 
 ```jsx
+import SpringButton from "react-native-animated-components";
+
 const onSpringPress = () => {
   console.log("Button Pressed");
 };
@@ -549,7 +646,9 @@ const onSpringPress = () => {
 ## Usage
 
 ```jsx
-<TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
+import TriDotLoader from "react-native-animated-components";
+
+<TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />;
 ```
 
 ## Props
@@ -561,3 +660,41 @@ const onSpringPress = () => {
 | loaderPreset      | TriDotLoaderPreset   | Small / Medium / Large      | It is an optional prop which defines the size preset of the dots in the loader. |
 
 **Note:** All the props are passed to the Tri-Dot Loader component.
+
+<br/>
+<br/>
+
+# React Native Search Bar
+
+The Search Bar component is an expandable search bar component which can expand and collapse by clicking on search icon.
+
+# Preview
+
+<img src="https://github.com/user-attachments/assets/742a32e7-d938-4106-b846-c82a7ded5c88" width="250" height="500"/>
+
+## Features
+
+- **Animation Transition Duration:** Control the duration of the opening/closing animation.
+- **Customizable Styles:** Styles can be customized via props.
+- **Icon Selection:** Allows users to choose their own icons.
+- **Performance Optimizations:** Only renders the dropdown and animations when needed, reducing unnecessary re-renders.
+
+## Props
+
+| Prop                        | Type                   | Description                                                                                    |
+| --------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------- |
+| **CloseIcon**               | React.ReactNode        | It is an optional prop which holds the icon to be displayed to close the search bar.           |
+| **duration**                | number                 | It is an optional prop which indicates the duration of the animation.                          |
+| **iconSize**                | number                 | It is an optional prop which indicates the size of the icon.                                   |
+| **iconStyle**               | DefaultStyle           | It is an optional prop which holds the style of the search icon.                               |
+| **inputContainerStyle**     | DefaultStyle           | It is an optional prop which holds the style of the input container.                           |
+| **handleInputChange**       | (text: string) => void | It is a prop which handles the input change.                                                   |
+| **height**                  | number                 | It is an optional prop which indicates the height of the search bar.                           |
+| **iconBackgroundColor**     | string                 | It is an optional prop which indicates the color of the icon background.                       |
+| **iconColor**               | string                 | It is an optional prop which indicates the color of the icon.                                  |
+| **placeholderText**         | string                 | It is an optional prop which holds the placeholder text.                                       |
+| **placeholderTextColor**    | string                 | It is an optional prop which holds the placeholder text color.                                 |
+| **searchBarContainerStyle** | DefaultStyle           | It is an optional prop which holds the style of the search bar.                                |
+| **SearchIcon**              | React.ReactNode        | It is an optional prop which holds the icon to be displayed.                                   |
+| **searchValue**             | string                 | It is a prop which holds the value of the search bar.                                          |
+| **wrapperContainerStyle**   | DefaultStyle           | It is an optional prop which holds the style of the main container which wraps the search bar. |

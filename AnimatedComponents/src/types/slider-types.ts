@@ -7,13 +7,9 @@ export interface ISliderProps {
   duration?: number
   /** inactiveTrackStyle is an optional prop that specifies the styles of the inactive track of the slider. */
   inactiveTrackStyle?: Omit<ViewStyle, 'width'>
-  /** labelContainerStyle is an optional prop that specifies the styles for label container */
-  labelContainerStyle?: ViewStyle
-  /** labelTextStyle is an optional prop that specifies the styles for label text */
-  labelTextStyle?: TextStyle
-  /** max is an optional prop that specifies the maximum value for the slider. */
+  /** max is an optional prop that specifies the maximum possible value for the slider. */
   max?: number
-  /** min is an optional prop that specifies the minimum value for the slider. */
+  /** min is an optional prop that specifies the minimum possible value for the slider. */
   min?: number
   /** sliderWidth is an optional prop that specifies the width of the slider. */
   sliderWidth?: number
@@ -27,4 +23,6 @@ export interface ISliderProps {
   thumbSize?: number
   /** thumbStyle is an optional prop that specifies the styles of the slider thumb. */
   thumbStyle?: ViewStyle
+  /** tooltipStyle is an optional prop that specifies the styles for tooltip */
+  tooltipStyle?: TextStyle
 }

@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import { Text, View } from 'react-native'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import { TextInput, View } from 'react-native'
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'
 import Animated, {
   runOnJS,
@@ -13,6 +13,10 @@ import { ISliderProps } from '@types'
 import { styles } from './rangeSlider-styles'
 
 interface IRangeSliderProps extends ISliderProps {
+  /** maxValue is an optional prop which states the current  maximum value of the slider */
+  maxValue?: number
+  /** minValue is an optional prop which states the current  minimum value of the slider */
+  minValue?: number
   /** setMaxValue is a required function prop which sets the maximum value for slider. */
   setMaxValue: React.Dispatch<React.SetStateAction<number>>
   /** setMinValue is a required function prop which updates the min value state for slider. */
@@ -24,10 +28,11 @@ const RangeSlider = (props: IRangeSliderProps) => {
     activeTrackStyle = {},
     duration = 1000,
     inactiveTrackStyle = {},
-    labelContainerStyle = {},
-    labelTextStyle,
+    tooltipStyle = {},
     max = 100,
+    maxValue = max,
     min = 0,
+    minValue = min,
     setMaxValue,
     setMinValue,
     sliderHeight = 8,
@@ -40,12 +45,13 @@ const RangeSlider = (props: IRangeSliderProps) => {
 
   const positionLowerLimit = useSharedValue(0)
   const positionUpperLimit = useSharedValue(sliderWidth)
-  const lowerLabelOpacity = useSharedValue(0)
-  const upperLabelOpacity = useSharedValue(0)
+  const lowerTooltipOpacity = useSharedValue(0)
+  const upperTooltipOpacity = useSharedValue(0)
   const lowerThumbZIndex = useSharedValue(0)
   const upperThumbZIndex = useSharedValue(0)
-  const [lowerLabelValue, setLowerLabelValue] = useState(min)
-  const [upperLabelValue, setUpperLabelValue] = useState(max)
+  const lowerToolTipRef = useRef<TextInput>(null)
+  const upperToolTipRef = useRef<TextInput>(null)
+  const AnimatedInput = Animated.createAnimatedComponent(TextInput)
 
   const getSliderMinValue = useCallback(() => {
     'worklet'
@@ -63,16 +69,24 @@ const RangeSlider = (props: IRangeSliderProps) => {
     return newMaxValue
   }, [max, min, step, sliderWidth, positionUpperLimit.value])
 
+  const setLowerToolTipText = (value: string) => {
+    lowerToolTipRef.current?.setNativeProps({ text: value })
+  }
+
+  const setUpperToolTipText = (value: string) => {
+    upperToolTipRef.current?.setNativeProps({ text: value })
+  }
+
   const handleLowerThumbGesture = Gesture.Pan()
     .onTouchesDown(() => {
-      lowerLabelOpacity.value = 1
+      lowerTooltipOpacity.value = 1
     })
     .onTouchesUp(() => {
-      lowerLabelOpacity.value = withTiming(0, { duration })
+      lowerTooltipOpacity.value = withTiming(0, { duration })
     })
     .onUpdate(event => {
       const velocityX = event.velocityX / 50
-      lowerLabelOpacity.value = 1
+      lowerTooltipOpacity.value = 1
       positionLowerLimit.value = Math.max(
         0,
         Math.min(positionLowerLimit.value + velocityX, positionUpperLimit.value),
@@ -81,24 +95,24 @@ const RangeSlider = (props: IRangeSliderProps) => {
       lowerThumbZIndex.value = 1
       upperThumbZIndex.value = 0
       const sliderMinValue = getSliderMinValue()
-      runOnJS(setLowerLabelValue)(sliderMinValue)
+      runOnJS(setLowerToolTipText)(String(sliderMinValue))
     })
     .onEnd(() => {
-      lowerLabelOpacity.value = withTiming(0, { duration })
+      lowerTooltipOpacity.value = withTiming(0, { duration })
       const sliderMinValue = getSliderMinValue()
       runOnJS(setMinValue)(sliderMinValue)
     })
 
   const handleUpperThumbGesture = Gesture.Pan()
     .onTouchesDown(() => {
-      upperLabelOpacity.value = 1
+      upperTooltipOpacity.value = 1
     })
     .onTouchesUp(() => {
-      upperLabelOpacity.value = withTiming(0, { duration })
+      upperTooltipOpacity.value = withTiming(0, { duration })
     })
     .onUpdate(event => {
       const velocityX = event.velocityX / 50
-      upperLabelOpacity.value = 1
+      upperTooltipOpacity.value = 1
       positionUpperLimit.value = Math.max(
         positionLowerLimit.value,
         Math.min(sliderWidth, positionUpperLimit.value + velocityX),
@@ -107,10 +121,10 @@ const RangeSlider = (props: IRangeSliderProps) => {
       upperThumbZIndex.value = 1
       lowerThumbZIndex.value = 0
       const sliderMaxValue = getSliderMaxValue()
-      runOnJS(setUpperLabelValue)(sliderMaxValue)
+      runOnJS(setUpperToolTipText)(String(sliderMaxValue))
     })
     .onEnd(() => {
-      upperLabelOpacity.value = withTiming(0, { duration })
+      upperTooltipOpacity.value = withTiming(0, { duration })
       const sliderMaxValue = getSliderMaxValue()
       runOnJS(setMaxValue)(sliderMaxValue)
     })
@@ -125,12 +139,12 @@ const RangeSlider = (props: IRangeSliderProps) => {
     zIndex: upperThumbZIndex.value,
   }))
 
-  const lowerLabelAnimatedStyles = useAnimatedStyle(() => ({
-    opacity: lowerLabelOpacity.value,
+  const lowerTooltipAnimatedStyles = useAnimatedStyle(() => ({
+    opacity: lowerTooltipOpacity.value,
   }))
 
-  const upperLabelAnimatedStyles = useAnimatedStyle(() => ({
-    opacity: upperLabelOpacity.value,
+  const upperTooltipAnimatedStyles = useAnimatedStyle(() => ({
+    opacity: upperTooltipOpacity.value,
   }))
 
   const sliderAnimatedStyles = useAnimatedStyle(() => ({
@@ -162,13 +176,22 @@ const RangeSlider = (props: IRangeSliderProps) => {
   )
 
   const sliderThumbStyles = useMemo(
-    () => [
-      styles.thumb,
-      { width: thumbSize, height: thumbSize, borderRadius: thumbSize / 2 },
-      thumbStyle,
-    ],
+    () => [styles.thumb, { width: thumbSize, height: thumbSize }, thumbStyle],
     [thumbSize, thumbStyle],
   )
+
+  useEffect(() => {
+    const stepCount = (max - min) / step
+    const sliderStepWidth = sliderWidth / stepCount
+    const clampedMinValue = Math.min(Math.max(minValue, min), max)
+    const clampedMaxValue = Math.min(Math.max(maxValue, min), max)
+    const lowerPosition = ((clampedMinValue - min) * sliderStepWidth) / step
+    const upperPosition = ((clampedMaxValue - min) * sliderStepWidth) / step
+    positionLowerLimit.value = Math.min(lowerPosition, upperPosition)
+    positionUpperLimit.value = Math.max(lowerPosition, upperPosition)
+    setLowerToolTipText(String(clampedMinValue))
+    setUpperToolTipText(String(clampedMaxValue))
+  }, [minValue, maxValue, min, max, step, sliderWidth])
 
   return (
     <GestureHandlerRootView>
@@ -177,19 +200,23 @@ const RangeSlider = (props: IRangeSliderProps) => {
         <Animated.View style={[styles.sliderFront, activeTrackStyle, sliderAnimatedStyles]} />
         <GestureDetector gesture={handleLowerThumbGesture}>
           <Animated.View style={lowerThumbContainerStyles}>
-            <Animated.View
-              style={[styles.labelContainer, labelContainerStyle, lowerLabelAnimatedStyles]}>
-              <Text style={[styles.labelText, labelTextStyle]}>{lowerLabelValue}</Text>
-            </Animated.View>
+            <AnimatedInput
+              editable={false}
+              ref={lowerToolTipRef}
+              style={[styles.tooltip, tooltipStyle, lowerTooltipAnimatedStyles]}
+              defaultValue={String(min)}
+            />
             {thumbIcon || <View style={sliderThumbStyles} />}
           </Animated.View>
         </GestureDetector>
         <GestureDetector gesture={handleUpperThumbGesture}>
           <Animated.View style={upperThumbContainerStyles}>
-            <Animated.View
-              style={[styles.labelContainer, labelContainerStyle, upperLabelAnimatedStyles]}>
-              <Text style={[styles.labelText, labelTextStyle]}>{upperLabelValue}</Text>
-            </Animated.View>
+            <AnimatedInput
+              editable={false}
+              ref={upperToolTipRef}
+              style={[styles.tooltip, tooltipStyle, upperTooltipAnimatedStyles]}
+              defaultValue={String(max)}
+            />
             {thumbIcon || <View style={sliderThumbStyles} />}
           </Animated.View>
         </GestureDetector>
