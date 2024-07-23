@@ -3,6 +3,6 @@ import SingleValueSlider from './single-value-slider/SingleValueSlider'
 
 const Slider = {
   Range: RangeSlider,
-  SingleValue: SingleValueSlider,
+  Single: SingleValueSlider,
 }
 export default Slider

@@ -134,29 +134,29 @@ const App = () => {
         </View>
         <View style={styles.childrenContainer}>
           <Text style={styles.title}>Slider</Text>
-          <Slider.SingleValue setValue={setValue} />
-          <Slider.SingleValue
-            setValue={setMinValue}
+          {/* <Slider.Single setValue={setValue} />
+          <Slider.Single
+            setValue={setValue}
             thumbIcon={<Icon name="hive" size={30} color="black" />}
             thumbSize={30}
             activeTrackStyle={{ backgroundColor: 'red' }}
             inactiveTrackStyle={{ backgroundColor: 'plum' }}
           />
           <Slider.Range
-            setMinValue={setMinValue}
-            setMaxValue={setMaxValue}
-            minValue={20}
-            maxValue={100}
-          />
-          <Slider.Range
-            setMinValue={setMinValue}
-            setMaxValue={setMaxValue}
+            onMinValSwipeEnd={setMinValue}
+            onMaxValSwipeEnd={setMaxValue}
             minValue={minValue}
             maxValue={maxValue}
-            // thumbSize={30}
-            thumbIcon={<Icon name="hive" size={30} color="black" />}
+          /> */}
+          <Slider.Range
             activeTrackStyle={{ backgroundColor: 'red' }}
             inactiveTrackStyle={{ backgroundColor: 'plum' }}
+            maxValue={maxValue}
+            minValue={minValue}
+            onMaxValSwipeEnd={setMaxValue}
+            onMinValSwipeEnd={setMinValue}
+            thumbIcon={<Icon name="hive" size={30} color="black" />}
+            thumbSize={30}
           />
         </View>
         <View style={styles.childrenContainer}>
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     borderBottomColor: palette.black,
     display: 'flex',
     flexDirection: 'column',
-    gap: Sizes.Size_40,
+    gap: Sizes.Size_50,
     marginBottom: Sizes.Size_16,
     paddingBottom: Sizes.Size_16,
   },

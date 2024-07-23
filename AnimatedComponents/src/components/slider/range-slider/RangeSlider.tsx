@@ -17,10 +17,10 @@ interface IRangeSliderProps extends ISliderProps {
   maxValue?: number
   /** minValue is an optional prop which states the current  minimum value of the slider */
   minValue?: number
-  /** setMaxValue is a required function prop which sets the maximum value for slider. */
-  setMaxValue: React.Dispatch<React.SetStateAction<number>>
-  /** setMinValue is a required function prop which updates the min value state for slider. */
-  setMinValue: React.Dispatch<React.SetStateAction<number>>
+  /** onMaxValSwipeEnd is a required function prop which sets the maximum value for slider. */
+  onMaxValSwipeEnd: React.Dispatch<React.SetStateAction<number>>
+  /** onMinValSwipeEnd is a required function prop which updates the min value state for slider. */
+  onMinValSwipeEnd: React.Dispatch<React.SetStateAction<number>>
 }
 
 const RangeSlider = (props: IRangeSliderProps) => {
@@ -33,8 +33,8 @@ const RangeSlider = (props: IRangeSliderProps) => {
     maxValue = max,
     min = 0,
     minValue = min,
-    setMaxValue,
-    setMinValue,
+    onMaxValSwipeEnd,
+    onMinValSwipeEnd,
     sliderHeight = 8,
     sliderWidth = 300,
     step = 1,
@@ -100,7 +100,7 @@ const RangeSlider = (props: IRangeSliderProps) => {
     .onEnd(() => {
       lowerTooltipOpacity.value = withTiming(0, { duration })
       const sliderMinValue = getSliderMinValue()
-      runOnJS(setMinValue)(sliderMinValue)
+      runOnJS(onMinValSwipeEnd)(sliderMinValue)
     })
 
   const handleUpperThumbGesture = Gesture.Pan()
@@ -126,7 +126,7 @@ const RangeSlider = (props: IRangeSliderProps) => {
     .onEnd(() => {
       upperTooltipOpacity.value = withTiming(0, { duration })
       const sliderMaxValue = getSliderMaxValue()
-      runOnJS(setMaxValue)(sliderMaxValue)
+      runOnJS(onMaxValSwipeEnd)(sliderMaxValue)
     })
 
   const lowerThumbContainerAnimatedStyles = useAnimatedStyle(() => ({

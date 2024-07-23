@@ -104,8 +104,8 @@ const Component = () => {
 | maxValue           | `number`                                       | It is an optional prop that specifies the current maximum value for the slider.                    |
 | min                | `number`                                       | It is an optional prop that specifies the minimum possible value for the slider.                   |
 | minValue           | `number`                                       | It is an optional prop that specifies the current minimum value for the slider.                    |
-| setMaxValue        | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which sets the maximum value for the slider.                                 |
-| setMinValue        | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which updates the minimum value state for the slider.                        |
+| onMaxValSwipeEnd   | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which sets the maximum value for the slider.                                 |
+| onMinValSwipeEnd   | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which updates the minimum value state for the slider.                        |
 | sliderHeight       | `number`                                       | It is an optional prop that specifies the height of the slider.                                    |
 | sliderWidth        | `number`                                       | It is an optional prop that specifies the width of the slider.                                     |
 | step               | `number`                                       | It is an optional prop that specifies the increment or decrement in the slider value when sliding. |
