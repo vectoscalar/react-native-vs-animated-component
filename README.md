@@ -116,6 +116,185 @@ const Component = () => {
 <br>
 <br>
 
+# React Native Progress Bars
+
+## Linear Progress Bar
+
+- It shows progress in form of a linear bar
+
+## Preview
+
+<img src="./AnimatedComponents/src/assets/gifs/LinearProgresssBar.gif" width="250" height="500"/>
+
+## Features
+
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Fully customizable:** Each element of progress bar can be customized by props.
+
+## Usage
+
+```jsx
+import ProgressBar from "react-native-animated-components";
+
+const Component = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        const newProgress = prevProgress + 10;
+        return newProgress > 100 ? 0 : newProgress;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <ProgressBar.Linear value={progress} maxValue={100} />;
+};
+```
+
+## Props
+
+| Prop           | Type                                      | Description                                                                                  |
+| -------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------- |
+| containerStyle | Omit<ViewStyle, 'width'> & {width:number} | It is an optional prop which states the styles for progress bar container.                   |
+| containerWidth | number                                    | It is an optional prop which states width for progress bar container.                        |
+| duration       | number                                    | It is an optional prop which states the duration in milliseconds for the progress animation. |
+| fillStyle      | Omit<ViewStyle, 'width'> & {width:number} | It is an optional prop which states the styles for the filled portion of the progress bar.   |
+| labelStyle     | TextStyle                                 | It is an optional prop which states the styles for the progress label.                       |
+| maxValue       | number                                    | It is an optional prop which states the maximum value of progress bar.                       |
+| showLabel      | boolean                                   | It is an optional prop which states whether the percentage label will be be visible or not.  |
+| value          | number                                    | It is a required prop which states the progress value.                                       |
+
+<br/>
+<br/>
+
+## Circular Progress Bar
+
+- It shows progress in form of a circular bar
+
+## Preview
+
+<img src="./AnimatedComponents/src/assets/gifs/CircularProgressBar.gif" width="250" height="500"/>
+
+## Features
+
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Fully customizable:** Each element of progress bar can be customized by props.
+
+## Usage
+
+```jsx
+import ProgressBar from "react-native-animated-components";
+
+const Component = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        const newProgress = prevProgress + 10;
+        return newProgress > 100 ? 0 : newProgress;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <ProgressBar.Circular value={progress} maxValue={100} />;
+};
+```
+
+## Props
+
+| Prop              | Type      | Description                                                                                              |
+| ----------------- | --------- | -------------------------------------------------------------------------------------------------------- |
+| duration          | number    | It is an optional prop which states the duration of the animation in milliseconds.                       |
+| labelStyle        | TextStyle | It is an optional prop which states the styles for the label displayed within the circular progress bar. |
+| maxValue          | number    | It is an optional prop which states the maximum value for the progress bar.                              |
+| outerRingColor    | string    | It is an optional prop which states the color of the outer ring of the circular progress bar.            |
+| progressRingColor | string    | It is an optional prop which states the color of the progress ring.                                      |
+| showLabel         | boolean   | It is an optional prop which states whether the percentage label will be be visible or not.              |
+| size              | number    | It is an optional prop which states the overall width , height of circular progress bar.                 |
+| strokeWidth       | number    | It is an optional prop which states the stroke width of the progress ring.                               |
+| value             | number    | It is a required prop which states the current progress value.                                           |
+
+<br/>
+<br/>
+
+## Infinite Linear Progress Bar
+
+- It provides an animated, continuously progressing bar to indicate loading.
+
+## Preview
+
+<img src="./AnimatedComponents/src/assets/gifs/InfiniteLinearProgressBar.gif" width="250" height="500"/>
+
+## Features
+
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Fully customizable:** Each element of progress bar can be customized by props.
+
+## Usage
+
+```jsx
+import ProgressBar from "react-native-animated-components";
+
+const Component = () => {
+  return <ProgressBar.InfiniteLinear />;
+};
+```
+
+## Props
+
+| Prop           | Type                                      | Description                                                                                |
+| -------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------ |
+| containerStyle | Omit<ViewStyle, 'width'> & {width:number} | It is an optional prop which states the styles for the progress bar container.             |
+| containerWidth | number                                    | It is an optional prop which states the width for the progress bar container.              |
+| duration       | number                                    | It is an optional prop which states the duration of the animation in milliseconds.         |
+| fillStyle      | Omit<ViewStyle, 'width'> & {width:number} | It is an optional prop which states the styles for the filled portion of the progress bar. |
+| fillWidth      | number                                    | It is an optional prop which states the width for the filled portion of the progress bar.  |
+
+<br/>
+<br/>
+
+## Infinite Circular Progress Bar
+
+- It provides an provides a continuous, animated circular indicator for loading.
+
+## Preview
+
+<img src="./AnimatedComponents/src/assets/gifs/InfiniteCircularProgressBar.gif" width="250" height="500"/>
+
+## Features
+
+- **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
+- **Fully customizable:** Each element of progress bar can be customized by props.
+
+## Usage
+
+```jsx
+import ProgressBar from "react-native-animated-components";
+
+const Component = () => {
+  return <ProgressBar.InfiniteCircular />;
+};
+```
+
+## Props
+
+| Prop              | Type   | Description                                                                                    |
+| ----------------- | ------ | ---------------------------------------------------------------------------------------------- |
+| duration          | number | It is an optional prop which states the duration of the animation in milliseconds.             |
+| outerRingColor    | string | It is an optional prop which states the color of the outer ring of the circular progress bar.  |
+| progressRingColor | string | It is an optional prop which states the color of the progress ring.                            |
+| size              | number | It is an optional prop which states the overall width and height of the circular progress bar. |
+| strokeWidth       | number | It is an optional prop which states the stroke width of the progress ring.                     |
+
+<br>
+<br>
+
 # React Native Floating Button
 
 ## Preview
