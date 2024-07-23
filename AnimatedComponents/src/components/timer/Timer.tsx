@@ -10,6 +10,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import Svg, { Circle as SvgCircle } from 'react-native-svg'
 
+import { PauseIcon, PlayIcon, ResetIcon } from '@assets'
 import { TimerPreset } from '@constants'
 
 import styles from './timer-styles'
@@ -18,15 +19,15 @@ const AnimatedSvgCircle = Animated.createAnimatedComponent(SvgCircle)
 const ReanimatedText = Animated.createAnimatedComponent(TextInput)
 interface ITimerProps {
   /** buttonStyles: is an optional prop to style the buttons of the timer */
-  buttonStyles?: { container?: ViewStyle; text?: TextStyle }
-  /** circularTimerRadius: is an optional prop that indicates the radius of circular timer */
-  circularTimerRadius?: number
+  buttonStyles?: ViewStyle
+  /** circularDimensions: is an optional prop that indicates the radius and stroke width of the circular timer */
+  circularDimensions?: { radius?: number; strokeWidth?: number }
   /** controls: is an optional prop that indicates whether control buttons are visible or not */
   controls?: boolean
   /** duration: is a required prop that indicates the total number of seconds of timer */
   duration: number
-  /** linearTimerWidth: is an optional prop that indicates the width of the linear timer */
-  linearTimerWidth?: number
+  /** linearDimensions: is an optional prop that indicates the width and height of the linear timer */
+  linearDimensions?: { width?: number; height?: number }
   /** showTimeLeft: is an optional prop that indicates whether to display time left on screen or not. */
   showTimeLeft?: boolean
   /** strokeColor: is an optional prop that indicates the color of timer */
@@ -40,10 +41,10 @@ interface ITimerProps {
 const Timer = (props: ITimerProps) => {
   const {
     buttonStyles = {},
-    circularTimerRadius = 45,
+    circularDimensions = { radius: 45, strokeWidth: 10 },
     controls = false,
     duration,
-    linearTimerWidth = 10,
+    linearDimensions = { width: 300, height: 10 },
     showTimeLeft = true,
     strokeColor = 'black',
     timeLeftTextStyle = {},
@@ -52,7 +53,6 @@ const Timer = (props: ITimerProps) => {
 
   const progress = useSharedValue(0)
   const isRunning = useSharedValue(false)
-  const isPaused = useSharedValue(false)
 
   const startAnimation = (duration: number) => {
     progress.value = withTiming(
@@ -68,50 +68,41 @@ const Timer = (props: ITimerProps) => {
   }
 
   const handleControl = useCallback(
-    (action: 'start' | 'pause' | 'resume') => {
+    (action: 'start' | 'pause' | 'resume' | 'reset') => {
       switch (action) {
-        case 'start': {
+        case 'start':
           isRunning.value = true
-          isPaused.value = false
           startAnimation(duration * 1000)
           break
-        }
-        case 'pause': {
+        case 'pause':
           isRunning.value = false
-          isPaused.value = true
           cancelAnimation(progress)
           break
-        }
-        case 'resume': {
+        case 'resume':
           isRunning.value = true
-          isPaused.value = false
           startAnimation((1 - progress.value) * duration * 1000)
           break
-        }
-        default: {
-          console.warn(`Unexpected action: ${action}`)
+        case 'reset':
+          progress.value = 0
+          isRunning.value = false
           break
-        }
+        default:
+          console.warn(`Unexpected action`)
+          break
       }
     },
     [duration],
   )
 
-  const handleReset = useCallback(() => {
-    progress.value = 0
-    isRunning.value = false
-    isPaused.value = false
-  }, [])
-
   const animatedCircleProps = useAnimatedProps(() => ({
-    strokeDashoffset: progress.value * 2 * Math.PI * circularTimerRadius,
+    strokeDashoffset: progress.value * 2 * Math.PI * (circularDimensions.radius ?? 45),
   }))
 
   const animatedLinearStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: -progress.value * 300 }],
+    transform: [{ translateX: -progress.value * (linearDimensions.width ?? 300) }],
     backgroundColor: strokeColor,
     borderRadius: 10,
-    height: linearTimerWidth,
+    height: linearDimensions.height,
   }))
 
   const reanimatedProps = useAnimatedProps(() => {
@@ -128,8 +119,8 @@ const Timer = (props: ITimerProps) => {
     handleControl('start')
   }, [])
 
-  const handleStart = () => {
-    handleControl('start')
+  const handleReset = () => {
+    handleControl('reset')
   }
 
   const handleResume = () => {
@@ -140,29 +131,33 @@ const Timer = (props: ITimerProps) => {
     handleControl('pause')
   }
 
+  const playIconStyle = useAnimatedStyle(() => {
+    return {
+      opacity: isRunning.value ? withTiming(0) : withTiming(1),
+    }
+  })
+
+  const pauseIconStyle = useAnimatedStyle(() => {
+    return {
+      opacity: isRunning.value ? withTiming(1) : withTiming(0),
+    }
+  })
+
   const renderControlButtons = useMemo(
     () => (
-      <>
-        {!isRunning && !isPaused ? (
-          <TouchableOpacity onPress={handleStart} style={[styles.button, buttonStyles?.container]}>
-            <Text style={[styles.buttonText, buttonStyles?.text]}>Start</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity onPress={handlePause} style={[styles.button, buttonStyles?.container]}>
-            <Text style={[styles.buttonText, buttonStyles?.text]}>Pause</Text>
-          </TouchableOpacity>
-        )}
-        {isPaused && (
-          <TouchableOpacity onPress={handleResume} style={[styles.button, buttonStyles?.container]}>
-            <Text style={[styles.buttonText, buttonStyles?.text]}>Resume</Text>
-          </TouchableOpacity>
-        )}
-        <TouchableOpacity onPress={handleReset} style={[styles.button, buttonStyles?.container]}>
-          <Text style={[styles.buttonText, buttonStyles?.text]}>Reset</Text>
-        </TouchableOpacity>
-      </>
+      <View style={[styles.iconContainer, buttonStyles]}>
+        <View style={styles.icons}>
+          <Animated.View style={playIconStyle}>
+            <PlayIcon onPress={handleResume} />
+          </Animated.View>
+          <Animated.View style={pauseIconStyle}>
+            <PauseIcon onPress={handlePause} />
+          </Animated.View>
+        </View>
+        <ResetIcon onPress={handleReset} />
+      </View>
     ),
-    [isRunning, isPaused, buttonStyles, handleControl, handleReset],
+    [isRunning.value, buttonStyles, handleControl],
   )
 
   const renderTimer = () => {
@@ -170,38 +165,40 @@ const Timer = (props: ITimerProps) => {
       <View
         style={[
           styles.linearContainer,
-          { width: 300, height: linearTimerWidth, borderRadius: 10 },
+          { width: linearDimensions.width, height: linearDimensions.height, borderRadius: 10 },
         ]}>
         <Animated.View style={[styles.linearProgress, animatedLinearStyle]} />
       </View>
     ) : (
       <View style={styles.circularContainer}>
         <Svg
-          width={circularTimerRadius * 2 + 10}
-          height={circularTimerRadius * 2 + 10}
-          viewBox={`0 0 ${circularTimerRadius * 2 + 10} ${circularTimerRadius * 2 + 10}`}>
+          width={(circularDimensions.radius ?? 45) * 2 + 10}
+          height={(circularDimensions.radius ?? 45) * 2 + 10}
+          viewBox={`0 0 ${(circularDimensions.radius ?? 45) * 2 + 10} ${
+            (circularDimensions.radius ?? 45) * 2 + 10
+          }`}>
           <SvgCircle
-            cx={circularTimerRadius + 5}
-            cy={circularTimerRadius + 5}
-            r={circularTimerRadius}
+            cx={(circularDimensions.radius ?? 45) + 5}
+            cy={(circularDimensions.radius ?? 45) + 5}
+            r={circularDimensions.radius ?? 45}
             stroke="#e0e0e0"
-            strokeWidth={10}
+            strokeWidth={circularDimensions.strokeWidth}
             fill="none"
           />
           <AnimatedSvgCircle
-            cx={circularTimerRadius + 5}
-            cy={circularTimerRadius + 5}
-            r={circularTimerRadius}
+            cx={(circularDimensions.radius ?? 45) + 5}
+            cy={(circularDimensions.radius ?? 45) + 5}
+            r={circularDimensions.radius ?? 45}
             stroke={strokeColor}
-            strokeWidth={10}
+            strokeWidth={circularDimensions.strokeWidth}
             fill="none"
-            strokeDasharray={`${2 * Math.PI * circularTimerRadius}`}
+            strokeDasharray={`${2 * Math.PI * (circularDimensions.radius ?? 45)}`}
             animatedProps={animatedCircleProps}
           />
         </Svg>
         {showTimeLeft && (
           <ReanimatedText
-            style={[styles.timeLeftTextLinear, timeLeftTextStyle]}
+            style={[styles.timeLeftTextCircular, timeLeftTextStyle]}
             animatedProps={reanimatedProps}
           />
         )}

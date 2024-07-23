@@ -133,7 +133,11 @@ const App = () => {
         animationType={ModalPreset.SlideInLeft}>
         <Text>This is a slide-in left modal</Text>
       </Modal>
-      <Timer duration={120} type={TimerPreset.Circular} />
+      <Timer
+        duration={120}
+        type={TimerPreset.Circular}
+        circularDimensions={{ radius: 45, strokeWidth: 2 }}
+      />
       <Timer duration={20} type={TimerPreset.Linear} controls />
     </ScrollView>
   )
