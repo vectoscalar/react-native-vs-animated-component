@@ -38,22 +38,21 @@ const Component = () => {
 
 ## Props
 
-| Prop                | Type                                           | Description                                                                                        |
-| ------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| activeTrackStyle    | `Omit<ViewStyle, 'width'>`                     | It is an optional prop that specifies the styles of the active track of the slider.                |
-| duration            | `number`                                       | It is an optional prop which specifies the duration of animation in milliseconds.                  |
-| inactiveTrackStyle  | `Omit<ViewStyle, 'width'> `                    | It is an optional prop that specifies the styles of the inactive track of the slider.              |
-| labelContainerStyle | `ViewStyle`                                    | It is an optional prop that specifies the styles for the label container.                          |
-| labelTextStyle      | `TextStyle`                                    | It is an optional prop that specifies the styles for the label text.                               |
-| max                 | `number`                                       | It is an optional prop that specifies the maximum value for the slider.                            |
-| min                 | `number`                                       | It is an optional prop that specifies the minimum value for the slider.                            |
-| setValue            | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which updates the value state for the slider.                                |
-| sliderHeight        | `number`                                       | It is an optional prop that specifies the height of the slider.                                    |
-| sliderWidth         | `number`                                       | It is an optional prop that specifies the width of the slider.                                     |
-| step                | `number`                                       | It is an optional prop that specifies the increment or decrement in the slider value when sliding. |
-| thumbIcon           | `React.ReactNode`                              | It is an optional prop that specifies the icon for the slider thumb.                               |
-| thumbSize           | `number`                                       | It is an optional prop that specifies the size of the slider thumb.                                |
-| thumbStyle          | `ViewStyle`                                    | It is an optional prop that specifies the styles of the slider thumb.                              |
+| Prop               | Type                                           | Description                                                                                        |
+| ------------------ | ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| activeTrackStyle   | `Omit<ViewStyle, 'width'>`                     | It is an optional prop that specifies the styles of the active track of the slider.                |
+| duration           | `number`                                       | It is an optional prop which specifies the duration of animation in milliseconds.                  |
+| inactiveTrackStyle | `Omit<ViewStyle, 'width'> `                    | It is an optional prop that specifies the styles of the inactive track of the slider.              |
+| max                | `number`                                       | It is an optional prop that specifies the maximum possible value for the slider.                   |
+| min                | `number`                                       | It is an optional prop that specifies the minimum possible value for the slider.                   |
+| setValue           | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which updates the value state for the slider.                                |
+| sliderHeight       | `number`                                       | It is an optional prop that specifies the height of the slider.                                    |
+| sliderWidth        | `number`                                       | It is an optional prop that specifies the width of the slider.                                     |
+| step               | `number`                                       | It is an optional prop that specifies the increment or decrement in the slider value when sliding. |
+| thumbIcon          | `React.ReactNode`                              | It is an optional prop that specifies the icon for the slider thumb.                               |
+| thumbSize          | `number`                                       | It is an optional prop that specifies the size of the slider thumb.                                |
+| thumbStyle         | `ViewStyle`                                    | It is an optional prop that specifies the styles of the slider thumb.                              |
+| value              | `number`                                       | It is an optional prop that specifies the current value of slider.                                 |
 
 <br/>
 <br/>
@@ -96,23 +95,23 @@ const Component = () => {
 
 ## Props
 
-| Prop                | Type                                           | Description                                                                                        |
-| ------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| activeTrackStyle    | `Omit<ViewStyle, 'width'>`                     | It is an optional prop that specifies the styles of the active track of the slider.                |
-| duration            | `number`                                       | It is an optional prop which specifies the duration of animation in milliseconds.                  |
-| inactiveTrackStyle  | `Omit<ViewStyle, 'width'>`                     | It is an optional prop that specifies the styles of the inactive track of the slider.              |
-| labelContainerStyle | `ViewStyle`                                    | It is an optional prop that specifies the styles for the label container.                          |
-| labelTextStyle      | `TextStyle`                                    | It is an optional prop that specifies the styles for the label text.                               |
-| max                 | `number`                                       | It is an optional prop that specifies the maximum value for the slider.                            |
-| min                 | `number`                                       | It is an optional prop that specifies the minimum value for the slider.                            |
-| setMaxValue         | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which sets the maximum value for the slider.                                 |
-| setMinValue         | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which updates the minimum value state for the slider.                        |
-| sliderHeight        | `number`                                       | It is an optional prop that specifies the height of the slider.                                    |
-| sliderWidth         | `number`                                       | It is an optional prop that specifies the width of the slider.                                     |
-| step                | `number`                                       | It is an optional prop that specifies the increment or decrement in the slider value when sliding. |
-| thumbIcon           | `React.ReactNode`                              | It is an optional prop that specifies the icon for the slider thumb.                               |
-| thumbSize           | `number`                                       | It is an optional prop that specifies the size of the slider thumb.                                |
-| thumbStyle          | `ViewStyle`                                    | It is an optional prop that specifies the styles of the slider thumb.                              |
+| Prop               | Type                                           | Description                                                                                        |
+| ------------------ | ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| activeTrackStyle   | `Omit<ViewStyle, 'width'>`                     | It is an optional prop that specifies the styles of the active track of the slider.                |
+| duration           | `number`                                       | It is an optional prop which specifies the duration of animation in milliseconds.                  |
+| inactiveTrackStyle | `Omit<ViewStyle, 'width'>`                     | It is an optional prop that specifies the styles of the inactive track of the slider.              |
+| max                | `number`                                       | It is an optional prop that specifies the maximum possible value for the slider.                   |
+| maxValue           | `number`                                       | It is an optional prop that specifies the current maximum value for the slider.                    |
+| min                | `number`                                       | It is an optional prop that specifies the minimum possible value for the slider.                   |
+| minValue           | `number`                                       | It is an optional prop that specifies the current minimum value for the slider.                    |
+| setMaxValue        | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which sets the maximum value for the slider.                                 |
+| setMinValue        | `React.Dispatch<React.SetStateAction<number>>` | It is a required prop which updates the minimum value state for the slider.                        |
+| sliderHeight       | `number`                                       | It is an optional prop that specifies the height of the slider.                                    |
+| sliderWidth        | `number`                                       | It is an optional prop that specifies the width of the slider.                                     |
+| step               | `number`                                       | It is an optional prop that specifies the increment or decrement in the slider value when sliding. |
+| thumbIcon          | `React.ReactNode`                              | It is an optional prop that specifies the icon for the slider thumb.                               |
+| thumbSize          | `number`                                       | It is an optional prop that specifies the size of the slider thumb.                                |
+| thumbStyle         | `ViewStyle`                                    | It is an optional prop that specifies the styles of the slider thumb.                              |
 
 <br>
 <br>
