@@ -895,11 +895,14 @@ https://github.com/user-attachments/assets/d84c2673-4d8b-46c7-b714-449ba7f4b016
 | Prop                     | Type                                        | Default Value | Required | Description                                                    |
 | ------------------------ | ------------------------------------------- | ------------- | -------- | -------------------------------------------------------------- |
 | buttonStyles             | { container?: ViewStyle; text?: TextStyle } | -             | No       | Custom styles for the timer control buttons                    |
-| circularTimerStrokeColor | string                                      | black         | No       | Stroke color for the circular timer                            |
+| circularDimensions       | { radius?: number; strokeWidth?: number }   | { radius: 45, strokeWidth: 10 } | No | indicates the radius and stroke width of the circular timer|
 | controls                 | boolean                                     | false         | No       | Determines if control buttons (Start, Pause, Reset) are shown  |
-| linearTimerColor         | string                                      | black         | No       | Color for the linear timer                                     |
-| timerType                | TimerPreset                                 | -             | Yes      | Type of the timer (TimerPreset.Linear or TimerPreset.Circular) |
-| totalDurationInSeconds   | number                                      | -             | Yes      | Total duration of the timer in seconds                         |
+|duration             | number                                      | -             | Yes      | Total duration of the timer in seconds                         |
+|linearDimenions      |{ width?: number; height?: number }          |{ width: 300, height: 10 }|Yes | Indicates the width and height of the linear timer | 
+|showTimeLeft         | boolean                                     | true                     | No | Indicates whether to display time left on screen or not   |
+|strokeColor          |string                                       |black                     |No  | Indicates the color of timer       |
+|timeLeftTextStyle    |TextSTyle                                    |-                         |No  | Prop to style the time left text of the timer            |
+| type                | TimerPreset                                 | -             | Yes      | Type of the timer (TimerPreset.Linear or TimerPreset.Circular) |
 
 ## Usage
 
