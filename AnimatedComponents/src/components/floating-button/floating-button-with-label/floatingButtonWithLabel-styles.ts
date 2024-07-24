@@ -61,7 +61,7 @@ const styles: IStyleProps = StyleSheet.create({
     height: Sizes.Size_26,
     width: Sizes.Size_26,
   },
-  
+
   text: {
     color: palette.neutral[0],
     fontSize: Sizes.Size_18,
