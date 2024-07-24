@@ -15,9 +15,10 @@ import {
   Slider,
   SpringButton,
   SwipeButton,
+  Timer,
   TriDotLoader,
 } from '@components'
-import { ModalPreset, RemixIcons, TriDotLoaderPreset } from '@constants'
+import { ModalPreset, RemixIcons, TimerPreset, TriDotLoaderPreset } from '@constants'
 import { Sizes, palette } from '@theme'
 
 import AccordionDemo from './src/components/accordion/AccordionDemo'
@@ -158,6 +159,11 @@ const App = () => {
             thumbIcon={<Icon name="hive" size={30} color="black" />}
             thumbSize={30}
           />
+        </View>
+        <View style={styles.childrenContainer}>
+          <Text style={styles.title}>Timer</Text>
+          <Timer duration={100} type={TimerPreset.Circular} />
+          <Timer duration={10} type={TimerPreset.Linear} controls />
         </View>
         <View style={styles.childrenContainer}>
           <Text style={styles.title}>Modals</Text>

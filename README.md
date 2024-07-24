@@ -876,3 +876,56 @@ The Search Bar component is an expandable search bar component which can expand 
 | **SearchIcon**              | React.ReactNode        | It is an optional prop which holds the icon to be displayed.                                   |
 | **searchValue**             | string                 | It is a prop which holds the value of the search bar.                                          |
 | **wrapperContainerStyle**   | DefaultStyle           | It is an optional prop which holds the style of the main container which wraps the search bar. |
+
+# React Native Timer
+
+## Features
+
+- **Customizable**: Easily style the timer and its control buttons.
+- **Dual Timer Types**: Supports both linear and circular timers.
+- **Controls**: Optional start, pause, resume, and reset controls.
+- **Animations**: Smooth animations
+
+## Preview
+
+https://github.com/user-attachments/assets/d84c2673-4d8b-46c7-b714-449ba7f4b016
+
+## Props
+
+| Prop                     | Type                                        | Default Value | Required | Description                                                    |
+| ------------------------ | ------------------------------------------- | ------------- | -------- | -------------------------------------------------------------- |
+| buttonStyles             | { container?: ViewStyle; text?: TextStyle } | -             | No       | Custom styles for the timer control buttons                    |
+| circularDimensions       | { radius?: number; strokeWidth?: number }   | { radius: 45, strokeWidth: 10 } | No | indicates the radius and stroke width of the circular timer|
+| controls                 | boolean                                     | false         | No       | Determines if control buttons (Start, Pause, Reset) are shown  |
+|duration             | number                                      | -             | Yes      | Total duration of the timer in seconds                         |
+|linearDimenions      |{ width?: number; height?: number }          |{ width: 300, height: 10 }|Yes | Indicates the width and height of the linear timer | 
+|showTimeLeft         | boolean                                     | true                     | No | Indicates whether to display time left on screen or not   |
+|strokeColor          |string                                       |black                     |No  | Indicates the color of timer       |
+|timeLeftTextStyle    |TextSTyle                                    |-                         |No  | Prop to style the time left text of the timer            |
+| type                | TimerPreset                                 | -             | Yes      | Type of the timer (TimerPreset.Linear or TimerPreset.Circular) |
+
+## Usage
+
+```typescript
+import React from "react";
+import Timer from "@components";
+import { TimerPreset } from "@constants";
+
+const App = () => {
+  return (
+    <Timer
+      buttonStyles={{
+        container: { backgroundColor: "blue" },
+        text: { color: "white" },
+      }}
+      circularTimerStrokeColor="red"
+      controls={true}
+      linearTimerColor="green"
+      timerType={TimerPreset.Circular} // or TimerPreset.Linear
+      totalDurationInSeconds={60}
+    />
+  );
+};
+
+export default App;
+```

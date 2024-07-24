@@ -17,3 +17,8 @@ export enum ModalPreset {
   SlideIn = 'SLIDE_IN',
   SlideInLeft = 'SLIDE_IN_LEFT',
 }
+
+export enum TimerPreset {
+  Linear = 'LINEAR',
+  Circular = 'CIRCULAR',
+}
