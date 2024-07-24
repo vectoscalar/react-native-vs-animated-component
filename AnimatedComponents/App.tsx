@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useMemo, useState } from 'react'
 import { Button, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import {
   FloatingButtonDemo,
@@ -17,7 +18,7 @@ import {
   Timer,
   TriDotLoader,
 } from '@components'
-import { ModalPreset, RemixIcons, SliderType, TimerPreset, TriDotLoaderPreset } from '@constants'
+import { ModalPreset, RemixIcons, TimerPreset, TriDotLoaderPreset } from '@constants'
 import { Sizes, palette } from '@theme'
 
 import AccordionDemo from './src/components/accordion/AccordionDemo'
@@ -31,6 +32,9 @@ const App = () => {
   const [slideInVisible, setSlideInVisible] = useState(false)
   const [scaleVisible, setScaleVisible] = useState(false)
   const [slideInLeftVisible, setSlideInLeftVisible] = useState(false)
+  const [minValue, setMinValue] = useState(0)
+  const [maxValue, setMaxValue] = useState(100)
+  const [value, setValue] = useState(0)
   const [progress, setProgress] = useState(0)
 
   const onPress = () => {
@@ -131,12 +135,29 @@ const App = () => {
         </View>
         <View style={styles.childrenContainer}>
           <Text style={styles.title}>Slider</Text>
-          <Slider
-            type={SliderType.SingleValueSlider}
-            sliderWidth={300}
-            min={0}
-            max={100}
-            step={5}
+          <Slider.Single setValue={setValue} />
+          <Slider.Single
+            setValue={setValue}
+            thumbIcon={<Icon name="hive" size={30} color="black" />}
+            thumbSize={30}
+            activeTrackStyle={{ backgroundColor: 'red' }}
+            inactiveTrackStyle={{ backgroundColor: 'plum' }}
+          />
+          <Slider.Range
+            onMinValSwipeEnd={setMinValue}
+            onMaxValSwipeEnd={setMaxValue}
+            minValue={minValue}
+            maxValue={maxValue}
+          />
+          <Slider.Range
+            activeTrackStyle={{ backgroundColor: 'red' }}
+            inactiveTrackStyle={{ backgroundColor: 'plum' }}
+            maxValue={maxValue}
+            minValue={minValue}
+            onMaxValSwipeEnd={setMaxValue}
+            onMinValSwipeEnd={setMinValue}
+            thumbIcon={<Icon name="hive" size={30} color="black" />}
+            thumbSize={30}
           />
         </View>
         <View style={styles.childrenContainer}>
@@ -191,7 +212,7 @@ const styles = StyleSheet.create({
     borderBottomColor: palette.black,
     display: 'flex',
     flexDirection: 'column',
-    gap: Sizes.Size_10,
+    gap: Sizes.Size_50,
     marginBottom: Sizes.Size_16,
     paddingBottom: Sizes.Size_16,
   },

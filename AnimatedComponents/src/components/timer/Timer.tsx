@@ -131,33 +131,31 @@ const Timer = (props: ITimerProps) => {
     handleControl('pause')
   }
 
-  const playIconStyle = useAnimatedStyle(() => {
-    return {
-      opacity: isRunning.value ? withTiming(0) : withTiming(1),
-    }
-  })
+  const playIconStyle = useAnimatedStyle(() => ({
+    opacity: isRunning.value ? withTiming(0) : withTiming(1),
+    zIndex: isRunning.value ? -1 : 1,
+  }))
 
-  const pauseIconStyle = useAnimatedStyle(() => {
-    return {
-      opacity: isRunning.value ? withTiming(1) : withTiming(0),
-    }
-  })
+  const pauseIconStyle = useAnimatedStyle(() => ({
+    opacity: isRunning.value ? withTiming(1) : withTiming(0),
+    zIndex: isRunning.value ? 1 : -1,
+  }))
 
   const renderControlButtons = useMemo(
     () => (
       <View style={[styles.iconContainer, buttonStyles]}>
-        <View style={styles.icons}>
-          <Animated.View style={playIconStyle}>
-            <PlayIcon onPress={handleResume} />
-          </Animated.View>
-          <Animated.View style={pauseIconStyle}>
+        <View style={styles.iconOverlayContainer}>
+          <Animated.View style={[styles.iconOverlay, pauseIconStyle]}>
             <PauseIcon onPress={handlePause} />
+          </Animated.View>
+          <Animated.View style={[styles.iconOverlay, playIconStyle]}>
+            <PlayIcon onPress={handleResume} />
           </Animated.View>
         </View>
         <ResetIcon onPress={handleReset} />
       </View>
     ),
-    [isRunning.value, buttonStyles, handleControl],
+    [isRunning.value, buttonStyles, handlePause, handleResume, handleReset],
   )
 
   const renderTimer = () => {

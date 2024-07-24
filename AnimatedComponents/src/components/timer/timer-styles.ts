@@ -53,11 +53,28 @@ const styles = StyleSheet.create({
   },
 
   iconContainer: {
+    alignItems: 'center',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginHorizontal: 20,
     marginTop: 0,
+  },
+
+  iconOverlayContainer: {
+    height: 50,
+    position: 'relative',
+    width: 50,
+  },
+
+  iconOverlay: {
+    alignItems: 'center',
+    bottom: 0,
+    justifyContent: 'center',
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
   },
 
   icons: {
