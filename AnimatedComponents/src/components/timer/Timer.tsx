@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo } from 'react'
-import { Text, TextInput, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native'
+import { TextInput, TextStyle, View, ViewStyle } from 'react-native'
 import Animated, {
   Easing,
   cancelAnimation,
@@ -70,25 +70,30 @@ const Timer = (props: ITimerProps) => {
   const handleControl = useCallback(
     (action: 'start' | 'pause' | 'resume' | 'reset') => {
       switch (action) {
-        case 'start':
+        case 'start': {
           isRunning.value = true
           startAnimation(duration * 1000)
           break
-        case 'pause':
+        }
+        case 'pause': {
           isRunning.value = false
           cancelAnimation(progress)
           break
-        case 'resume':
+        }
+        case 'resume': {
           isRunning.value = true
           startAnimation((1 - progress.value) * duration * 1000)
           break
-        case 'reset':
+        }
+        case 'reset': {
           progress.value = 0
           isRunning.value = false
           break
-        default:
+        }
+        default: {
           console.warn(`Unexpected action`)
           break
+        }
       }
     },
     [duration],

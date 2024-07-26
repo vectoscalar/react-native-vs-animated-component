@@ -72,7 +72,7 @@ const Modal = (props: IModalProps) => {
         break
       }
       default: {
-        console.warn(`Unknown modal type: ${animationType}`)
+        console.warn(`Unknown modal type:`, animationType)
         break
       }
     }
