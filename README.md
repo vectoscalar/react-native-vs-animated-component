@@ -15,6 +15,35 @@ Tired of spending countless hours crafting complex animations for your React Nat
 ## Key Components:
 Slider | Progress bar | Infinite progress bar | Floating button | Select | Accordion | Modal | Icon Transition button | Swipe button | Progress button | Spring button | Tri-dot loader |  Search bar | Timer
 
+<img
+  src="./AnimatedComponents/src/assets/gifs/FloatingButtonWithLabel.gif"
+  width="250"
+  height="500"
+/>;
+<img src="./AnimatedComponents/src/assets/gifs/CircularProgressBar.gif" width="250" height="500" />;
+<img
+  src="./AnimatedComponents/src/assets/gifs/InfiniteLinearProgressBar.gif"
+  width="250"
+  height="500"
+/>;
+<img
+  src="./AnimatedComponents/src/assets/gifs/InfiniteCircularProgressBar.gif"
+  width="250"
+  height="500"
+/>;
+<img
+  src="./AnimatedComponents/src/assets/gifs/CircularFloatingButton.gif"
+  width="250"
+  height="500"
+/>;
+<img src="./AnimatedComponents/src/assets/gifs/SelectBox.gif" width="250" height="500" />;
+<img
+  src="https://github.com/user-attachments/assets/ac939947-d3e6-43de-a341-ac203620cee6"
+  width="250"
+  height="500"
+/>;
+<img src="./AnimatedComponents/src/assets/gifs/IconTransitionButton.gif" alt="Icon Transition Button" width="300" height="500">
+<img src="https://github.com/user-attachments/assets/742a32e7-d938-4106-b846-c82a7ded5c88" width="300" height="500"/>
 
 # Slider
 
