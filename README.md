@@ -2,7 +2,7 @@
 
 Tired of spending countless hours crafting complex animations for your React Native app? react-native-vs-animated-component is your solution. This library offers a collection of meticulously designed, pre-built components that seamlessly integrate animations into your app, enhancing user experience and developer efficiency.
 
-## Key Benefits:
+## Key Benefits
 
 **Accelerated Development:** Save time and effort by using pre-built components with built-in animations.
 
@@ -12,7 +12,7 @@ Tired of spending countless hours crafting complex animations for your React Nat
 
 **Performance Optimized:** Components are designed for optimal performance using React Native's Animated API.
 
-## Key Components:
+## Key Components
 Slider | Progress bar | Infinite progress bar | Floating button | Select | Accordion | Modal | Icon Transition button | Swipe button | Progress button | Spring button | Tri-dot loader |  Search bar | Timer
 
 <img
@@ -44,6 +44,20 @@ Slider | Progress bar | Infinite progress bar | Floating button | Select | Accor
 />;
 <img src="./AnimatedComponents/src/assets/gifs/IconTransitionButton.gif" alt="Icon Transition Button" width="300" height="500">
 <img src="https://github.com/user-attachments/assets/742a32e7-d938-4106-b846-c82a7ded5c88" width="300" height="500"/>
+
+## Installation:
+
+> Note: This package requires **[@react-native-reanimated](https://www.npmjs.com/package/react-native-reanimated)**
+
+```bash
+npm install react-native-vs-animated-component --save
+```
+OR
+```bash
+yarn add react-native-vs-animated-component --save
+```
+
+
 
 # Slider
 
