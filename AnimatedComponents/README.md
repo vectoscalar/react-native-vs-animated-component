@@ -46,7 +46,7 @@ Slider | Progress bar | Infinite progress bar | Floating button | Select | Accor
 <img src="./src/assets/gifs/IconTransitionButton.gif" alt="Icon Transition Button" width="300" height="500">
 <img src="https://github.com/user-attachments/assets/742a32e7-d938-4106-b846-c82a7ded5c88" width="300" height="500"/>
 
-## Installation:
+## Installation
 
 > Note: This package requires **[@react-native-reanimated](https://www.npmjs.com/package/react-native-reanimated)**
 
