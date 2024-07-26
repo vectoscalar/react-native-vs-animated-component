@@ -1,7 +1,6 @@
 {
-  "name": "AnimatedComponents",
+  "name": "react-native-vs-animated-component",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -13,6 +12,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss}\"",
     "pods": "cd ios && pod install && cd .."
   },
+  "license": "MIT",
   "dependencies": {
     "@jest/globals": "^29.7.0",
     "@react-navigation/native": "^6.1.17",
@@ -67,6 +67,10 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vectoscalar/react-native-vs-animated-component.git"
   },
   "husky": {
     "hooks": {

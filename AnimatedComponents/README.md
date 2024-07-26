@@ -13,36 +13,37 @@ Tired of spending countless hours crafting complex animations for your React Nat
 **Performance Optimized:** Components are designed for optimal performance using React Native's Animated API.
 
 ## Key Components
-Slider | Progress bar | Infinite progress bar | Floating button | Select | Accordion | Modal | Icon Transition button | Swipe button | Progress button | Spring button | Tri-dot loader |  Search bar | Timer
+
+Slider | Progress bar | Infinite progress bar | Floating button | Select | Accordion | Modal | Icon Transition button | Swipe button | Progress button | Spring button | Tri-dot loader | Search bar | Timer
 
 <img
-  src="./AnimatedComponents/src/assets/gifs/FloatingButtonWithLabel.gif"
+  src="./src/assets/gifs/FloatingButtonWithLabel.gif"
   width="250"
   height="500"
 />;
-<img src="./AnimatedComponents/src/assets/gifs/CircularProgressBar.gif" width="250" height="500" />;
+<img src="./src/assets/gifs/CircularProgressBar.gif" width="250" height="500" />;
 <img
-  src="./AnimatedComponents/src/assets/gifs/InfiniteLinearProgressBar.gif"
-  width="250"
-  height="500"
-/>;
-<img
-  src="./AnimatedComponents/src/assets/gifs/InfiniteCircularProgressBar.gif"
+  src="./src/assets/gifs/InfiniteLinearProgressBar.gif"
   width="250"
   height="500"
 />;
 <img
-  src="./AnimatedComponents/src/assets/gifs/CircularFloatingButton.gif"
+  src="./src/assets/gifs/InfiniteCircularProgressBar.gif"
   width="250"
   height="500"
 />;
-<img src="./AnimatedComponents/src/assets/gifs/SelectBox.gif" width="250" height="500" />;
+<img
+  src="./src/assets/gifs/CircularFloatingButton.gif"
+  width="250"
+  height="500"
+/>;
+<img src="./src/assets/gifs/SelectBox.gif" width="250" height="500" />;
 <img
   src="https://github.com/user-attachments/assets/ac939947-d3e6-43de-a341-ac203620cee6"
   width="250"
   height="500"
 />;
-<img src="./AnimatedComponents/src/assets/gifs/IconTransitionButton.gif" alt="Icon Transition Button" width="300" height="500">
+<img src="./src/assets/gifs/IconTransitionButton.gif" alt="Icon Transition Button" width="300" height="500">
 <img src="https://github.com/user-attachments/assets/742a32e7-d938-4106-b846-c82a7ded5c88" width="300" height="500"/>
 
 ## Installation:
@@ -52,18 +53,18 @@ Slider | Progress bar | Infinite progress bar | Floating button | Select | Accor
 ```bash
 npm install react-native-vs-animated-component --save
 ```
+
 OR
+
 ```bash
 yarn add react-native-vs-animated-component --save
 ```
-
-
 
 # Slider
 
 ## Single Value Slider
 
-<img src="./AnimatedComponents/src/assets/gifs/SingleValueSlider.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/SingleValueSlider.gif" width="250" height="500"/>
 
 ## Features
 
@@ -73,11 +74,11 @@ yarn add react-native-vs-animated-component --save
 ## Usage
 
 ```jsx
-import Slider from "react-native-animated-components";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Slider from 'react-native-animated-components'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const Component = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(0)
 
   return (
     <View>
@@ -85,12 +86,12 @@ const Component = () => {
       <Slider.SingleValue
         setValue={setValue}
         thumbIcon={<Icon name="hive" size={35} color="black" />}
-        activeTrackStyle={{ backgroundColor: "red" }}
-        inactiveTrackStyle={{ backgroundColor: "plum" }}
+        activeTrackStyle={{ backgroundColor: 'red' }}
+        inactiveTrackStyle={{ backgroundColor: 'plum' }}
       />
     </View>
-  );
-};
+  )
+}
 ```
 
 ## Props
@@ -116,7 +117,7 @@ const Component = () => {
 
 ## Range Slider
 
-<img src="./AnimatedComponents/src/assets/gifs/RangeSlider.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/RangeSlider.gif" width="250" height="500"/>
 
 ## Features
 
@@ -126,12 +127,12 @@ const Component = () => {
 ## Usage
 
 ```jsx
-import Slider from "react-native-animated-components";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Slider from 'react-native-animated-components'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const Component = () => {
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(100);
+  const [minValue, setMinValue] = useState(0)
+  const [maxValue, setMaxValue] = useState(100)
 
   return (
     <View>
@@ -140,12 +141,12 @@ const Component = () => {
         setMinValue={setMinValue}
         setMaxValue={setMaxValue}
         thumbIcon={<Icon name="hive" size={35} color="black" />}
-        activeTrackStyle={{ backgroundColor: "red" }}
-        inactiveTrackStyle={{ backgroundColor: "plum" }}
+        activeTrackStyle={{ backgroundColor: 'red' }}
+        inactiveTrackStyle={{ backgroundColor: 'plum' }}
       />
     </View>
-  );
-};
+  )
+}
 ```
 
 ## Props
@@ -177,7 +178,7 @@ const Component = () => {
 
 - It shows progress in form of a linear bar
 
-<img src="./AnimatedComponents/src/assets/gifs/LinearProgresssBar.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/LinearProgresssBar.gif" width="250" height="500"/>
 
 ## Features
 
@@ -187,24 +188,24 @@ const Component = () => {
 ## Usage
 
 ```jsx
-import ProgressBar from "react-native-animated-components";
+import ProgressBar from 'react-native-animated-components'
 
 const Component = () => {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress((prevProgress) => {
-        const newProgress = prevProgress + 10;
-        return newProgress > 100 ? 0 : newProgress;
-      });
-    }, 1000);
+      setProgress(prevProgress => {
+        const newProgress = prevProgress + 10
+        return newProgress > 100 ? 0 : newProgress
+      })
+    }, 1000)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
 
-  return <ProgressBar.Linear value={progress} maxValue={100} />;
-};
+  return <ProgressBar.Linear value={progress} maxValue={100} />
+}
 ```
 
 ## Props
@@ -227,7 +228,7 @@ const Component = () => {
 
 - It shows progress in form of a circular bar
 
-<img src="./AnimatedComponents/src/assets/gifs/CircularProgressBar.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/CircularProgressBar.gif" width="250" height="500"/>
 
 ## Features
 
@@ -237,24 +238,24 @@ const Component = () => {
 ## Usage
 
 ```jsx
-import ProgressBar from "react-native-animated-components";
+import ProgressBar from 'react-native-animated-components'
 
 const Component = () => {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress((prevProgress) => {
-        const newProgress = prevProgress + 10;
-        return newProgress > 100 ? 0 : newProgress;
-      });
-    }, 1000);
+      setProgress(prevProgress => {
+        const newProgress = prevProgress + 10
+        return newProgress > 100 ? 0 : newProgress
+      })
+    }, 1000)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
 
-  return <ProgressBar.Circular value={progress} maxValue={100} />;
-};
+  return <ProgressBar.Circular value={progress} maxValue={100} />
+}
 ```
 
 ## Props
@@ -278,7 +279,7 @@ const Component = () => {
 
 - It provides an animated, continuously progressing bar to indicate loading.
 
-<img src="./AnimatedComponents/src/assets/gifs/InfiniteLinearProgressBar.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/InfiniteLinearProgressBar.gif" width="250" height="500"/>
 
 ## Features
 
@@ -288,11 +289,11 @@ const Component = () => {
 ## Usage
 
 ```jsx
-import ProgressBar from "react-native-animated-components";
+import ProgressBar from 'react-native-animated-components'
 
 const Component = () => {
-  return <ProgressBar.InfiniteLinear />;
-};
+  return <ProgressBar.InfiniteLinear />
+}
 ```
 
 ## Props
@@ -312,7 +313,7 @@ const Component = () => {
 
 - It provides an provides a continuous, animated circular indicator for loading.
 
-<img src="./AnimatedComponents/src/assets/gifs/InfiniteCircularProgressBar.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/InfiniteCircularProgressBar.gif" width="250" height="500"/>
 
 ## Features
 
@@ -322,11 +323,11 @@ const Component = () => {
 ## Usage
 
 ```jsx
-import ProgressBar from "react-native-animated-components";
+import ProgressBar from 'react-native-animated-components'
 
 const Component = () => {
-  return <ProgressBar.InfiniteCircular />;
-};
+  return <ProgressBar.InfiniteCircular />
+}
 ```
 
 ## Props
@@ -346,25 +347,25 @@ const Component = () => {
 
 ### Floating Button All Variants
 
-<img src="./AnimatedComponents/src/assets/gifs/FloatingButton.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/FloatingButton.gif" width="250" height="500"/>
 
 <br/>
 
 ### Floating Button With Icon
 
-<img src="./AnimatedComponents/src/assets/gifs/FloatingButtonWithIcon.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/FloatingButtonWithIcon.gif" width="250" height="500"/>
 
 <br/>
 
 ### Floating Button With Label
 
-<img src="./AnimatedComponents/src/assets/gifs/FloatingButtonWithLabel.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/FloatingButtonWithLabel.gif" width="250" height="500"/>
 
 <br/>
 
 ### Circular Floating Button
 
-<img src="./AnimatedComponents/src/assets/gifs/CircularFloatingButton.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/CircularFloatingButton.gif" width="250" height="500"/>
 
 ## Features
 
@@ -427,7 +428,7 @@ const icons = [
 
 # Select
 
-<img src="./AnimatedComponents/src/assets/gifs/SelectBox.gif" width="250" height="500"/>
+<img src="./src/assets/gifs/SelectBox.gif" width="250" height="500"/>
 
 ## Features
 
@@ -492,32 +493,29 @@ The Accordion component lets users show and hide sections of related content on 
 ```jsx
 <Accordion showSingleItemAtOnce={false}>
   <Accordion.Item id={1} title="FAQ">
-    <View style={{ padding: 20, backgroundColor: "#E8C5E5" }}>
-      <Text style={{ fontFamily: "Robot-Medium", letterSpacing: 1 }}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore officia
-        nostrum libero similique iste cumque, perspiciatis quasi exercitationem,
-        suscipit voluptatum autem, fuga maiores? Saepe, vitae perspiciatis.
-        Cumque consequatur facilis incidunt.
+    <View style={{ padding: 20, backgroundColor: '#E8C5E5' }}>
+      <Text style={{ fontFamily: 'Robot-Medium', letterSpacing: 1 }}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore officia nostrum libero
+        similique iste cumque, perspiciatis quasi exercitationem, suscipit voluptatum autem, fuga
+        maiores? Saepe, vitae perspiciatis. Cumque consequatur facilis incidunt.
       </Text>
     </View>
   </Accordion.Item>
   <Accordion.Item id={2} title="FAQ">
-    <View style={{ padding: 20, backgroundColor: "#E8C5E5" }}>
-      <Text style={{ fontFamily: "Robot-Medium", letterSpacing: 1 }}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore officia
-        nostrum libero similique iste cumque, perspiciatis quasi exercitationem,
-        suscipit voluptatum autem, fuga maiores? Saepe, vitae perspiciatis.
-        Cumque consequatur facilis incidunt.
+    <View style={{ padding: 20, backgroundColor: '#E8C5E5' }}>
+      <Text style={{ fontFamily: 'Robot-Medium', letterSpacing: 1 }}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore officia nostrum libero
+        similique iste cumque, perspiciatis quasi exercitationem, suscipit voluptatum autem, fuga
+        maiores? Saepe, vitae perspiciatis. Cumque consequatur facilis incidunt.
       </Text>
     </View>
   </Accordion.Item>
   <Accordion.Item id={3} title="FAQ">
-    <View style={{ padding: 20, backgroundColor: "#E8C5E5" }}>
-      <Text style={{ fontFamily: "Robot-Medium", letterSpacing: 1 }}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore officia
-        nostrum libero similique iste cumque, perspiciatis quasi exercitationem,
-        suscipit voluptatum autem, fuga maiores? Saepe, vitae perspiciatis.
-        Cumque consequatur facilis incidunt.
+    <View style={{ padding: 20, backgroundColor: '#E8C5E5' }}>
+      <Text style={{ fontFamily: 'Robot-Medium', letterSpacing: 1 }}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore officia nostrum libero
+        similique iste cumque, perspiciatis quasi exercitationem, suscipit voluptatum autem, fuga
+        maiores? Saepe, vitae perspiciatis. Cumque consequatur facilis incidunt.
       </Text>
     </View>
   </Accordion.Item>
@@ -623,7 +621,7 @@ export default App;
 
 # Icon Transition Button
 
-<img src="./AnimatedComponents/src/assets/gifs/IconTransitionButton.gif" alt="Icon Transition Button" width="300" height="500">
+<img src="./src/assets/gifs/IconTransitionButton.gif" alt="Icon Transition Button" width="300" height="500">
 
 ## Features
 
@@ -636,13 +634,13 @@ export default App;
 ## Usage
 
 ```jsx
-import IconTransitionButton from "react-native-animated-components";
+import IconTransitionButton from 'react-native-animated-components'
 
-<IconTransitionButton
+;<IconTransitionButton
   onPress={async () => {
     // Perform some async operation
-    const success = await someAsyncFunction();
-    return success;
+    const success = await someAsyncFunction()
+    return success
   }}
   startIcon={<StartIconComponent />}
   failedLabel="Payment Failed"
@@ -652,7 +650,7 @@ import IconTransitionButton from "react-native-animated-components";
   successIcon={<SuccessIconComponent />}
   isDisabled={false}
   isLoading={false}
-/>;
+/>
 ```
 
 | Prop         | Type                                 | Values                      | Description                                                                                                 |
@@ -675,7 +673,7 @@ import IconTransitionButton from "react-native-animated-components";
 
 # Swipe Button
 
-<img src="./AnimatedComponents/src/assets/gifs/SwipeButton.gif" alt="Description of GIF" width="300" height="500">
+<img src="./src/assets/gifs/SwipeButton.gif" alt="Description of GIF" width="300" height="500">
 
 ## Features
 
@@ -685,56 +683,56 @@ import IconTransitionButton from "react-native-animated-components";
 ## Usage
 
 ```jsx
-import SwipeButton from "react-native-animated-components";
+import SwipeButton from 'react-native-animated-components'
 
-const gradientWaveColor = useMemo(() => ["#1A63C5", "#1A63C5"], []);
-const thumbColors = useMemo(() => ["#1A63C5", "#1A63C5"], []);
+const gradientWaveColor = useMemo(() => ['#1A63C5', '#1A63C5'], [])
+const thumbColors = useMemo(() => ['#1A63C5', '#1A63C5'], [])
 
 const taskStatusData = useMemo(
   () => ({
     fail: {
-      text: "Failed",
+      text: 'Failed',
       icon: RemixIcons.FILLED_CLOSE_CIRCLE,
-      iconColor: "white",
-      waveColor: ["#D54D49", "#D54D49"],
+      iconColor: 'white',
+      waveColor: ['#D54D49', '#D54D49'],
     },
     success: {
-      text: "Successfully",
+      text: 'Successfully',
       icon: RemixIcons.CHECKBOX_CIRCLE_FILLED,
-      iconColor: "white",
-      waveColor: ["#59B359", "#59B359"],
+      iconColor: 'white',
+      waveColor: ['#59B359', '#59B359'],
     },
   }),
-  []
-);
+  [],
+)
 
 const handleSubmitBtnPress = () => {
   try {
-    return true;
+    return true
   } catch {
-    return false;
+    return false
   }
-};
+}
 
-<SwipeButton
+;<SwipeButton
   buttonInitialText="Swipe to complete"
-  gradientWaveColor={["#4c669f", "#3b5998", "#192f6a"]}
+  gradientWaveColor={['#4c669f', '#3b5998', '#192f6a']}
   isDisabled={false}
   onSwipeComplete={async () => {
     // Simulate async operation
-    const success = await someAsyncOperation();
-    return success;
+    const success = await someAsyncOperation()
+    return success
   }}
-  onTaskComplete={(isSuccess) => {
+  onTaskComplete={isSuccess => {
     // Handle task completion
-    console.log("Task completed:", isSuccess);
+    console.log('Task completed:', isSuccess)
   }}
   taskStatusData={{
-    success: { waveColor: ["#00ff00"] },
-    fail: { waveColor: ["#ff0000"] },
+    success: { waveColor: ['#00ff00'] },
+    fail: { waveColor: ['#ff0000'] },
   }}
-  thumbColors={["#ffffff", "#000000"]}
-/>;
+  thumbColors={['#ffffff', '#000000']}
+/>
 ```
 
 ## Props
@@ -757,7 +755,7 @@ const handleSubmitBtnPress = () => {
 
 # Progress Button
 
-<img src="./AnimatedComponents/src/assets/gifs/ProgressButton.gif" alt="Description of GIF" width="300" height="500">
+<img src="./src/assets/gifs/ProgressButton.gif" alt="Description of GIF" width="300" height="500">
 
 ## Features
 
@@ -767,23 +765,23 @@ const handleSubmitBtnPress = () => {
 ## Usage
 
 ```jsx
-import ProgressButton from "react-native-animated-components";
+import ProgressButton from 'react-native-animated-components'
 
-const [isLoading, setIsLoading] = useState(false);
+const [isLoading, setIsLoading] = useState(false)
 
 const onPress = () => {
-  setIsLoading(true);
-  setTimeout(() => setIsLoading(false), 3000);
-};
+  setIsLoading(true)
+  setTimeout(() => setIsLoading(false), 3000)
+}
 
-<ProgressButton
+;<ProgressButton
   isLoading={isLoading}
   onPress={onPress}
   label="Submit"
   buttonContainerStyle={{
     marginVertical: 20,
   }}
-/>;
+/>
 ```
 
 ## Props
@@ -806,7 +804,7 @@ const onPress = () => {
 
 # Spring Button
 
-<img src="./AnimatedComponents/src/assets/gifs/SpringButton.gif" alt="Description of GIF" width="300" height="500">
+<img src="./src/assets/gifs/SpringButton.gif" alt="Description of GIF" width="300" height="500">
 
 ## Features
 
@@ -816,13 +814,13 @@ const onPress = () => {
 ## Usage
 
 ```jsx
-import SpringButton from "react-native-animated-components";
+import SpringButton from 'react-native-animated-components'
 
 const onPress = () => {
-  console.log("Button Pressed");
-};
+  console.log('Button Pressed')
+}
 
-<SpringButton label="Press me" onPress={onPress} />;
+;<SpringButton label="Press me" onPress={onPress} />
 ```
 
 ## Props
@@ -843,7 +841,7 @@ const onPress = () => {
 
 # Tri-Dot Loader
 
-<img src="./AnimatedComponents/src/assets/gifs/Loader.gif" alt="Description of GIF" width="300" height="500">
+<img src="./src/assets/gifs/Loader.gif" alt="Description of GIF" width="300" height="500">
 
 ## Features
 
@@ -853,9 +851,9 @@ const onPress = () => {
 ## Usage
 
 ```jsx
-import TriDotLoader from "react-native-animated-components";
+import TriDotLoader from 'react-native-animated-components'
 
-<TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />;
+;<TriDotLoader loaderPreset={TriDotLoaderPreset.Large} />
 ```
 
 ## Props
@@ -919,31 +917,32 @@ https://github.com/user-attachments/assets/d84c2673-4d8b-46c7-b714-449ba7f4b016
 
 ## Props
 
-| Prop                     | Type                                        | Default Value | Required | Description                                                    |
-| ------------------------ | ------------------------------------------- | ------------- | -------- | -------------------------------------------------------------- |
-| buttonStyles             | { container?: ViewStyle; text?: TextStyle } | -             | No       | Custom styles for the timer control buttons                    |
-| circularDimensions       | { radius?: number; strokeWidth?: number }   | { radius: 45, strokeWidth: 10 } | No | indicates the radius and stroke width of the circular timer|
-| controls                 | boolean                                     | false         | No       | Determines if control buttons (Start, Pause, Reset) are shown  |
-|duration             | number                                      | -             | Yes      | Total duration of the timer in seconds                         |
-|linearDimenions      |{ width?: number; height?: number }          |{ width: 300, height: 10 }|Yes | Indicates the width and height of the linear timer | 
-|showTimeLeft         | boolean                                     | true                     | No | Indicates whether to display time left on screen or not   |
-|strokeColor          |string                                       |black                     |No  | Indicates the color of timer       |
-|timeLeftTextStyle    |TextSTyle                                    |-                         |No  | Prop to style the time left text of the timer            |
-| type                | TimerPreset                                 | -             | Yes      | Type of the timer (TimerPreset.Linear or TimerPreset.Circular) |
+| Prop               | Type                                        | Default Value                   | Required | Description                                                    |
+| ------------------ | ------------------------------------------- | ------------------------------- | -------- | -------------------------------------------------------------- |
+| buttonStyles       | { container?: ViewStyle; text?: TextStyle } | -                               | No       | Custom styles for the timer control buttons                    |
+| circularDimensions | { radius?: number; strokeWidth?: number }   | { radius: 45, strokeWidth: 10 } | No       | indicates the radius and stroke width of the circular timer    |
+| controls           | boolean                                     | false                           | No       | Determines if control buttons (Start, Pause, Reset) are shown  |
+| duration           | number                                      | -                               | Yes      | Total duration of the timer in seconds                         |
+| linearDimenions    | { width?: number; height?: number }         | { width: 300, height: 10 }      | Yes      | Indicates the width and height of the linear timer             |
+| showTimeLeft       | boolean                                     | true                            | No       | Indicates whether to display time left on screen or not        |
+| strokeColor        | string                                      | black                           | No       | Indicates the color of timer                                   |
+| timeLeftTextStyle  | TextSTyle                                   | -                               | No       | Prop to style the time left text of the timer                  |
+| type               | TimerPreset                                 | -                               | Yes      | Type of the timer (TimerPreset.Linear or TimerPreset.Circular) |
 
 ## Usage
 
 ```typescript
-import React from "react";
-import Timer from "@components";
-import { TimerPreset } from "@constants";
+import React from 'react'
+
+import Timer from '@components'
+import { TimerPreset } from '@constants'
 
 const App = () => {
   return (
     <Timer
       buttonStyles={{
-        container: { backgroundColor: "blue" },
-        text: { color: "white" },
+        container: { backgroundColor: 'blue' },
+        text: { color: 'white' },
       }}
       circularTimerStrokeColor="red"
       controls={true}
@@ -951,8 +950,8 @@ const App = () => {
       timerType={TimerPreset.Circular} // or TimerPreset.Linear
       totalDurationInSeconds={60}
     />
-  );
-};
+  )
+}
 
-export default App;
+export default App
 ```
