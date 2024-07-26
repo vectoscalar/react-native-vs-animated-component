@@ -1,10 +1,24 @@
 # react-native-vs-animated-component
 
-# React Native Slider
+Tired of spending countless hours crafting complex animations for your React Native app? react-native-vs-animated-component is your solution. This library offers a collection of meticulously designed, pre-built components that seamlessly integrate animations into your app, enhancing user experience and developer efficiency.
+
+## Key Benefits:
+
+**Accelerated Development:** Save time and effort by using pre-built components with built-in animations.
+
+**Enhanced User Experience:** Create engaging and interactive apps with visually appealing animations.
+
+**Consistent Design:** Maintain a cohesive look and feel throughout your app with standardized components.
+
+**Performance Optimized:** Components are designed for optimal performance using React Native's Animated API.
+
+## Key Components:
+Slider | Progress bar | Infinite progress bar | Floating button | Select | Accordion | Modal | Icon Transition button | Swipe button | Progress button | Spring button | Tri-dot loader |  Search bar | Timer
+
+
+# Slider
 
 ## Single Value Slider
-
-## Preview
 
 <img src="./AnimatedComponents/src/assets/gifs/SingleValueSlider.gif" width="250" height="500"/>
 
@@ -58,8 +72,6 @@ const Component = () => {
 <br/>
 
 ## Range Slider
-
-## Preview
 
 <img src="./AnimatedComponents/src/assets/gifs/RangeSlider.gif" width="250" height="500"/>
 
@@ -116,13 +128,11 @@ const Component = () => {
 <br>
 <br>
 
-# React Native Progress Bars
+# Progress Bar
 
 ## Linear Progress Bar
 
 - It shows progress in form of a linear bar
-
-## Preview
 
 <img src="./AnimatedComponents/src/assets/gifs/LinearProgresssBar.gif" width="250" height="500"/>
 
@@ -173,8 +183,6 @@ const Component = () => {
 ## Circular Progress Bar
 
 - It shows progress in form of a circular bar
-
-## Preview
 
 <img src="./AnimatedComponents/src/assets/gifs/CircularProgressBar.gif" width="250" height="500"/>
 
@@ -227,8 +235,6 @@ const Component = () => {
 
 - It provides an animated, continuously progressing bar to indicate loading.
 
-## Preview
-
 <img src="./AnimatedComponents/src/assets/gifs/InfiniteLinearProgressBar.gif" width="250" height="500"/>
 
 ## Features
@@ -263,8 +269,6 @@ const Component = () => {
 
 - It provides an provides a continuous, animated circular indicator for loading.
 
-## Preview
-
 <img src="./AnimatedComponents/src/assets/gifs/InfiniteCircularProgressBar.gif" width="250" height="500"/>
 
 ## Features
@@ -295,9 +299,7 @@ const Component = () => {
 <br>
 <br>
 
-# React Native Floating Button
-
-## Preview
+# Floating Button
 
 ### Floating Button All Variants
 
@@ -380,9 +382,7 @@ const icons = [
 <br/>
 <br/>
 
-# React Native Select Box
-
-## Preview
+# Select
 
 <img src="./AnimatedComponents/src/assets/gifs/SelectBox.gif" width="250" height="500"/>
 
@@ -435,8 +435,6 @@ const [select, setSelect] = useState<ISelectOption | ISelectOption[]>([])
 # Accordion
 
 The Accordion component lets users show and hide sections of related content on a page.
-
-# Preview
 
 <img src="https://github.com/user-attachments/assets/ac939947-d3e6-43de-a341-ac203620cee6" width="250" height="500"/>
 
@@ -504,7 +502,9 @@ The Accordion component lets users show and hide sections of related content on 
 <br/>
 <br/>
 
-# Modals
+# Modal
+
+<img src="https://github.com/user-attachments/assets/034dec4b-a3c0-4aea-917d-3608c9b3f87d" alt="Animated Modals" width="300" height="500">
 
 ## Features:
 
@@ -515,10 +515,6 @@ The Accordion component lets users show and hide sections of related content on 
    - Slide-In-Left
 2. Easy to integrate and use in any React Native project.
 3. Customizable modal content and styles.
-
-## Preview
-
-<img src="https://github.com/user-attachments/assets/034dec4b-a3c0-4aea-917d-3608c9b3f87d" alt="Animated Modals" width="300" height="500">
 
 ## Props:
 
@@ -582,7 +578,9 @@ export default App;
 <br/>
 <br/>
 
-# React Native Icon Transition Button
+# Icon Transition Button
+
+<img src="./AnimatedComponents/src/assets/gifs/IconTransitionButton.gif" alt="Icon Transition Button" width="300" height="500">
 
 ## Features
 
@@ -591,10 +589,6 @@ export default App;
 - **Multiple States Handling:** Efficiently handles various states such as success and failure. This can be particularly useful for forms or any action that requires feedback based on the result of an asynchronous operation.
 - **Responsive Design:** Adjusts to screen dimensions to maintain consistent behavior across devices.
 - **Smooth Transition Animations:** Provide smooth and visually appealing transition animations for icons and labels. This can enhance the user experience significantly.
-
-## Preview
-
-<img src="./AnimatedComponents/src/assets/gifs/IconTransitionButton.gif" alt="Icon Transition Button" width="300" height="500">
 
 ## Usage
 
@@ -636,9 +630,7 @@ import IconTransitionButton from "react-native-animated-components";
 <br/>
 <br/>
 
-# React Native Swipe Button
-
-## Preview
+# Swipe Button
 
 <img src="./AnimatedComponents/src/assets/gifs/SwipeButton.gif" alt="Description of GIF" width="300" height="500">
 
@@ -720,9 +712,7 @@ const handleSubmitBtnPress = () => {
 <br/>
 <br/>
 
-# React Native Progress Button
-
-## Preview
+# Progress Button
 
 <img src="./AnimatedComponents/src/assets/gifs/ProgressButton.gif" alt="Description of GIF" width="300" height="500">
 
@@ -771,9 +761,7 @@ const onPress = () => {
 <br/>
 <br/>
 
-# React Native Spring Button
-
-## Preview
+# Spring Button
 
 <img src="./AnimatedComponents/src/assets/gifs/SpringButton.gif" alt="Description of GIF" width="300" height="500">
 
@@ -787,11 +775,11 @@ const onPress = () => {
 ```jsx
 import SpringButton from "react-native-animated-components";
 
-const onSpringPress = () => {
+const onPress = () => {
   console.log("Button Pressed");
 };
 
-<SpringButton label="Press me" onPress={onSpringPress} />;
+<SpringButton label="Press me" onPress={onPress} />;
 ```
 
 ## Props
@@ -810,9 +798,7 @@ const onSpringPress = () => {
 <br/>
 <br/>
 
-# React Native Tri-Dot Loader
-
-## Preview
+# Tri-Dot Loader
 
 <img src="./AnimatedComponents/src/assets/gifs/Loader.gif" alt="Description of GIF" width="300" height="500">
 
@@ -842,7 +828,7 @@ import TriDotLoader from "react-native-animated-components";
 <br/>
 <br/>
 
-# React Native Search Bar
+# Search Bar
 
 The Search Bar component is an expandable search bar component which can expand and collapse by clicking on search icon.
 
@@ -877,7 +863,9 @@ The Search Bar component is an expandable search bar component which can expand 
 | **searchValue**             | string                 | It is a prop which holds the value of the search bar.                                          |
 | **wrapperContainerStyle**   | DefaultStyle           | It is an optional prop which holds the style of the main container which wraps the search bar. |
 
-# React Native Timer
+# Timer
+
+https://github.com/user-attachments/assets/d84c2673-4d8b-46c7-b714-449ba7f4b016
 
 ## Features
 
@@ -885,10 +873,6 @@ The Search Bar component is an expandable search bar component which can expand 
 - **Dual Timer Types**: Supports both linear and circular timers.
 - **Controls**: Optional start, pause, resume, and reset controls.
 - **Animations**: Smooth animations
-
-## Preview
-
-https://github.com/user-attachments/assets/d84c2673-4d8b-46c7-b714-449ba7f4b016
 
 ## Props
 
