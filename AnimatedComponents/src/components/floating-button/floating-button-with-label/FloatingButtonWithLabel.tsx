@@ -1,0 +1,135 @@
+import React from 'react'
+import { Image, Pressable, View } from 'react-native'
+import Animated, {
+  Easing,
+  Extrapolation,
+  SharedValue,
+  interpolate,
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+  withDelay,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated'
+
+import { PlusIcon } from '@assets'
+import { FloatingButtonProps } from '@types'
+
+import styles from './floatingButtonWithLabel-styles'
+
+const FloatingButtonWithLabel = (props: FloatingButtonProps) => {
+  const {
+    animationTransitionDuration = 500,
+    buttonContainerStyle = styles.buttonContainer,
+    contentContainerStyle = styles.contentContainer,
+    icons,
+    iconContainerStyle = styles.iconContainer,
+    iconStyle = styles.icon,
+    textStyle = styles.text,
+    isLeftAligned = false,
+  } = props
+
+  const isOpen = useSharedValue(false)
+  const opacity = useSharedValue(0)
+  const progress = useDerivedValue(() => (isOpen.value ? withTiming(1) : withTiming(0)))
+  const iconLength = icons.length
+  const sharedValues: SharedValue<number>[] = []
+  const sharedWidthValues: SharedValue<number>[] = []
+
+  for (let i = 0; i < iconLength; i += 1) {
+    sharedValues.push(useSharedValue(30))
+  }
+
+  for (let i = 0; i < iconLength; i += 1) {
+    sharedWidthValues.push(useSharedValue(60))
+  }
+
+  const handlePress = () => {
+    const config = {
+      easing: Easing.bezier(0.68, -0.6, 0.32, 1.6),
+      duration: animationTransitionDuration,
+    }
+
+    if (isOpen.value) {
+      sharedWidthValues.map((item, index) => {
+        item.value = withTiming(60, { duration: 100 }, finish => {
+          if (finish) {
+            sharedValues[index].value = withDelay(50 * index, withTiming(30, config))
+          }
+        })
+      })
+      opacity.value = withTiming(0, { duration: 100 })
+    } else {
+      sharedValues.map((item, index) => {
+        item.value =
+          index === sharedValues.length - 1
+            ? withSpring(130 + index * 70)
+            : withDelay(100 + index * 100, withSpring(130 + index * 70))
+        sharedWidthValues[index].value = withDelay(1000 + index * 100, withSpring(200))
+      })
+      opacity.value = withDelay(1200, withSpring(1))
+    }
+    isOpen.value = !isOpen.value
+  }
+
+  const opacityTextAnimation = useAnimatedStyle(() => {
+    return {
+      opacity: opacity.value,
+    }
+  })
+
+  const animatedStylesAnimation = sharedValues.map((item, index) =>
+    useAnimatedStyle(() => {
+      const scale = interpolate(
+        item.value,
+        [30, 30 + (index + 1) * 80],
+        [0, 1],
+        Extrapolation.CLAMP,
+      )
+
+      return {
+        bottom: item.value,
+        transform: [{ scale }],
+        width: sharedWidthValues[index].value,
+      }
+    }),
+  )
+
+  const plusIconAnimation = useAnimatedStyle(() => {
+    return {
+      transform: [{ rotate: `${progress.value * 45}deg` }],
+    }
+  })
+
+  return (
+    <View style={styles.container}>
+      {icons.map((item, index) => (
+        <Animated.View
+          key={item.iconName}
+          style={[
+            isLeftAligned ? styles.contentContainerLeft : contentContainerStyle,
+            animatedStylesAnimation[index],
+          ]}>
+          <Pressable onPress={item.onPress} style={iconContainerStyle}>
+            <View>
+              <Image source={item.icon} style={iconStyle} />
+            </View>
+            <Animated.Text style={[textStyle, opacityTextAnimation]}>{item.iconName}</Animated.Text>
+          </Pressable>
+        </Animated.View>
+      ))}
+      <Pressable
+        style={[isLeftAligned ? styles.contentContainerLeft : contentContainerStyle]}
+        onPress={() => {
+          handlePress()
+        }}>
+        <Animated.View style={[buttonContainerStyle, plusIconAnimation]}>
+          <Image source={PlusIcon} style={iconStyle} />
+        </Animated.View>
+      </Pressable>
+    </View>
+  )
+}
+
+export default FloatingButtonWithLabel

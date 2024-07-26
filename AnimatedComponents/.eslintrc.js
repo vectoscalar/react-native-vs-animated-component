@@ -60,6 +60,13 @@ module.exports = {
     'unicorn/consistent-function-scoping': 'off',
     'unicorn/filename-case': 'off',
     'unicorn/prevent-abbreviations': 'off',
+    'lines-around-directive': 'off',
+    'react/require-default-props': [
+      2,
+      {
+        ignoreFunctionalComponents: true,
+      },
+    ],
   },
   overrides: [
     {
